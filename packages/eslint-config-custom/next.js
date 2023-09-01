@@ -38,6 +38,8 @@ module.exports = {
 	// add rules configurations here
 	rules: {
 		"import/no-default-export": "off",
-		"unicorn/filename-case": "off",
+		"@typescript-eslint/no-confusing-void-expression": "off",
+		"@typescript-eslint/no-shadow": "off",
+		"no-nested-ternary": "off",
 	},
 };

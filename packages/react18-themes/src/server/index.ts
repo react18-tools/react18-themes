@@ -5,4 +5,4 @@
  * */
 
 // server component exports
-export * from "./fork-me";
+export * from "./nextjs";

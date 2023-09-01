@@ -1,7 +1,7 @@
 import * as React from "react";
-
 import { useEffect } from "react";
-import { ColorSchemeType, useTheme } from "../../store";
+import type { ColorSchemeType } from "../../store";
+import { useTheme } from "../../store";
 
 export function ThemeSwitcher(props: {
 	forcedTheme?: string;
@@ -45,11 +45,13 @@ export function ThemeSwitcher(props: {
 						break;
 					case "light":
 						newTheme = defaultLightTheme;
+						break;
+					default:
 				}
 			}
 			newTheme = newTheme || theme || defaultTheme;
 			document.documentElement.setAttribute("data-theme", newTheme);
-			document.cookie = "data-theme=" + newTheme;
+			document.cookie = `data-theme=${newTheme}`;
 			restoreTransitions();
 		};
 		media.addEventListener("change", updateTheme);
@@ -67,7 +69,7 @@ export function ThemeSwitcher(props: {
 		forcedColorScheme,
 	]);
 
-	return <></>;
+	return null;
 }
 
 // todo: customizable transition time

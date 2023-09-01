@@ -20,7 +20,7 @@
 		"test": "vitest run --coverage",
 		"build": "tsup src --dts && node touchup.js",
 		"publish-package": "cd dist && npm publish --access public",
-		"lint": "eslint ."
+		"lint": "eslint . "
 	},
 	"devDependencies": {
 		"@testing-library/react": "^14.0.0",
@@ -34,6 +34,7 @@
 		"esbuild-react18-useclient": "^1.0.5",
 		"eslint-config-custom": "workspace:*",
 		"jsdom": "^22.1.0",
+		"next": "^13.4.19",
 		"octokit": "^3.1.0",
 		"persist-and-sync": "^0.1.1",
 		"react": "^18.2.0",

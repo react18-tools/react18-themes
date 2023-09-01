@@ -1,11 +1,11 @@
 import { ForkMe } from "@mayank1513/fork-me/server";
 import "./globals.css";
-import { ThemeSwitcher } from "nextjs-themes";
-import { SSCWrapper } from "nextjs-themes/server/nextjs";
+import { ThemeSwitcher } from "react18-themes";
+import { ServerSideWrapper } from "react18-themes/server";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<SSCWrapper tag="html" lang="en">
+		<ServerSideWrapper tag="html" lang="en">
 			<body>
 				<ThemeSwitcher />
 				<div className="container">{children}</div>
@@ -23,6 +23,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					text="Use this Template"
 				/>
 			</body>
-		</SSCWrapper>
+		</ServerSideWrapper>
 	);
 }

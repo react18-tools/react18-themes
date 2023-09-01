@@ -1,8 +1,9 @@
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
-const packageJson = require(path.resolve(__dirname, "package.json"));
+const fs = require("node:fs");
+const path = require("node:path");
+
+const packageJson = require(path.resolve(process.cwd(), "package.json"));
 if (process.env.TOKEN) {
 	const { Octokit } = require("octokit");
 	// Octokit.js
@@ -20,7 +21,7 @@ if (process.env.TOKEN) {
 	};
 	octokit.request("GET /repos/{owner}/{repo}/topics", octoOptions).then(({ data }) => {
 		octoOptions.names = [...new Set([...data.names, ...packageJson.keywords])];
-		if (octoOptions.names.length != data.names.length)
+		if (octoOptions.names.length !== data.names.length)
 			octokit
 				.request("PUT /repos/{owner}/{repo}/topics", octoOptions)
 				.then(console.log)
@@ -34,8 +35,11 @@ packageJson.main = "index.js";
 packageJson.types = "index.d.ts";
 
 fs.writeFileSync(
-	path.resolve(__dirname, "dist", "package.json"),
+	path.resolve(process.cwd(), "dist", "package.json"),
 	JSON.stringify(packageJson, null, 2),
 );
 
-fs.copyFileSync(path.resolve(__dirname, "..", "..", "README.md"), path.resolve(__dirname, "dist", "README.md"));
+fs.copyFileSync(
+	path.resolve(process.cwd(), "..", "..", "README.md"),
+	path.resolve(process.cwd(), "dist", "README.md"),
+);

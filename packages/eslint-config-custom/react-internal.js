@@ -18,6 +18,12 @@ module.exports = {
 		"@vercel/style-guide/eslint/typescript",
 		"@vercel/style-guide/eslint/react",
 	].map(require.resolve),
+	env: {
+		node: true,
+		commonjs: true,
+		browser: true,
+		es6: true,
+	},
 	parserOptions: {
 		project,
 	},
@@ -35,5 +41,13 @@ module.exports = {
 	// add rules configurations here
 	rules: {
 		"import/no-default-export": "off",
+		"@typescript-eslint/require-await": "off",
+		"no-console": "off",
+		"@typescript-eslint/no-unsafe-member-access": "off",
+		"@typescript-eslint/no-unsafe-call": "off",
+		"@typescript-eslint/no-confusing-void-expression": "off",
+		"@typescript-eslint/consistent-type-definitions": "off",
+		"@typescript-eslint/explicit-function-return-type": "off",
+		"@typescript-eslint/no-unused-vars": "off",
 	},
 };
