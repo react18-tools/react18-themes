@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import styles from "./page.module.css";
+import { StarMe } from "@mayank1513/fork-me";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +44,14 @@ export default function Home() {
 					</h2>
 					<p>Explore more on official GitHub Repo.</p>
 				</a>
+				<StarMe
+					gitHubUrl="https://github.com/mayank1513/turborepo-template"
+					className={styles.card}>
+					<h2>
+						Star this repo <span>-&gt;</span>
+					</h2>
+					<p>Star this repo for your new library!</p>
+				</StarMe>
 			</div>
 		</main>
 	);
