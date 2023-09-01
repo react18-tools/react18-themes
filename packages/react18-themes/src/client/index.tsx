@@ -5,4 +5,4 @@
  * */
 
 // client component exports
-export * from "./star-me";
+export * from "./theme-switcher";
