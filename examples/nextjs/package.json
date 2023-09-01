@@ -1,6 +1,6 @@
 {
 	"name": "nextjs-example",
-	"version": "1.0.0",
+	"version": "0.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -9,7 +9,8 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@mayank1513/fork-me": "workspace:*",
+		"@mayank1513/fork-me": "latest",
+		"react18-themes": "workspace:*",
 		"next": "^13.4.19",
 		"nextjs-themes": "^0.4.0",
 		"react": "^18.2.0",
