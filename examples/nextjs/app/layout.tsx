@@ -16,7 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					</a>
 				</footer>
 				<ForkMe
-					gitHubUrl="https://github.com/mayank1513/turbo-template"
+					gitHubUrl="https://github.com/mayank1513/react18-themes"
 					bgColor="var(--text-color)"
 					textColor="var(--bg-color)"
 					noAutoFork

@@ -1,15 +1,23 @@
-# Turborepo template [![test](https://github.com/mayank1513/turborepo-template/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/turborepo-template/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/turborepo-template/graph/badge.svg?token=8LX1NLNVRV)](https://codecov.io/gh/mayank1513/turborepo-template) [![Version](https://img.shields.io/npm/v/@mayank1513/fork-me.svg?colorB=green)](https://www.npmjs.com/package/@mayank1513/fork-me) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/@mayank1513/fork-me.svg)](https://www.npmjs.com/package/@mayank1513/fork-me) [![Unit Tests](https://github.com/mayank1513/turborepo-template/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/turborepo-template/actions/workflows/test.yml) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/@mayank1513/fork-me)
+# Turborepo template [![test](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/react18-themes/graph/badge.svg?token=8LX1NLNVRV)](https://codecov.io/gh/mayank1513/react18-themes) [![Version](https://img.shields.io/npm/v/react18-themes.svg?colorB=green)](https://www.npmjs.com/package/react18-themes) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes.svg)](https://www.npmjs.com/package/react18-themes) [![Unit Tests](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes)
 
-- ✅ Fully Treeshakable (`import from @mayank1513/fork-me/client/component`)
+- ✅ Fully Treeshakable (`import from react18-themes/client/component`)
 - ✅ Full TypeScript Support
 - ✅ Unleash the full power of React18 Server components
 - ✅ Works with all build systems/tools/frameworks for React18
 
-This is a template created based on official starter Turborepo.
+## Install
+
+```bash
+$ pnpm add @react18-themes
+# or
+$ npm install @react18-themes
+# or
+$ yarn add @react18-themes
+```
 
 > A quick tip: Delete all stale branches `git branch --merged main | grep -v '^[ *]*main$' | xargs git branch -d`
 
-Simply click on `Use this template` button to use and customize this template for your next JavaSctipt / TypeScript / React / Vue / Next.js library or project.
+
 
 ## What's different from scaffolding turbo-repo by `create-turbo`
 
@@ -42,8 +50,8 @@ Following features make it really cool and useful
 - [ ] Add `NPM_AUTH_TOKEN` to repository secrets to automate publishing package
   - [ ] login to your `npm` account and create automation token
   - [ ] Create a new repository secrets `NPM_AUTH_TOKEN`
-- [ ] Update description in `packages/@mayank1513/fork-me/package.json`
-- [ ] Imp - update publish workflow - replace `fork-me` with `@mayank1513/fork-me`
+- [ ] Update description in `packages/react18-themes/package.json`
+- [ ] Imp - update publish workflow - replace `fork-me` with `react18-themes`
 - [ ] Create your library and update examples
 - [ ] Update README
 - [ ] Push your changes/Create PR and see your library being automatically tested and published
