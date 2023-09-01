@@ -37,21 +37,9 @@ Following features make it really cool and useful
 
 ## Checklist
 
-- [ ] Clone this repo
-- [ ] Review and merge `setup-repo` branch to main
-  - We have created a new branch called `setup-repo`. This will automatically rename packages and update workflows, directories etc. with your repo's name
-  - [ ] Create PR from `setup-repo` to `main`
-  - [ ] Review changes and merge
 - [ ] Set up `CodeCov`
-  - If you merged changes from `setup-repo` branch, we have already updated the badges, however, codecov needs a token
-  - [ ] Visit codecov and setup your repo
   - [ ] Update codecov badge in README
-  - [ ] Create repository secrets for `CODECOV_TOKEN`
-- [ ] Add `NPM_AUTH_TOKEN` to repository secrets to automate publishing package
-  - [ ] login to your `npm` account and create automation token
-  - [ ] Create a new repository secrets `NPM_AUTH_TOKEN`
 - [ ] Update description in `packages/react18-themes/package.json`
-- [ ] Imp - update publish workflow - replace `fork-me` with `react18-themes`
 - [ ] Create your library and update examples
 - [ ] Update README
 - [ ] Push your changes/Create PR and see your library being automatically tested and published

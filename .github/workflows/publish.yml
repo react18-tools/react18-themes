@@ -4,7 +4,7 @@ name: Publish (NPM & GPR)
 on:
   push:
     branches: [main]
-    paths: "packages/fork-me/package.json"
+    paths: "packages/react18-themes/package.json"
 
 jobs:
   publish:
@@ -16,7 +16,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./packages/fork-me
+        working-directory: ./packages/react18-themes
 
     steps:
       - uses: actions/checkout@v3
