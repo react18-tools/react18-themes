@@ -5,41 +5,38 @@ export type ColorSchemeType = "" | "system" | "dark" | "light";
 
 type ThemeStoreType = {
 	theme: string;
-	defaultTheme: string;
-	defaultDarkTheme: string;
-	defaultLightTheme: string;
+	darkTheme: string;
+	lightTheme: string;
 	colorSchemePref: ColorSchemeType;
-	forcedTheme: string;
-	forcedColorScheme: ColorSchemeType;
+	forcedTheme?: string;
+	forcedColorScheme?: ColorSchemeType;
 };
 
 type ThemeStoreActionsType = {
 	setTheme: (theme: string) => void;
-	setDefaultTheme: (defaultTheme: string) => void;
-	setDefaultDarkTheme: (defaultDarkTheme: string) => void;
-	setDefaultLightTheme: (defaultLightTheme: string) => void;
+	setDarkTheme: (defaultDarkTheme: string) => void;
+	setLightTheme: (defaultLightTheme: string) => void;
 	setColorSchemePref: (colorSchemePref: ColorSchemeType) => void;
-	setForcedTheme: (forcedTheme: string) => void;
-	setForcedColorScheme: (forcedColorScheme: ColorSchemeType) => void;
+	setForcedTheme: (forcedTheme?: string) => void;
+	setForcedColorScheme: (forcedColorScheme?: ColorSchemeType) => void;
+};
+
+export const initialState: ThemeStoreType = {
+	theme: "",
+	darkTheme: "dark",
+	lightTheme: "",
+	colorSchemePref: "system",
 };
 
 export const useTheme = create<ThemeStoreType & ThemeStoreActionsType>()(
 	persistNSync(
 		(set, get) => ({
-			theme: "",
-			defaultTheme: "",
-			defaultDarkTheme: "dark",
-			defaultLightTheme: "",
-			colorSchemePref: "system",
-			forcedTheme: "",
-			forcedColorScheme: "",
-			setTheme: (theme: string) => set({ ...get(), theme }),
-			setDefaultTheme: (defaultTheme: string) => set({ ...get(), defaultTheme }),
-			setDefaultDarkTheme: (defaultDarkTheme: string) => set({ ...get(), defaultDarkTheme }),
-			setDefaultLightTheme: (defaultLightTheme: string) => set({ ...get(), defaultLightTheme }),
-			setForcedTheme: (forcedTheme: string) => set({ ...get(), forcedTheme }),
-			setForcedColorScheme: (forcedColorScheme: ColorSchemeType) =>
-				set({ ...get(), forcedColorScheme }),
+			...initialState,
+			setTheme: theme => set({ ...get(), theme }),
+			setDarkTheme: darkTheme => set({ ...get(), darkTheme }),
+			setLightTheme: lightTheme => set({ ...get(), lightTheme }),
+			setForcedTheme: forcedTheme => set({ ...get(), forcedTheme }),
+			setForcedColorScheme: forcedColorScheme => set({ ...get(), forcedColorScheme }),
 			setColorSchemePref: colorSchemePref => set({ ...get(), colorSchemePref }),
 		}),
 		{ name: "react18-themes", regExpToIgnore: /forced/ },
