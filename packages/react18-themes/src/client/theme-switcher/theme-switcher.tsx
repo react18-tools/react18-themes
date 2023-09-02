@@ -57,7 +57,7 @@ export function ThemeSwitcher(props: {
 		return () => {
 			media.removeEventListener("change", updateTheme);
 		};
-	}, [theme, darkTheme, lightTheme, forcedTheme, colorSchemePref, colorScheme]);
+	}, [theme, darkTheme, lightTheme, forcedTheme, colorSchemePref, colorScheme, forcedColorScheme]);
 
 	return null;
 }

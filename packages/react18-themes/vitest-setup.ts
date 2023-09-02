@@ -35,7 +35,7 @@ declare global {
 	interface Window {
 		media: "dark" | "light";
 	}
-	var cookies: { [k: string]: { value: string } }; // eslint-disable-line no-var -- let is not supported in defining global due to block scope
+	var cookies: Record<string, { value: string }>; // eslint-disable-line no-var -- let is not supported in defining global due to block scope
 	var path: string; // eslint-disable-line no-var -- let is not supported in defining global due to block scope
 }
 Object.defineProperty(window, "media", {

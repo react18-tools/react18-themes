@@ -8,7 +8,7 @@ const packageJson = require(path.resolve(process.cwd(), "package.json"));
 const ref = packageJson.name;
 if (!ref.startsWith(`@${owner}`)) {
 	packageJson.name = `@${owner}/${packageJson.name}`;
-	const readMePath = path.resolve(__dirname, "README.md");
+	const readMePath = path.resolve(process.cwd(), "README.md");
 	let readMe = fs.readFileSync(readMePath, { encoding: "utf8" });
 	const tmp = "!--|--!";
 	readMe = readMe.replace(new RegExp(`$${owner}/${ref}`, "g"), tmp);

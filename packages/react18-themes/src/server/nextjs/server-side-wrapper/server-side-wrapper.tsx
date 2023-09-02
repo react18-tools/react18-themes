@@ -1,7 +1,7 @@
 import type { HTMLProps, ReactNode } from "react";
 import { cookies, headers } from "next/headers";
 import * as React from "react";
-import { ColorSchemeType } from "../../../store";
+import type { ColorSchemeType } from "../../../store";
 
 export type ForcedPage = [
 	pathMatcher: RegExp | string,
@@ -32,7 +32,7 @@ export function ServerSideWrapper({
 		const dataThemeDark = cookies().get("data-theme-dark")?.value || "";
 		const dataThemeLight = cookies().get("data-theme-light")?.value || "";
 		const dataColorScheme = cookies().get("data-color-scheme")?.value || "";
-		for (let f of forcedPages) {
+		for (const f of forcedPages) {
 			if (path?.match(f[0])) {
 				if (f[1].theme) {
 					theme = f[1].theme;

@@ -41,7 +41,7 @@ jobs:
           REPO: ${{ github.event.repository.name }}
 
       - name: Publish Scoped package to NPM
-        run: cd dist && node scope.js && npm publish --access public
+        run: cd dist && node ../scope.js && npm publish --access public
       - uses: actions/setup-node@v3
         with:
           registry-url: https://npm.pkg.github.com/
