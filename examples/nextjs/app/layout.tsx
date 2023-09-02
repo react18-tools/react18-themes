@@ -1,11 +1,21 @@
 import { ForkMe } from "@mayank1513/fork-me/server";
 import "./globals.css";
 import { ThemeSwitcher } from "react18-themes";
+import type { ForcedPage } from "react18-themes/server";
 import { ServerSideWrapper } from "react18-themes/server";
+import { darkThemes, lightThemes } from "./themes";
+
+const forcedPages: ForcedPage[] = [
+	[/forced-color-scheme\/dark/, { colorScheme: "dark" }],
+	[/forced-color-scheme\/light/, { colorScheme: "light" }],
+	...[darkThemes, lightThemes].map(
+		th => [new RegExp(`themed-page\/${th}`), { theme: "light" }] as ForcedPage,
+	),
+];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<ServerSideWrapper tag="html" lang="en">
+		<ServerSideWrapper forcedPages={forcedPages} lang="en">
 			<body>
 				<ThemeSwitcher />
 				<div className="container">{children}</div>
