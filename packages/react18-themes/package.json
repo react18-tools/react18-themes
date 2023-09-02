@@ -3,7 +3,7 @@
 	"author": "Mayank Kumar Chaudhari <https://mayank-chaudhari.vercel.app>",
 	"private": false,
 	"version": "1.0.0",
-	"description": "An intuitive React.js fork me ribbon component for promoting open source project forks.",
+	"description": "Unleash the Power of React Server Components! Use multiple themes on your site with confidence, without losing any advantages of React Server Components.",
 	"main": "./index.ts",
 	"types": "./index.ts",
 	"repository": {
