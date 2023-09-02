@@ -1,124 +1,184 @@
 # Turborepo template [![test](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/react18-themes/graph/badge.svg?token=8LX1NLNVRV)](https://codecov.io/gh/mayank1513/react18-themes) [![Version](https://img.shields.io/npm/v/react18-themes.svg?colorB=green)](https://www.npmjs.com/package/react18-themes) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes.svg)](https://www.npmjs.com/package/react18-themes) [![Unit Tests](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes)
 
+🤟 👉 [Unleash the Power of React Server Components](https://medium.com/javascript-in-plain-english/unleash-the-power-of-react-server-components-eb3fe7201231)
+
+This project is inspired by `next-themes`. `next-themes` is an awesome package, however, it requires wrapping everything in a client side provider. And thus, it takes away all the benefits of Server Components.
+
+`react18-themes` removes this limitation and enables you to unleash the full power of React 18 Server Components. In addition, more features are coming up soon... Stay tuned!
+
 - ✅ Fully Treeshakable (`import from react18-themes/client/component`)
 - ✅ Full TypeScript Support
 - ✅ Unleash the full power of React18 Server components
 - ✅ Works with all build systems/tools/frameworks for React18
+- ✅ Perfect dark mode in 2 lines of code
+- ✅ System setting with prefers-color-scheme
+- ✅ Themed browser UI with color-scheme
+- ✅ Support for Next.js 13 `appDir`
+- ✅ Sync theme across tabs and windows
+- ✅ Disable flashing when changing themes
+- ✅ Force pages to specific themes
+- ✅ Class or data attribute selector
+- ✅ Manipulate theme via `useTheme` hook
+
+Check out the [live example](https://react18-themes.vercel.app/).
 
 ## Install
 
 ```bash
-$ pnpm add @react18-themes
+$ pnpm add react18-themes
 # or
-$ npm install @react18-themes
+$ npm install react18-themes
 # or
-$ yarn add @react18-themes
+$ yarn add react18-themes
 ```
 
-> A quick tip: Delete all stale branches `git branch --merged main | grep -v '^[ *]*main$' | xargs git branch -d`
+## Want Lite Version? [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes-lite)](https://www.npmjs.com/package/react18-themes-lite)
 
-
-
-## What's different from scaffolding turbo-repo by `create-turbo`
-
-The default scafold from `create-turbo` just gives some stubs for sharing packages across projects/apps within current monorepo.
-
-This template is targeted for sharing packages across organizations/repos publically or privately.
-
-Following features make it really cool and useful
-
-- Unit tests with `vitest`
-- Build setup with `tsup` and `esbuild-react18-useclient` Supports React Server components out of the box
-- **Automatic file generation**
-  - just run `yarn turbo gen` and follow the propts to auto generate your new component with test file and dependency linking
-  - follow best practices automatically
-- As a small extra gift Fork Me component is already added in UI
-- github actions/workflows to auto publish your package when version changes
-
-## Checklist
-
-- [ ] Set up `CodeCov`
-  - [ ] Update codecov badge in README
-- [ ] Update description in `packages/react18-themes/package.json`
-- [ ] Create your library and update examples
-- [ ] Update README
-- [ ] Push your changes/Create PR and see your library being automatically tested and published
-- [ ] Optionally deploy your example(s) to Vercel.
-- [ ] You are most welcome to star this template, contribute, and/or sponsor the terbo-repo-template project / me
-
-## What's inside?
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Apps and Packages
-
-This Turborepo includes the following packages/apps:
-
-- `nextjs`: a [Next.js](https://nextjs.org/) app
-- `docs`: another [Next.js](https://nextjs.org/) app
-- `ui`: a React component library shared by both `nextjs` and `docs` examples
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/example is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+```bash
+$ pnpm add react18-themes-lite
+# or
+$ npm install react18-themes-lite
+# or
+$ yarn add react18-themes-lite
 ```
 
-### Develop
+> You need Zustand as a peer-dependency
 
-To develop all apps and packages, run the following command:
+## Use
 
-```
-cd my-turborepo
-pnpm dev
-```
+### With pages/
 
-### Remote Caching
+The best way is to add a [Custom `App`](https://nextjs.org/docs/advanced-features/custom-app) to use by modifying `_app` as follows:
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+Adding dark mode support takes 2 lines of code:
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+```js
+import { ThemeSwitcher } from "react18-themes";
 
-```
-cd my-turborepo
-npx turbo login
-```
+function MyApp({ Component, pageProps }) {
+	return (
+		<>
+			<ThemeSwitcher forcedTheme={Component.theme} />
+			<Component {...pageProps} />
+		</>
+	);
+}
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
+export default MyApp;
 ```
 
-## Useful Links
+⚡🎉Boom! Just a couple of lines and your dark mode is ready!
 
-Learn more about the power of Turborepo:
+Check out examples for advanced usage.
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+### With app/
+
+Update your `app/layout.jsx` to add `ThemeSwitcher` and `ServerSideWrapper` from `react18-themes`. `ServerSideWrapper` is required to avoid flash of un-themed content on reload.
+
+```js
+// app/layout.jsx
+import { ThemeSwitcher } from "react18-themes";
+import { ServerSideWrapper } from "react18-themes/server/nextjs";
+
+export default function Layout({ children }) {
+	return (
+		<ServerSideWrapper tag="html" lang="en">
+			<head />
+			<body>
+				<ThemeSwitcher />
+				{children}
+			</body>
+		</ServerSideWrapper>
+	);
+}
+```
+
+Woohoo! You just added dark mode and you can also use Server Component! Isn't that awesome!
+
+### HTML & CSS
+
+That's it, your Next.js app fully supports dark mode, including System preference with `prefers-color-scheme`. The theme is also immediately synced between tabs. By default, react18-themes modifies the `data-theme` attribute on the `html` element, which you can easily use to style your app:
+
+```css
+:root {
+	/* Your default theme */
+	--background: white;
+	--foreground: black;
+}
+
+[data-theme="dark"] {
+	--background: black;
+	--foreground: white;
+}
+```
+
+### useTheme
+
+In case your components need to know the current theme and be able to change it. The `useTheme` hook provides theme information:
+
+```js
+import { useTheme } from "react18-themes";
+
+const ThemeChanger = () => {
+	/* you can also improve performance by using selectors
+	 * const [theme, setTheme] = useTheme(state => [state.theme, state.setTheme]);
+	 */
+	const { theme, setTheme } = useTheme();
+
+	return (
+		<div>
+			The current theme is: {theme}
+			<button onClick={() => setTheme("light")}>Light Mode</button>
+			<button onClick={() => setTheme("dark")}>Dark Mode</button>
+		</div>
+	);
+};
+```
+
+## Force per page theme and color-scheme
+
+### Next.js app router
+
+```javascript
+import { ForceTheme } from "react18-themes";
+
+function MyPage() {
+	return (
+		<>
+			<ForceTheme theme={"my-theme"} />
+			...
+		</>
+	);
+}
+
+export default MyPage;
+```
+
+### Next.js pages router
+
+For pages router, you have 2 options. One is the same as the app router and the other option which is compatible with `next-themes` is to add `theme` to your page component as follows.
+
+```javascript
+function MyPage() {
+	return <>...</>;
+}
+
+MyPage.theme = "my-theme";
+
+export default MyPage;
+```
+
+In a similar way, you can also force color scheme.
+
+Forcing color scheme will apply your defaultDark or defaultLight theme, configurable via hooks.
+
+> Full docs coming soon!
 
 ### 🤩 Don't forger to start this repo!
 
 Want handson course for getting started with Turborepo? Check out [React and Next.js with TypeScript](https://www.udemy.com/course/react-and-next-js-with-typescript/?referralCode=7202184A1E57C3DCA8B2)
+
+![Alt](https://repobeats.axiom.co/api/embed/212c15d25de3d653995014d1e5d27df1b7e20d13.svg "Repobeats analytics image")
 
 ## License
 
