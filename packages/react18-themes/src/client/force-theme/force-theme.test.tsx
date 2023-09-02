@@ -8,7 +8,7 @@ describe.concurrent("force-color-scheme", () => {
 	/** Test only the things that this component is responsible for - chanding state*/
 	test("Force theme with force color scheme", async ({ expect }) => {
 		const { result } = renderHook(() => useTheme());
-		await act(() => result.current.setForcedTheme("red"));
+		act(() => result.current.setForcedTheme("red"));
 		await act(() => render(<ForceTheme theme="yellow" />));
 		expect(result.current.forcedTheme).toBe("yellow");
 	});

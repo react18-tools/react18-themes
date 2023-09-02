@@ -1,5 +1,5 @@
-// @ts-nocheck
 import { act } from "@testing-library/react";
+import { afterEach, vi } from "vitest";
 import { create as actualCreate, StateCreator } from "zustand";
 
 // a variable to hold reset functions for all stores declared in the app
@@ -20,7 +20,7 @@ afterEach(() => {
 // mock matchMedia
 Object.defineProperty(window, "matchMedia", {
 	writable: true,
-	value: vi.fn().mockImplementation(query => ({
+	value: vi.fn().mockImplementation((query: string) => ({
 		matches: query.includes(window.media),
 		media: query,
 		onchange: null,
@@ -34,14 +34,15 @@ declare global {
 	interface Window {
 		media: "dark" | "light";
 	}
+	var cookies: string; // eslint-disable-line no-var -- let is not supported in defining global due to block scope
 }
 Object.defineProperty(window, "media", {
 	writable: true,
 	value: "dark",
 });
 
-globalThis.cookie = "dark";
+globalThis.cookies = "dark";
 
 vi.mock("next/headers", () => ({
-	cookies: () => ({ get: (cookieName: string) => globalThis.cookie }),
+	cookies: () => ({ get: (cookieName: string) => globalThis.cookies }),
 }));

@@ -20,8 +20,8 @@ describe("theme-switcher", () => {
 
 	test("Test defaultDark and defaultLight themes", async ({ expect }) => {
 		const { result } = renderHook(() => useTheme());
-		await act(() => result.current.setDarkTheme("dark1"));
-		await act(() => result.current.setLightTheme("light1"));
+		act(() => result.current.setDarkTheme("dark1"));
+		act(() => result.current.setLightTheme("light1"));
 		window.media = "dark";
 		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("dark1");
@@ -33,46 +33,46 @@ describe("theme-switcher", () => {
 	// colorScheme has higher preference
 	test("test themes with colorScheme=''", async ({ expect }) => {
 		const { result } = renderHook(() => useTheme());
-		await act(() => result.current.setColorSchemePref(""));
-		await act(() => result.current.setTheme("blue"));
+		act(() => result.current.setColorSchemePref(""));
+		act(() => result.current.setTheme("blue"));
 		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("blue");
 	});
 
 	test("test color scheme preference", async ({ expect }) => {
 		const { result } = renderHook(() => useTheme());
-		await act(() => result.current.setColorSchemePref("light"));
-		await act(() => result.current.setLightTheme("yellow"));
-		await act(() => result.current.setTheme("blue"));
+		act(() => result.current.setColorSchemePref("light"));
+		act(() => result.current.setLightTheme("yellow"));
+		act(() => result.current.setTheme("blue"));
 		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("yellow");
-		await act(() => result.current.setDarkTheme("dark-blue"));
-		await act(() => result.current.setColorSchemePref("dark"));
+		act(() => result.current.setDarkTheme("dark-blue"));
+		act(() => result.current.setColorSchemePref("dark"));
 		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("dark-blue");
 	});
 
 	test("test forcedTheme", async ({ expect }) => {
 		const { result } = renderHook(() => useTheme());
-		await act(() => result.current.setForcedTheme("forced1"));
-		await act(() => result.current.setForcedColorScheme("dark"));
-		await act(() => result.current.setColorSchemePref("light"));
-		await act(() => result.current.setTheme("f1"));
+		act(() => result.current.setForcedTheme("forced1"));
+		act(() => result.current.setForcedColorScheme("dark"));
+		act(() => result.current.setColorSchemePref("light"));
+		act(() => result.current.setTheme("f1"));
 		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("forced1");
 	});
 
 	test("forced colorScheme only", async ({ expect }) => {
 		const { result } = renderHook(() => useTheme());
-		await act(() => result.current.setForcedTheme(""));
-		await act(() => result.current.setForcedColorScheme("dark"));
-		await act(() => result.current.setColorSchemePref("light"));
-		await act(() => result.current.setTheme("f1"));
-		await act(() => result.current.setLightTheme("yellow"));
-		await act(() => result.current.setDarkTheme("black"));
+		act(() => result.current.setForcedTheme(""));
+		act(() => result.current.setForcedColorScheme("dark"));
+		act(() => result.current.setColorSchemePref("light"));
+		act(() => result.current.setTheme("f1"));
+		act(() => result.current.setLightTheme("yellow"));
+		act(() => result.current.setDarkTheme("black"));
 		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("");
-		await act(() => result.current.setForcedTheme(undefined));
+		act(() => result.current.setForcedTheme(undefined));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("black");
 	});
 
