@@ -16,7 +16,7 @@ export function ServerSideWrapper({ children, tag, ...props }: ServerSideWrapper
 	const Tag: keyof JSX.IntrinsicElements = tag || "html";
 	return (
 		// @ts-expect-error -> svg props and html element props conflict
-		<Tag data-theme={dataTheme} {...props}>
+		<Tag data-theme={dataTheme} {...props} data-testid="server-side-wrapper">
 			{children}
 		</Tag>
 	);

@@ -5,8 +5,12 @@ import { ServerSideWrapper } from "./server-side-wrapper";
 describe.concurrent("server-side-wrapper", () => {
 	afterEach(cleanup);
 
-	test.todo("check if h1 heading exists", async ({ expect }) => {
+	test("test tag", ({ expect }) => {
 		render(<ServerSideWrapper>ServerSideWrapper</ServerSideWrapper>);
-		expect(screen.getByTestId("server-side-wrapper-h1").textContent).toBe("ServerSideWrapper");
+		expect(screen.getByTestId("server-side-wrapper").tagName).toBe("HTML");
+	});
+	test("test custom tag", ({ expect }) => {
+		render(<ServerSideWrapper tag="div">ServerSideWrapper</ServerSideWrapper>);
+		expect(screen.getByTestId("server-side-wrapper").tagName).toBe("DIV");
 	});
 });
