@@ -27,6 +27,7 @@ export default function generator(plop: PlopTypes.NodePlopAPI): void {
 		actions: data => {
 			let root = data?.isClient ? "src/client/" : "src/server/";
 			const _actions: PlopTypes.ActionType[] = [];
+			// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call -- intentional
 			if (data?.name.includes("/")) {
 				const name = data.name as string;
 				const lastSlashInd = name.lastIndexOf("/") || name.lastIndexOf("\\");

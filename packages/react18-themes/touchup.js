@@ -24,8 +24,8 @@ if (process.env.TOKEN) {
 		if (octoOptions.names.length !== data.names.length)
 			octokit
 				.request("PUT /repos/{owner}/{repo}/topics", octoOptions)
-				.then(console.log)
-				.catch(console.error);
+				.then(console.log) // eslint-disable-line no-console -- intentional debug log
+				.catch(console.error); // eslint-disable-line no-console -- intentional error log
 	});
 }
 delete packageJson.devDependencies;

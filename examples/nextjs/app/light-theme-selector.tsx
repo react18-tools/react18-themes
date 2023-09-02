@@ -7,8 +7,8 @@ import styles from "./page.module.css";
 export default function LightThemeSelector() {
 	const [colorSchemePref, defaultLightTheme, setDefaultLightTheme] = useTheme(state => [
 		state.colorSchemePref,
-		state.defaultLightTheme,
-		state.setDefaultLightTheme,
+		state.lightTheme,
+		state.setLightTheme,
 	]);
 	useEffect(() => {
 		setDefaultLightTheme(lightThemes[0]);

@@ -5,13 +5,13 @@ import { useEffect } from "react";
 import styles from "./page.module.css";
 
 export default function DarkThemeSelector() {
-	const [colorSchemePref, defaultDarkTheme, setDefaultDarkTheme] = useTheme(state => [
+	const [colorSchemePref, defaultTheme, setDarkTheme] = useTheme(state => [
 		state.colorSchemePref,
-		state.defaultDarkTheme,
-		state.setDefaultDarkTheme,
+		state.darkTheme,
+		state.setDarkTheme,
 	]);
 	useEffect(() => {
-		setDefaultDarkTheme(darkThemes[0]);
+		setDarkTheme(darkThemes[0]);
 	}, []);
 	const className =
 		colorSchemePref === "dark" ? styles.active : colorSchemePref === "system" ? styles.dark : "";
@@ -19,8 +19,8 @@ export default function DarkThemeSelector() {
 		<p>
 			Select default dark theme{" "}
 			<select
-				value={defaultDarkTheme}
-				onChange={e => setDefaultDarkTheme(e.target.value)}
+				value={defaultTheme}
+				onChange={e => setDarkTheme(e.target.value)}
 				className={className}>
 				{darkThemes.map(theme => (
 					<option key={theme} value={theme}>

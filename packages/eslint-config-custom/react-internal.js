@@ -40,9 +40,6 @@ module.exports = {
 	ignorePatterns: ["node_modules/", "dist/", ".eslintrc.js", "coverage"],
 	// add rules configurations here
 	rules: {
-		"no-console": "off",
-		"@typescript-eslint/no-unsafe-member-access": "off",
-		"@typescript-eslint/no-unsafe-call": "off",
 		"@typescript-eslint/no-confusing-void-expression": "off",
 		"@typescript-eslint/consistent-type-definitions": "off",
 		"@typescript-eslint/explicit-function-return-type": "off",
