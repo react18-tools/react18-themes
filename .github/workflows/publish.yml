@@ -26,7 +26,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-          registry-url: https://registry.npmjs.org
       - run: npm i -g pnpm && pnpm i
         name: Install dependencies
         # fail and not publish if any of the unit tests are failing
@@ -34,8 +33,6 @@ jobs:
         run: pnpm test
       - name: Update topics and Publish to NPM
         run: pnpm build && pnpm publish-package
-        # continue on error to publish scoped package name <- by default repo is setup for a non-scoped + scoped package name
-        continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -43,21 +40,23 @@ jobs:
           REPO: ${{ github.event.repository.name }}
 
       - name: Publish Scoped package to NPM
-        # continue on error - expecing npm to trow error if scoping is done twice
-        continue-on-error: true
-        id: publish_scoped
-        run: |
-          cd dist          
-          sed -i -e "s/\"name\": \"/\"name\": \"@${{ github.event.repository.owner.login }}\//" package.json
-          sed -i -e "s/pnpm add /pnpm add @mayank1513\//" README.md
-          sed -i -e "s/npm install /npm install @mayank1513\//" README.md
-          sed -i -e "s/yarn add /yan add @mayank1513\//" README.md
-          npm publish --access public
+        run: cd dist && node scope.js && npm publish --access public
+      - uses: actions/setup-node@v3
+        with:
+          registry-url: https://npm.pkg.github.com/
+      - name: Publish to GitHub Public Repository
+        run: pnpm publish-package
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-      - name: Fix double scoping
-        if: steps.publish_scoped.outcome == 'failure'
-        run: cd dist && sed -i -e "s/@${{ github.event.repository.owner.login }}\/@/@/" package.json
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Publish lite version
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org
+      - run: node lite.js && pnpm build && pnpm publish-package
+      - name: Publish Scoped package to NPM
+        run: cd dist && node scope.js && npm publish --access public
       - uses: actions/setup-node@v3
         with:
           registry-url: https://npm.pkg.github.com/

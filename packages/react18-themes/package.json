@@ -2,7 +2,7 @@
 	"name": "react18-themes",
 	"author": "Mayank Kumar Chaudhari <https://mayank-chaudhari.vercel.app>",
 	"private": false,
-	"version": "0.0.0",
+	"version": "1.0.0",
 	"description": "An intuitive React.js fork me ribbon component for promoting open source project forks.",
 	"main": "./index.ts",
 	"types": "./index.ts",
