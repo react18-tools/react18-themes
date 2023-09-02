@@ -9,7 +9,7 @@ export function ForceColorScheme(props: { colorScheme: ColorSchemeType }) {
 	useEffect(() => {
 		setForcedColorScheme(props.colorScheme);
 		return () => {
-			setForcedColorScheme("");
+			setForcedColorScheme(undefined);
 		};
 	}, []);
 	return null;

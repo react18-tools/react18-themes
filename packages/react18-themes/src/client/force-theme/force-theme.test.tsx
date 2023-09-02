@@ -9,7 +9,9 @@ describe.concurrent("force-color-scheme", () => {
 	test("Force theme with force color scheme", async ({ expect }) => {
 		const { result } = renderHook(() => useTheme());
 		act(() => result.current.setForcedTheme("red"));
-		await act(() => render(<ForceTheme theme="yellow" />));
+		const { unmount } = await act(() => render(<ForceTheme theme="yellow" />));
 		expect(result.current.forcedTheme).toBe("yellow");
+		act(() => unmount());
+		expect(result.current.forcedTheme).toBe(undefined);
 	});
 });

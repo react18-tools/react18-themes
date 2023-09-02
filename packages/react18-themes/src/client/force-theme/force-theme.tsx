@@ -8,7 +8,7 @@ export function ForceTheme(props: { theme: string }) {
 	useEffect(() => {
 		setForcedTheme(props.theme);
 		return () => {
-			setForcedTheme("");
+			setForcedTheme(undefined);
 		};
 	}, [props.theme]);
 	return null;
