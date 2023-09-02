@@ -35,15 +35,21 @@ declare global {
 	interface Window {
 		media: "dark" | "light";
 	}
-	var cookies: string; // eslint-disable-line no-var -- let is not supported in defining global due to block scope
+	var cookies: { [k: string]: { value: string } }; // eslint-disable-line no-var -- let is not supported in defining global due to block scope
+	var path: string; // eslint-disable-line no-var -- let is not supported in defining global due to block scope
 }
 Object.defineProperty(window, "media", {
 	writable: true,
 	value: "dark",
 });
 
-globalThis.cookies = "dark";
+globalThis.cookies = {
+	"data-theme-dark": { value: "dark-blue" },
+	"data-theme": { value: "light-yellow" },
+};
+globalThis.path = "";
 
 vi.mock("next/headers", () => ({
-	cookies: () => ({ get: (cookieName: string) => globalThis.cookies }),
+	cookies: () => ({ get: (cookieName: string) => globalThis.cookies[cookieName] }),
+	headers: () => ({ get: (h: string) => globalThis.path }),
 }));

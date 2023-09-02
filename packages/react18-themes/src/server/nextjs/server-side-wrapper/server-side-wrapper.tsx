@@ -29,7 +29,7 @@ export function ServerSideWrapper({
 	const path = headers().get("x-invoke-path");
 	let theme;
 	if (forcedPages) {
-		const dataThemeDark = cookies().get("data-color-scheme")?.value || "";
+		const dataThemeDark = cookies().get("data-theme-dark")?.value || "";
 		const dataThemeLight = cookies().get("data-theme-light")?.value || "";
 		const dataColorScheme = cookies().get("data-color-scheme")?.value || "";
 		for (let f of forcedPages) {
