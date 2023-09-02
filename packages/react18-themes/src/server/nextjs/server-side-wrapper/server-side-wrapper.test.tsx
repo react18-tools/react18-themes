@@ -6,7 +6,11 @@ describe.concurrent("server-side-wrapper", () => {
 	afterEach(cleanup);
 
 	test("test tag", ({ expect }) => {
-		render(<ServerSideWrapper>ServerSideWrapper</ServerSideWrapper>);
+		render(
+			<ServerSideWrapper>
+				<body>ServerSideWrapper</body>
+			</ServerSideWrapper>,
+		);
 		expect(screen.getByTestId("server-side-wrapper").tagName).toBe("HTML");
 	});
 	test("test custom tag", ({ expect }) => {

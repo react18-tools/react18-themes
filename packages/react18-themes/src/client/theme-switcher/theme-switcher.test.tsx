@@ -9,12 +9,12 @@ import { useTheme } from "../../store";
 describe("theme-switcher", () => {
 	afterEach(cleanup);
 
-	test("Test first time load based on media query", ({ expect }) => {
+	test("Test first time load based on media query", async ({ expect }) => {
 		window.media = "dark";
-		render(<ThemeSwitcher />);
+		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("dark");
 		window.media = "light";
-		render(<ThemeSwitcher />);
+		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("");
 	});
 
@@ -23,10 +23,10 @@ describe("theme-switcher", () => {
 		await act(() => result.current.setDarkTheme("dark1"));
 		await act(() => result.current.setLightTheme("light1"));
 		window.media = "dark";
-		render(<ThemeSwitcher />);
+		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("dark1");
 		window.media = "light";
-		render(<ThemeSwitcher />);
+		await act(() => render(<ThemeSwitcher />));
 		expect(document.documentElement.getAttribute("data-theme")).toBe("light1");
 	});
 
