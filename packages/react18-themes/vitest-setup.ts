@@ -1,6 +1,7 @@
 import { act } from "@testing-library/react";
 import { afterEach, vi } from "vitest";
-import { create as actualCreate, StateCreator } from "zustand";
+import type { StateCreator } from "zustand";
+import { create as actualCreate } from "zustand";
 
 // a variable to hold reset functions for all stores declared in the app
 export const storeResetFns = new Set<() => void>();

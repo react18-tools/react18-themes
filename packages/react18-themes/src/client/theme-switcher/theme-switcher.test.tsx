@@ -1,7 +1,7 @@
-import { act, cleanup, render, renderHook, screen } from "@testing-library/react";
+import { act, cleanup, render, renderHook } from "@testing-library/react";
 import { afterEach, describe, test } from "vitest";
-import { ThemeSwitcher } from "./theme-switcher";
 import { useTheme } from "../../store";
+import { ThemeSwitcher } from "./theme-switcher";
 
 /** Test if proper data-theme is added to documentElement
  * concurrency is not feasible because of global store conflicts

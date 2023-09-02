@@ -25,7 +25,7 @@ export function ThemeSwitcher(props: {
 		const media = matchMedia("(prefers-color-scheme: dark)");
 		const updateTheme = () => {
 			const restoreTransitions = disableAnimation();
-			let newTheme = undefined;
+			let newTheme;
 			if (forcedTheme !== undefined) {
 				newTheme = forcedTheme;
 			} else {
@@ -52,7 +52,7 @@ export function ThemeSwitcher(props: {
 		return () => {
 			media.removeEventListener("change", updateTheme);
 		};
-	}, [theme, darkTheme, lightTheme, forcedTheme, colorSchemePref, forcedColorScheme]);
+	}, [theme, darkTheme, lightTheme, forcedTheme, colorSchemePref, colorScheme]);
 
 	return null;
 }

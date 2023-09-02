@@ -1,6 +1,5 @@
 "use client";
 import * as React from "react";
-
 import { useEffect } from "react";
 import type { ColorSchemeType } from "../../store";
 import { useTheme } from "../../store";
