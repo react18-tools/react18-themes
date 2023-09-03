@@ -1,5 +1,6 @@
 "use client";
-import { useTheme, ColorSchemeType } from "react18-themes";
+import type { ColorSchemeType } from "react18-themes";
+import { useTheme } from "react18-themes";
 import styles from "./page.module.css";
 
 const colorSchemes: ColorSchemeType[] = ["", "system", "light", "dark"];

@@ -17,8 +17,8 @@ const inter = Inter({ subsets: ["latin"] });
 const forcedPages: ForcedPage[] = [
 	[/forced-color-scheme\/dark/, { colorScheme: "dark" }],
 	[/forced-color-scheme\/light/, { colorScheme: "light" }],
-	...[darkThemes, lightThemes].map(
-		th => [new RegExp(`themed-page\/${th}`), { theme: "light" }] as ForcedPage,
+	...[...darkThemes, ...lightThemes].map(
+		th => [new RegExp(`themed-page/${th}`), { theme: "light" }] as ForcedPage,
 	),
 ];
 

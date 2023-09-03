@@ -1,7 +1,7 @@
 "use client";
 import { useTheme } from "react18-themes";
-import { darkThemes } from "./themes";
 import { useEffect } from "react";
+import { darkThemes } from "./themes";
 import styles from "./page.module.css";
 
 export default function DarkThemeSelector() {

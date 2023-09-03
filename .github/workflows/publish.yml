@@ -12,7 +12,9 @@ jobs:
     # Also avoid running after merging set-up PR
     if: github.run_number > 2
     runs-on: ubuntu-latest
-    permissions: write-all
+    permissions:
+      packages: write
+      contents: write
 
     defaults:
       run:
@@ -34,6 +36,7 @@ jobs:
         run: pnpm test
       - name: Update topics and Publish to NPM
         run: pnpm build && pnpm publish-package && cd dist && node ../scope.js && npm publish --access public
+        continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
