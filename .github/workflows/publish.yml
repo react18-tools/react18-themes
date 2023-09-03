@@ -33,15 +33,12 @@ jobs:
       - name: Test
         run: pnpm test
       - name: Update topics and Publish to NPM
-        run: pnpm build && pnpm publish-package
+        run: pnpm build && pnpm publish-package && cd dist && node ../scope.js && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
           OWNER: ${{ github.event.repository.owner.login }}
           REPO: ${{ github.event.repository.name }}
-
-      - name: Publish Scoped package to NPM
-        run: cd dist && node ../scope.js && npm publish --access public
       - uses: actions/setup-node@v3
         with:
           registry-url: https://npm.pkg.github.com/
@@ -55,9 +52,12 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
-      - run: node lite.js && pnpm build && pnpm publish-package
-      - name: Publish Scoped package to NPM
-        run: cd dist && node scope.js && npm publish --access public
+      - run: node lite.js && pnpm build && pnpm publish-package && cd dist && node scope.js && npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OWNER: ${{ github.event.repository.owner.login }}
+          REPO: ${{ github.event.repository.name }}
       - uses: actions/setup-node@v3
         with:
           registry-url: https://npm.pkg.github.com/

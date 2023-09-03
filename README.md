@@ -1,4 +1,4 @@
-# Turborepo template [![test](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/react18-themes/graph/badge.svg?token=8LX1NLNVRV)](https://codecov.io/gh/mayank1513/react18-themes) [![Version](https://img.shields.io/npm/v/react18-themes.svg?colorB=green)](https://www.npmjs.com/package/react18-themes) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes.svg)](https://www.npmjs.com/package/react18-themes) [![Unit Tests](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes)
+# React 18 Themes [![test](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/react18-themes/graph/badge.svg)](https://codecov.io/gh/mayank1513/react18-themes) [![Version](https://img.shields.io/npm/v/react18-themes.svg?colorB=green)](https://www.npmjs.com/package/react18-themes) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes.svg)](https://www.npmjs.com/package/react18-themes) [![Unit Tests](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes)
 
 🤟 👉 [Unleash the Power of React Server Components](https://medium.com/javascript-in-plain-english/unleash-the-power-of-react-server-components-eb3fe7201231)
 
@@ -15,6 +15,7 @@ This project is inspired by `next-themes`. `next-themes` is an awesome package, 
 - ✅ Themed browser UI with color-scheme
 - ✅ Support for Next.js 13 `appDir`
 - ✅ Sync theme across tabs and windows
+- ✅ Theme in sync with server component
 - ✅ Disable flashing when changing themes
 - ✅ Force pages to specific themes
 - ✅ Class or data attribute selector
@@ -171,6 +172,13 @@ export default MyPage;
 In a similar way, you can also force color scheme.
 
 Forcing color scheme will apply your defaultDark or defaultLight theme, configurable via hooks.
+
+## Migrating from v0 to v1
+
+- defaultDarkTheme is renamed to darkTheme
+- setDefaultDarkTheme is renamed to setDarkTheme
+- defaultLightTheme is renamed to lightTheme
+- setDefaultLightTheme is renamed to setLightTheme
 
 > Full docs coming soon!
 
