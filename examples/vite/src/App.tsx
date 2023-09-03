@@ -4,10 +4,14 @@ import viteLogo from "/vite.svg";
 import { ThemeSwitcher } from "react18-themes";
 import { ForkMe } from "@mayank1513/fork-me/server";
 import "./App.css";
+import ColorSchemePreference from "./components/color-scheme-preference";
+import ThemeSelector from "./components/theme-selector";
+import DarkThemeSelector from "./components/dark-theme-selector";
+import LightThemeSelector from "./components/light-theme-selector";
+import styles from "./components/page.module.css";
+import { StarMe } from "@mayank1513/fork-me";
 
 function App() {
-	const [count, setCount] = useState(0);
-
 	return (
 		<>
 			<ThemeSwitcher />
@@ -19,15 +23,24 @@ function App() {
 					<img src={reactLogo} className="logo react" alt="React logo" />
 				</a>
 			</div>
-			<h1>Vite + React</h1>
+			<h1>React18 Themes</h1>
 			<div className="card">
-				<button onClick={() => setCount(count => count + 1)}>count is {count}</button>
+				<StarMe gitHubUrl="https://github.com/mayank1513/react18-themes" />
 				<p>
 					Edit <code>src/App.tsx</code> and save to test HMR
 				</p>
 			</div>
-			<p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-			<ForkMe gitHubUrl="https://github.com/mayank1513/turborepo-template" />
+			<div className={[styles.center, styles.prefs].join(" ")}>
+				<div>
+					<ColorSchemePreference />
+					<ThemeSelector />
+				</div>
+				<div>
+					<DarkThemeSelector />
+					<LightThemeSelector />
+				</div>
+			</div>
+			<ForkMe gitHubUrl="https://github.com/mayank1513/react18-themes" bgColor=" " />
 		</>
 	);
 }

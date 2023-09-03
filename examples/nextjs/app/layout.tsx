@@ -29,8 +29,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					gitHubUrl="https://github.com/mayank1513/react18-themes"
 					bgColor="var(--text-color)"
 					textColor="var(--bg-color)"
-					noAutoFork
-					text="Use this Template"
 				/>
 			</body>
 		</ServerSideWrapper>

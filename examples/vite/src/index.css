@@ -44,6 +44,7 @@ button {
 	font-weight: 500;
 	font-family: inherit;
 	background-color: #f9f9f9;
+	color: #213547;
 	cursor: pointer;
 	transition: border-color 0.25s;
 }
@@ -54,14 +55,56 @@ button:focus,
 button:focus-visible {
 	outline: 4px auto -webkit-focus-ring-color;
 }
+
+/* dark themes */
 [data-theme="dark"] {
 	color: rgba(255, 255, 255, 0.87);
 	background-color: #242424;
 }
 
-[data-theme="dark"] a:hover {
+[data-theme="black"] {
+	background-color: #000;
+	color: #fff;
+}
+
+[data-theme="gray"] {
+	background-color: gray;
+	color: #fff;
+}
+
+[data-theme="dark-blue"] {
+	background-color: #006;
+	color: #ff0;
+}
+
+[data-theme="dark"] button,
+[data-theme="black"] button,
+[data-theme="gray"] button,
+[data-theme="dark-blue"] button {
+	background-color: #1a1a1a;
+	color: #decab8;
+}
+
+[data-theme="dark"] a:hover,
+[data-theme="black"] a:hover,
+[data-theme="gray"] a:hover,
+[data-theme="dark-blue"] a:hover {
 	color: #535bf2;
 }
-[data-theme="dark"] button {
-	background-color: #1a1a1a;
+
+/* light themes */
+
+[data-theme="white"] {
+	background-color: #fff;
+	color: #000;
+}
+
+[data-theme="yellow"] {
+	background-color: #ff0;
+	color: #00f;
+}
+
+[data-theme="orange"] {
+	background-color: #ffa500;
+	color: #05f;
 }
