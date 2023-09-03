@@ -36,7 +36,6 @@ jobs:
         run: pnpm test
       - name: Update topics and Publish to NPM
         run: pnpm build && pnpm publish-package && cd dist && node ../scope.js && npm publish --access public
-        continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -47,6 +46,7 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - name: Publish to GitHub Public Repository
         run: pnpm publish-package
+        continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
