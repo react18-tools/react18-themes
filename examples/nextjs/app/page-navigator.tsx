@@ -9,7 +9,8 @@ export default function PageNavigator() {
 	const [exampleOption, setExampleOption] = useState(darkThemes[0]);
 	const [exampleOptions, setExampleOptions] = useState([...darkThemes, ...lightThemes]);
 	const setExampleType = (exampleType: string) => {
-		const exampleOptions = exampleType === "themed-page" ? [] : ["system", "dark", "light"];
+		const exampleOptions =
+			exampleType === "themed-page" ? [...darkThemes, ...lightThemes] : ["system", "dark", "light"];
 		setExampleOptions(exampleOptions);
 		setExampleOption(exampleOptions[0]);
 		_setExampleType(exampleType);

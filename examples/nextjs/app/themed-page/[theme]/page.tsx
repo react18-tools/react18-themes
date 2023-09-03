@@ -4,7 +4,7 @@ export default function PageWithForcedTheme({ params: { theme } }) {
 	return (
 		<>
 			<ForceTheme theme={theme} />
-			<p>Theme is forced to {theme}</p>
+			<p>Theme is forced to {theme}. | Try changing theme or colorScheme and verify!</p>
 		</>
 	);
 }

@@ -4,8 +4,11 @@ export default function PageWithForcedColorScheme() {
 	return (
 		<>
 			<ForceColorScheme colorScheme={""} />
-			<p>Color scheme is forced to "" (Empty string)</p>
-			<p>Thus, theme is applied irrespective of colorScheme</p>
+			<p>
+				Color scheme is forced to "" (Empty string)
+				<br />
+				Thus, theme is applied irrespective of colorScheme
+			</p>
 		</>
 	);
 }
