@@ -55,7 +55,7 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
-      - run: node lite.js && pnpm build && pnpm publish-package && cd dist && node scope.js && npm publish --access public
+      - run: node lite.js && pnpm build && pnpm publish-package && cd dist && node ../scope.js && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
