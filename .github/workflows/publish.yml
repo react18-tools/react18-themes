@@ -31,17 +31,8 @@ jobs:
         # fail and not publish if any of the unit tests are failing
       - name: Test
         run: pnpm test
-      - name: Setup Git
-        run: |
-          git config --global user.name "mayank1513"
-          git config --global user.email "mayank.srmu@gmail.com"
-          git fetch
-          git checkout main
-      - name: update version and push back to the repo
-        run: pnpm changeset version && git push origin main
-        working-directory: .
       - name: Update topics and Publish to NPM
-        run: pnpm build && pnpm publish-package && cd dist && node ../scope.js && npm publish --access public
+        run: pnpm build && pnpm publish-package && node scope.js && pnpm publish-package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -52,7 +43,7 @@ jobs:
           node-version: 18
           registry-url: https://npm.pkg.github.com/
       - name: Publish to GitHub Public Repository
-        run: pnpm publish-package
+        run: node github.js && pnpm publish-package
         continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -62,7 +53,7 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
-      - run: node lite.js && pnpm build && pnpm publish-package && cd dist && node ../scope.js && sleep 2s && npm publish --access public
+      - run: node lite.js && pnpm build && pnpm publish-package && node scope.js && pnpm publish-package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
           TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -73,6 +64,6 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           node-version: 18
       - name: Publish to GitHub Public Repository
-        run: pnpm publish-package
+        run: node github.js && pnpm publish-package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
