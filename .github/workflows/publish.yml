@@ -40,10 +40,10 @@ jobs:
           REPO: ${{ github.event.repository.name }}
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
           registry-url: https://npm.pkg.github.com/
+          node-version: 18
       - name: Publish to GitHub Public Repository
-        run: node github.js && pnpm publish-package
+        run: node github.js && cd dist && npm publish
         continue-on-error: true
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -51,8 +51,8 @@ jobs:
       # Publish lite version
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
           registry-url: https://registry.npmjs.org
+          node-version: 18
       - run: node lite.js && pnpm build && pnpm publish-package && node scope.js && pnpm publish-package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
@@ -64,6 +64,6 @@ jobs:
           registry-url: https://npm.pkg.github.com/
           node-version: 18
       - name: Publish to GitHub Public Repository
-        run: node github.js && pnpm publish-package
+        run: node github.js && cd dist && npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
