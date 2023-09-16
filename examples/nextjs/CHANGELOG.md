@@ -1,5 +1,12 @@
 # nextjs-example
 
+## 0.0.2
+
+### Patch Changes
+
+- Updated dependencies [3bc14c9]
+  - react18-themes@1.0.7
+
 ## 0.0.1
 
 ### Patch Changes
