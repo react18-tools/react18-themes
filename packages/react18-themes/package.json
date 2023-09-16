@@ -72,6 +72,7 @@
 		"react-server-components",
 		"react-client-components",
 		"themes",
+		"next-themes",
 		"dark-mode",
 		"dark-themes",
 		"typescript",
