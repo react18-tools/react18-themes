@@ -1,0 +1,9 @@
+# vite-example
+
+## 0.0.1
+
+### Patch Changes
+
+- Updated dependencies [37c9223]
+- Updated dependencies [8ee8462]
+  - react18-themes@1.0.6
