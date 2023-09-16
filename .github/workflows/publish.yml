@@ -44,6 +44,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           registry-url: https://npm.pkg.github.com/
+          node-version: 18
       - name: Publish to GitHub Public Repository
         run: pnpm publish-package
         continue-on-error: true
