@@ -2,18 +2,18 @@
 	"name": "react18-themes",
 	"author": "Mayank Kumar Chaudhari <https://mayank-chaudhari.vercel.app>",
 	"private": false,
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Unleash the Power of React Server Components! Use multiple themes on your site with confidence, without losing any advantages of React Server Components.",
 	"main": "./index.ts",
 	"types": "./index.ts",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mayank1513/turborepo-template.git"
+		"url": "git+https://github.com/mayank1513/react18-themes.git"
 	},
 	"bugs": {
-		"url": "https://github.com/mayank1513/turborepo-template/issues"
+		"url": "https://github.com/mayank1513/react18-themes/issues"
 	},
-	"homepage": "https://github.com/mayank1513/turborepo-template/tree/main/packages/fork-me#readme",
+	"homepage": "https://github.com/mayank1513/react18-themes#readme",
 	"sideEffects": false,
 	"license": "MIT",
 	"scripts": {

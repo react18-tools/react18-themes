@@ -1,4 +1,4 @@
-# React 18 Themes [![test](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/react18-themes/graph/badge.svg)](https://codecov.io/gh/mayank1513/react18-themes) [![Version](https://img.shields.io/npm/v/react18-themes.svg?colorB=green)](https://www.npmjs.com/package/react18-themes) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes.svg)](https://www.npmjs.com/package/react18-themes) [![Unit Tests](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes)
+# React 18 Themes [![test](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) [![codecov](https://codecov.io/gh/mayank1513/react18-themes/graph/badge.svg)](https://codecov.io/gh/mayank1513/react18-themes) [![Version](https://img.shields.io/npm/v/react18-themes.svg?colorB=green)](https://www.npmjs.com/package/react18-themes) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes.svg)](https://www.npmjs.com/package/react18-themes) [![Unit Tests](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/mayank1513/react18-themes/actions/workflows/test.yml) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes) [![Get help](codementor.svg)](https://www.codementor.io/@mayank1513?refer=badge)
 
 🤟 👉 [Unleash the Power of React Server Components](https://medium.com/javascript-in-plain-english/unleash-the-power-of-react-server-components-eb3fe7201231)
 
@@ -33,7 +33,7 @@ $ npm install react18-themes
 $ yarn add react18-themes
 ```
 
-## Want Lite Version? [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes-lite)](https://www.npmjs.com/package/react18-themes-lite)
+## Want Lite Version? [![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes-lite)](https://www.npmjs.com/package/react18-themes-lite) [![Version](https://img.shields.io/npm/v/react18-themes-lite.svg?colorB=green)](https://www.npmjs.com/package/react18-themes-lite) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes-lite.svg)](https://www.npmjs.com/package/react18-themes-lite)
 
 ```bash
 $ pnpm add react18-themes-lite
