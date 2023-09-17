@@ -14,7 +14,7 @@ fs.writeFileSync(path.resolve(__dirname, "package.json"), JSON.stringify(package
 const readMePath = path.resolve(__dirname, "..", "..", "README.md");
 let readMe = fs.readFileSync(readMePath, { encoding: "utf8" });
 const tmp = "!--|--!";
-const owner = process.env.OWNER;
+const owner = "mayank";
 readMe = readMe.replace(new RegExp(`$${owner}/${ref}`, "g"), tmp);
 readMe = readMe.replace(new RegExp(ref, "g"), packageJson.name);
 readMe = readMe.replace(new RegExp(tmp, "g"), `$${owner}/${ref}`);

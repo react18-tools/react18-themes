@@ -1,4 +1,4 @@
-name: Publish (NPM & GPR)
+name: Publish to NPM
 
 # publish only when package json has changed - assuming version upgrade
 on:
@@ -35,35 +35,8 @@ jobs:
         run: pnpm build && pnpm publish-package && node scope.js && pnpm publish-package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OWNER: ${{ github.event.repository.owner.login }}
-          REPO: ${{ github.event.repository.name }}
-      - uses: actions/setup-node@v3
-        with:
-          registry-url: https://npm.pkg.github.com/
-          node-version: 18
-      - name: Publish to GitHub Public Repository
-        run: node github.js && cd dist && npm publish
-        continue-on-error: true
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Publish lite version
-      - uses: actions/setup-node@v3
-        with:
-          registry-url: https://registry.npmjs.org
-          node-version: 18
       - run: node lite.js && pnpm build && pnpm publish-package && node scope.js && pnpm publish-package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OWNER: ${{ github.event.repository.owner.login }}
-          REPO: ${{ github.event.repository.name }}
-      - uses: actions/setup-node@v3
-        with:
-          registry-url: https://npm.pkg.github.com/
-          node-version: 18
-      - name: Publish to GitHub Public Repository
-        run: node github.js && cd dist && npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

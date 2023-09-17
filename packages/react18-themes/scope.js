@@ -3,7 +3,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const owner = process.env.OWNER;
+const owner = "mayank1513";
 const wd = path.resolve(process.cwd(), "dist");
 const packageJson = require(path.resolve(wd, "package.json"));
 const ref = packageJson.name;
