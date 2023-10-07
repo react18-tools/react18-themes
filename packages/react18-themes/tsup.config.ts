@@ -8,6 +8,6 @@ export default defineConfig(options => ({
 	sourcemap: false,
 	clean: true,
 	minify: !options.watch,
-	esbuildPlugins: [react18Plugin({})],
+	esbuildPlugins: [react18Plugin()],
 	legacyOutput: true,
 }));
