@@ -9,7 +9,7 @@
 		"lint": "next lint"
 	},
 	"dependencies": {
-		"@mayank1513/fork-me": "1.0.0",
+		"@mayank1513/fork-me": "1.1.2",
 		"next": "^13.5.4",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
