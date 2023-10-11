@@ -1,5 +1,11 @@
 # react18-themes
 
+## 1.0.9
+
+### Patch Changes
+
+- Add `data-color-scheme` attribute -> we will be simplifying the library use in near future
+
 ## 1.0.7
 
 ### Patch Changes
