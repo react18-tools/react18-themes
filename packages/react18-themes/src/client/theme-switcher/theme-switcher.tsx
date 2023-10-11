@@ -44,6 +44,7 @@ export function ThemeSwitcher(props: {
 			}
 			newTheme = newTheme === undefined ? theme : newTheme;
 			document.documentElement.setAttribute("data-theme", newTheme);
+			document.documentElement.setAttribute("data-color-scheme", colorScheme);
 			/** do not create cookie for forced page as they will interfere with normal prefs */
 			if (!forcedColorScheme && forcedTheme === undefined)
 				document.cookie = `data-theme=${newTheme}`;
