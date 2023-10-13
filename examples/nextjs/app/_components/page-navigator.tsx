@@ -1,27 +1,34 @@
 "use client";
+import type { ChangeEvent } from "react";
 import { useState } from "react";
 import Link from "next/link";
+import { Select } from "shared-ui";
 import { darkThemes, lightThemes } from "../themes";
 import styles from "../page.module.css";
 
+const exampleTypes: string[] = ["Themed Page", "Forced Color Scheme"];
+
 export default function PageNavigator(): JSX.Element {
-	const [exampleType, setExampleType] = useState("themed-page");
+	const [exampleType, setExampleType] = useState("Themed Page");
 	const [exampleOption, setExampleOption] = useState(darkThemes[0]);
 	const [exampleOptions, setExampleOptions] = useState([...darkThemes, ...lightThemes]);
-	const handleChangeExampleType: (exampleType: string) => void = exampleType => {
+	const handleChangeExampleType: (e: ChangeEvent<HTMLSelectElement>) => void = e => {
+		const exampleType = e.target.value;
 		const exampleOptions =
 			exampleType === "themed-page" ? [...darkThemes, ...lightThemes] : ["system", "dark", "light"];
 		setExampleOptions(exampleOptions);
 		setExampleOption(exampleOptions[0]);
 		setExampleType(exampleType);
 	};
+
+	const handleChangeExample: (e: ChangeEvent<HTMLSelectElement>) => void = e => setExampleOption(e.target.value);
+
 	return (
 		<div className={styles.card}>
 			<h2>
 				Pages Navigator
-				<Link href={`/${exampleType}/${exampleOption}`}>
-					{" "}
-					<span>-&gt;</span>
+				<Link href={`/${exampleType.replace(/ +/g, "-").toLowerCase()}/${exampleOption}`}>
+					&nbsp;<span>-&gt;</span>
 				</Link>
 			</h2>
 			<p>
@@ -29,17 +36,8 @@ export default function PageNavigator(): JSX.Element {
 			</p>
 			<br />
 			<nav>
-				<select onChange={e => handleChangeExampleType(e.target.value)} value={exampleType}>
-					<option value="themed-page">Themed Page</option>
-					<option value="forced-color-scheme">Forced ColorScheme</option>
-				</select>{" "}
-				<select onChange={e => setExampleOption(e.target.value)} value={exampleOption}>
-					{exampleOptions.map(o => (
-						<option key={o} value={o}>
-							{o}
-						</option>
-					))}
-				</select>
+				<Select onChange={handleChangeExampleType} options={exampleTypes} value={exampleType} />
+				<Select onChange={handleChangeExample} options={exampleOptions} value={exampleOption} />
 			</nav>
 		</div>
 	);
