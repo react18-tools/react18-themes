@@ -1,4 +1,5 @@
 "use client";
+import type { ColorSchemeType } from "react18-themes";
 import { useTheme } from "react18-themes";
 import { useEffect, useMemo } from "react";
 import type { ChangeEvent } from "react";
@@ -27,20 +28,20 @@ export function ThemeSelector({ scope }: ThemeSelectorProps) {
 		setTheme(themes[0]);
 	}, [setTheme, themes]);
 
-	let className = colorSchemePref ? "" : styles.active;
-
-	/** handle className for dark and light themes */
-	if (scope !== "") {
-		if (colorSchemePref === scope) className = styles.active;
-		else className = colorSchemePref === "system" ? styles[scope] : "";
-	}
 	const handleChange: (e: ChangeEvent<HTMLSelectElement>) => void = e => setTheme(e.target.value);
 
 	return (
 		<p>
-			Select {scope} theme <Select className={className} onChange={handleChange} options={themes} value={theme} />
+			Select {scope} theme{" "}
+			<Select className={getClassName(scope, colorSchemePref)} onChange={handleChange} options={themes} value={theme} />
 		</p>
 	);
+}
+
+function getClassName(scope: ThemeSelectorProps["scope"], colorSchemePref: ColorSchemeType) {
+	if (scope === "") return colorSchemePref ? "" : styles.active;
+	if (colorSchemePref === scope) return styles.active;
+	return colorSchemePref === "system" ? styles[scope] : "";
 }
 
 function useThemeStates(scope: ThemeSelectorProps["scope"]) {
