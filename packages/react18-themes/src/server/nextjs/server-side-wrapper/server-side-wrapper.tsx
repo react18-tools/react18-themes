@@ -26,20 +26,18 @@ export function ServerSideWrapper({
 }: ServerSideWrapperProps) {
 	const Tag: keyof JSX.IntrinsicElements = tag || "html";
 	const dataTheme = cookies().get("data-theme")?.value || "";
-	const dataColorScheme = cookies().get("data-color-scheme")?.value || "";
+	const dataColorSchemePref = cookies().get("data-color-scheme-pref")?.value || "";
 
 	const path = headers().get("x-invoke-path");
 	const forcedPageData = forcedPages?.find(forcedPage => path?.match(forcedPage[0]));
 	const isForcedPage = forcedPageData !== undefined;
 
-	const forcedTheme = isForcedPage
-		? getForcedPageTheme(forcedPageData, dataColorScheme)
-		: undefined;
+	const forcedTheme = isForcedPage ? getForcedPageTheme(forcedPageData) : undefined;
 
 	return (
 		// @ts-expect-error -> svg props and html element props conflict
 		<Tag
-			data-color-scheme={dataColorScheme}
+			data-color-scheme={dataColorSchemePref}
 			data-theme={forcedTheme === undefined ? dataTheme : forcedTheme}
 			{...props}
 			data-testid="server-side-wrapper">
@@ -48,10 +46,8 @@ export function ServerSideWrapper({
 	);
 }
 
-function getForcedPageTheme(
-	forcedPageData: ForcedPage,
-	dataColorScheme: string,
-): string | undefined {
+function getForcedPageTheme(forcedPageData: ForcedPage): string | undefined {
+	const dataColorScheme = cookies().get("data-color-scheme")?.value || "";
 	const dataThemeDark = cookies().get("data-theme-dark")?.value || "";
 	const dataThemeLight = cookies().get("data-theme-light")?.value || "";
 

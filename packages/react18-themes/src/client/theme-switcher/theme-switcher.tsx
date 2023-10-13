@@ -49,6 +49,7 @@ export function ThemeSwitcher(props: {
 			document.cookie = `data-theme=${newTheme}`;
 			document.cookie = `data-theme-dark=${darkTheme}`;
 			document.cookie = `data-theme-light=${lightTheme}`;
+			document.cookie = `data-color-scheme-pref=${colorSchemePref}`;
 			document.cookie = `data-color-scheme=${media.matches ? "dark" : "light"}`;
 			restoreTransitions();
 		};
