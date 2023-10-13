@@ -1,6 +1,10 @@
 import { ForceTheme } from "react18-themes";
 
-export default function PageWithForcedTheme({ params: { theme } }: { params: { theme: string } }) {
+interface PageProps {
+	params: { theme: string };
+}
+
+export default function PageWithForcedTheme({ params: { theme } }: PageProps): JSX.Element {
 	return (
 		<>
 			<ForceTheme theme={theme} />

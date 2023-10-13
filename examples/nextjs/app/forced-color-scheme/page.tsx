@@ -1,6 +1,6 @@
 import { ForceColorScheme } from "react18-themes";
 
-export default function PageWithForcedColorScheme() {
+export default function PageWithForcedColorScheme(): JSX.Element {
 	return (
 		<>
 			<ForceColorScheme colorScheme="" />
