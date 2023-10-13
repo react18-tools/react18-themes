@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { darkThemes, lightThemes } from "./themes";
-import styles from "./page.module.css";
+import { darkThemes, lightThemes } from "../themes";
+import styles from "../page.module.css";
 
 export default function PageNavigator(): JSX.Element {
 	const [exampleType, setExampleType] = useState("themed-page");
