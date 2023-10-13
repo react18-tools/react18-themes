@@ -1,4 +1,4 @@
-import ColorSchemePreference from "./color-scheme-preference";
+import { ColorSchemePreference } from "./color-scheme-preference";
 import styles from "./page.module.css";
 import { ThemeSelector } from "./theme-selector";
 

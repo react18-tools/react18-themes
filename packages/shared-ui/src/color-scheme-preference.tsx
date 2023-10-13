@@ -5,7 +5,7 @@ import styles from "./page.module.css";
 
 const colorSchemes: ColorSchemeType[] = ["", "system", "light", "dark"];
 
-export default function ColorSchemePreference() {
+export function ColorSchemePreference() {
 	const [colorSchemePref, setColorSchemePref] = useTheme(state => [
 		state.colorSchemePref,
 		state.setColorSchemePref,
@@ -14,9 +14,9 @@ export default function ColorSchemePreference() {
 		<p>
 			ColorScheme Preference{" "}
 			<select
-				value={colorSchemePref}
+				className={styles.active}
 				onChange={e => setColorSchemePref(e.target.value as ColorSchemeType)}
-				className={styles.active}>
+				value={colorSchemePref}>
 				{colorSchemes.map(theme => (
 					<option key={theme} value={theme}>
 						{theme}

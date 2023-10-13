@@ -1,8 +1,8 @@
 "use client";
 import { useTheme } from "react18-themes";
+import { useEffect, useMemo } from "react";
 import { darkThemes, lightThemes } from "./themes";
 import styles from "./page.module.css";
-import { useEffect, useMemo } from "react";
 
 interface ThemeSelectorProps {
 	scope: "" | "dark" | "light";
@@ -10,13 +10,13 @@ interface ThemeSelectorProps {
 
 export function ThemeSelector({ scope }: ThemeSelectorProps) {
 	const [colorSchemePref, theme, setTheme] = useTheme(state => {
-		let theme = state.theme;
-		let setTheme = state.setTheme;
+		let _theme = state.theme;
+		let _setTheme = state.setTheme;
 		if (scope !== "") {
-			theme = scope === "dark" ? state.darkTheme : state.lightTheme;
-			setTheme = scope === "dark" ? state.setDarkTheme : state.setLightTheme;
+			_theme = scope === "dark" ? state.darkTheme : state.lightTheme;
+			_setTheme = scope === "dark" ? state.setDarkTheme : state.setLightTheme;
 		}
-		return [state.colorSchemePref, theme, setTheme];
+		return [state.colorSchemePref, _theme, _setTheme];
 	});
 	const themes = useMemo(() => {
 		switch (scope) {
@@ -30,7 +30,7 @@ export function ThemeSelector({ scope }: ThemeSelectorProps) {
 	}, [scope]);
 	useEffect(() => {
 		setTheme(themes[0]);
-	}, []);
+	}, [setTheme, themes]);
 	let className = colorSchemePref ? "" : styles.active;
 	if (scope !== "") {
 		if (colorSchemePref === scope) className = styles.active;
@@ -39,10 +39,10 @@ export function ThemeSelector({ scope }: ThemeSelectorProps) {
 	return (
 		<p>
 			Select {scope} theme{" "}
-			<select value={theme} onChange={e => setTheme(e.target.value)} className={className}>
-				{themes.map(theme => (
-					<option key={theme} value={theme}>
-						{theme}
+			<select className={className} onChange={e => setTheme(e.target.value)} value={theme}>
+				{themes.map(_theme => (
+					<option key={_theme} value={_theme}>
+						{_theme}
 					</option>
 				))}
 			</select>
