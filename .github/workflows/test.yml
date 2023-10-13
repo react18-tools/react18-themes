@@ -27,3 +27,8 @@ jobs:
           directory: ./packages/react18-themes
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: fork-me
+      - uses: paambaati/codeclimate-action@v5.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          workingDirectory: ./packages/react18-themes
