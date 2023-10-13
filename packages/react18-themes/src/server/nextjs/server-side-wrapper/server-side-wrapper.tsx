@@ -3,10 +3,7 @@ import { cookies, headers } from "next/headers";
 import * as React from "react";
 import type { ColorSchemeType } from "../../../store";
 
-export type ForcedPage = [
-	pathMatcher: RegExp | string,
-	themes: { theme?: string; colorScheme?: ColorSchemeType },
-];
+export type ForcedPage = [pathMatcher: RegExp | string, themes: { theme?: string; colorScheme?: ColorSchemeType }];
 
 interface ServerSideWrapperProps extends HTMLProps<HTMLElement> {
 	children: ReactNode;
@@ -18,12 +15,7 @@ interface ServerSideWrapperProps extends HTMLProps<HTMLElement> {
  * # ServerSideWrapper
  * Server side wrapper for Next.js to replace &#x60;html&#x60; tag
  */
-export function ServerSideWrapper({
-	children,
-	tag,
-	forcedPages,
-	...props
-}: ServerSideWrapperProps) {
+export function ServerSideWrapper({ children, tag, forcedPages, ...props }: ServerSideWrapperProps) {
 	const Tag: keyof JSX.IntrinsicElements = tag || "html";
 	const dataTheme = cookies().get("data-theme")?.value || "";
 	const dataColorSchemePref = cookies().get("data-color-scheme-pref")?.value || "";
@@ -55,8 +47,7 @@ function getForcedPageTheme(forcedPageData: ForcedPage): string | undefined {
 	if (forcedPageData[1].theme) {
 		forcedTheme = forcedPageData[1].theme;
 	} else if (forcedPageData[1].colorScheme !== "") {
-		const colorScheme =
-			forcedPageData[1].colorScheme === "system" ? dataColorScheme : forcedPageData[1].colorScheme;
+		const colorScheme = forcedPageData[1].colorScheme === "system" ? dataColorScheme : forcedPageData[1].colorScheme;
 		forcedTheme = colorScheme === "dark" ? dataThemeDark : dataThemeLight;
 	}
 	return forcedTheme;

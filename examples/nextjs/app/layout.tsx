@@ -14,9 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 const forcedPages: ForcedPage[] = [
 	[/forced-color-scheme\/dark/, { colorScheme: "dark" }],
 	[/forced-color-scheme\/light/, { colorScheme: "light" }],
-	...[...darkThemes, ...lightThemes].map(
-		th => [new RegExp(`themed-page/${th}`), { theme: "light" }] as ForcedPage,
-	),
+	...[...darkThemes, ...lightThemes].map(th => [new RegExp(`themed-page/${th}`), { theme: "light" }] as ForcedPage),
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
@@ -38,10 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
 							</a>
 							{children}
 							<div>
-								<a
-									href="https://mayank-chaudhari.vercel.app"
-									rel="noopener noreferrer"
-									target="_blank">
+								<a href="https://mayank-chaudhari.vercel.app" rel="noopener noreferrer" target="_blank">
 									By Mayank
 								</a>
 							</div>
@@ -68,9 +63,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
 								</h2>
 								<p>Explore more examples on official GitHub Repo.</p>
 							</a>
-							<StarMe
-								className={styles.card}
-								gitHubUrl="https://github.com/mayank1513/react18-themes">
+							<StarMe className={styles.card} gitHubUrl="https://github.com/mayank1513/react18-themes">
 								<h2>
 									Star this repo <span>-&gt;</span>
 								</h2>

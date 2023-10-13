@@ -39,9 +39,7 @@ function getActions(data: InquirerDataType) {
 		{
 			type: "add",
 			path: `${root}{{kebabCase name}}/index.ts`,
-			template: `${
-				data.isClient ? '"use client";\n\n' : ""
-			}export * from "./{{kebabCase name}}";\n`,
+			template: `${data.isClient ? '"use client";\n\n' : ""}export * from "./{{kebabCase name}}";\n`,
 		},
 		{
 			type: "add",
@@ -66,19 +64,20 @@ function getNestedRouteActions(data: InquirerDataType) {
 	const { isClient, name } = data;
 	const root = isClient ? "src/client/" : "src/server/";
 	const nestedRouteActions: PlopTypes.ActionType[] = [];
+
 	/** Return early if no nested routes */
 	if (!name.includes("/")) return { nestedRouteActions, root };
 
 	const lastSlashInd = name.lastIndexOf("/") || name.lastIndexOf("\\");
+	/** following is required to make sure appropreate name is used while creating components */
 	data.name = name.slice(lastSlashInd + 1);
+
 	const dir = name.slice(0, lastSlashInd).split(/\/|\\/);
 	const r1 = root.split(/\/|\\/);
 	for (let i = 1; i <= dir.length; i++) {
 		const p = path.resolve(process.cwd(), "..", "..", ...r1, ...dir.slice(0, i), "index.ts");
 		if (!fs.existsSync(p)) {
-			const content = `${isClient ? '"use client";\n' : ""}// ${dir
-				.slice(0, i)
-				.join("/")} component exports\n`;
+			const content = `${isClient ? '"use client";\n' : ""}// ${dir.slice(0, i).join("/")} component exports\n`;
 			nestedRouteActions.push({
 				type: "add",
 				path: `${root + dir.slice(0, i).join("/")}/index.ts`,
