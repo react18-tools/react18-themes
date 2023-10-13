@@ -1,11 +1,13 @@
 import type { ColorSchemeType } from "react18-themes";
 import { ForceColorScheme } from "react18-themes";
 
+interface PageWithForcedColorSchemeProps {
+	params: { colorScheme: ColorSchemeType };
+}
+
 export default function PageWithForcedColorScheme({
 	params: { colorScheme },
-}: {
-	params: { colorScheme: ColorSchemeType };
-}) {
+}: PageWithForcedColorSchemeProps): JSX.Element {
 	return (
 		<>
 			<ForceColorScheme colorScheme={colorScheme} />

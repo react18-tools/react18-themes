@@ -3,12 +3,8 @@ import viteLogo from "/vite.svg";
 import { ThemeSwitcher } from "react18-themes";
 import { ForkMe } from "@mayank1513/fork-me/server";
 import "./App.css";
-import ColorSchemePreference from "./components/color-scheme-preference";
-import ThemeSelector from "./components/theme-selector";
-import DarkThemeSelector from "./components/dark-theme-selector";
-import LightThemeSelector from "./components/light-theme-selector";
-import styles from "./components/page.module.css";
 import { StarMe } from "@mayank1513/fork-me";
+import { ThemeController } from "shared-ui";
 
 function App() {
 	return (
@@ -29,16 +25,7 @@ function App() {
 					Edit <code>src/App.tsx</code> and save to test HMR
 				</p>
 			</div>
-			<div className={[styles.center, styles.prefs].join(" ")}>
-				<div>
-					<ColorSchemePreference />
-					<ThemeSelector />
-				</div>
-				<div>
-					<DarkThemeSelector />
-					<LightThemeSelector />
-				</div>
-			</div>
+			<ThemeController />
 			<ForkMe gitHubUrl="https://github.com/mayank1513/react18-themes" bgColor=" " />
 		</>
 	);

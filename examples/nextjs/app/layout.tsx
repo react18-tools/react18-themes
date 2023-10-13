@@ -3,14 +3,11 @@ import "./globals.css";
 import { ThemeSwitcher } from "react18-themes";
 import type { ForcedPage } from "react18-themes/server";
 import { ServerSideWrapper } from "react18-themes/server";
-import { darkThemes, lightThemes } from "./themes";
 import { Inter } from "next/font/google";
-import styles from "./page.module.css";
 import { StarMe } from "@mayank1513/fork-me";
-import ColorSchemePreference from "./color-scheme-preference";
-import ThemeSelector from "./theme-selector";
-import DarkThemeSelector from "./dark-theme-selector";
-import LightThemeSelector from "./light-theme-selector";
+import { ThemeController } from "shared-ui";
+import { darkThemes, lightThemes } from "./themes";
+import styles from "./page.module.css";
 import PageNavigator from "./page-navigator";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,7 +19,7 @@ const forcedPages: ForcedPage[] = [
 	),
 ];
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
 	return (
 		<ServerSideWrapper forcedPages={forcedPages} lang="en">
 			<body>
@@ -31,10 +28,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 					<main className={`${styles.main} ${inter.className}`}>
 						<div className={styles.description}>
 							<a
+								className={styles.logo}
 								href="https://github.com/mayank1513/react18-themes"
-								target="_blank"
 								rel="noopener noreferrer"
-								className={styles.logo}>
+								target="_blank">
 								<p>
 									<code className={styles.code}>react18-themes</code>
 								</p>
@@ -43,8 +40,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 							<div>
 								<a
 									href="https://mayank-chaudhari.vercel.app"
-									target="_blank"
-									rel="noopener noreferrer">
+									rel="noopener noreferrer"
+									target="_blank">
 									By Mayank
 								</a>
 							</div>
@@ -58,31 +55,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 								<p>Unleash the power of React Server Components!</p>
 							</div>
 						</div>
-						<div className={[styles.center, styles.prefs].join(" ")}>
-							<div>
-								<ColorSchemePreference />
-								<ThemeSelector />
-							</div>
-							<div>
-								<DarkThemeSelector />
-								<LightThemeSelector />
-							</div>
-						</div>
+						<ThemeController />
 						<div className={styles.cards}>
 							<PageNavigator />
 							<a
-								href="https://github.com/mayank1513/react18-themes"
 								className={styles.card}
-								target="_blank"
-								rel="noopener noreferrer">
+								href="https://github.com/mayank1513/react18-themes"
+								rel="noopener noreferrer"
+								target="_blank">
 								<h2>
 									More Examples <span>-&gt;</span>
 								</h2>
 								<p>Explore more examples on official GitHub Repo.</p>
 							</a>
 							<StarMe
-								gitHubUrl="https://github.com/mayank1513/react18-themes"
-								className={styles.card}>
+								className={styles.card}
+								gitHubUrl="https://github.com/mayank1513/react18-themes">
 								<h2>
 									Star this repo <span>-&gt;</span>
 								</h2>
@@ -93,13 +81,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 				</div>
 				<footer>
 					with 💖 by{" "}
-					<a href="https://mayank-chaudhari.vercel.app" target="_blank" rel="noopener noreferrer">
+					<a href="https://mayank-chaudhari.vercel.app" rel="noopener noreferrer" target="_blank">
 						Mayank Chaudhari
 					</a>
 				</footer>
 				<ForkMe
-					gitHubUrl="https://github.com/mayank1513/react18-themes"
 					bgColor="var(--text-color)"
+					gitHubUrl="https://github.com/mayank1513/react18-themes"
 					textColor="var(--bg-color)"
 				/>
 			</body>

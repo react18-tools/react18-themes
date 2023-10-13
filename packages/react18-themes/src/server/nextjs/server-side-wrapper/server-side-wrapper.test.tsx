@@ -20,7 +20,7 @@ describe("server-side-wrapper", () => {
 	test.concurrent("forced theme", ({ expect }) => {
 		globalThis.path = "/themed-page/dark1";
 		render(
-			<ServerSideWrapper tag="div" forcedPages={[[/themed-page\/dark1/, { theme: "dark1" }]]}>
+			<ServerSideWrapper forcedPages={[[/themed-page\/dark1/, { theme: "dark1" }]]} tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);
@@ -38,8 +38,8 @@ describe("server-side-wrapper", () => {
 		globalThis.path = "/forced-color-scheme/dark";
 		render(
 			<ServerSideWrapper
-				tag="div"
-				forcedPages={[[/forced-color-scheme\/dark/, { colorScheme: "dark" }]]}>
+				forcedPages={[[/forced-color-scheme\/dark/, { colorScheme: "dark" }]]}
+				tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);
@@ -49,8 +49,8 @@ describe("server-side-wrapper", () => {
 		globalThis.path = "/forced-color-scheme/light";
 		render(
 			<ServerSideWrapper
-				tag="div"
-				forcedPages={[[/forced-color-scheme\/light/, { colorScheme: "light" }]]}>
+				forcedPages={[[/forced-color-scheme\/light/, { colorScheme: "light" }]]}
+				tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);
@@ -62,8 +62,8 @@ describe("server-side-wrapper", () => {
 		globalThis.path = "/forced-color-scheme/system";
 		render(
 			<ServerSideWrapper
-				tag="div"
-				forcedPages={[[/forced-color-scheme\/system/, { colorScheme: "system" }]]}>
+				forcedPages={[[/forced-color-scheme\/system/, { colorScheme: "system" }]]}
+				tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);
@@ -72,7 +72,7 @@ describe("server-side-wrapper", () => {
 	test("force disable color scheme", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme";
 		render(
-			<ServerSideWrapper tag="div" forcedPages={[[/forced-color-scheme$/, { colorScheme: "" }]]}>
+			<ServerSideWrapper forcedPages={[[/forced-color-scheme$/, { colorScheme: "" }]]} tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);
@@ -83,7 +83,7 @@ describe("server-side-wrapper", () => {
 		globalThis.cookies = {};
 		globalThis.path = "/forced-color-scheme";
 		render(
-			<ServerSideWrapper tag="div" forcedPages={[[/forced-color-scheme$/, { colorScheme: "" }]]}>
+			<ServerSideWrapper forcedPages={[[/forced-color-scheme$/, { colorScheme: "" }]]} tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);

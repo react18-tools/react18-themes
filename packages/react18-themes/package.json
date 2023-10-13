@@ -20,7 +20,7 @@
 		"test": "vitest run --coverage",
 		"build": "tsup src && tsc --p tsconfig.build.json && node touchup.js",
 		"publish-package": "cd dist && npm publish --access public",
-		"lint": "eslint . --quiet"
+		"lint": "eslint ."
 	},
 	"devDependencies": {
 		"@testing-library/react": "^14.0.0",
@@ -77,5 +77,8 @@
 		"javascript",
 		"mayank1513",
 		"turborepo-trmplate"
-	]
+	],
+	"dependencies": {
+		"eslint": "^8.51.0"
+	}
 }
