@@ -11,7 +11,7 @@ export default defineConfig({
 		globals: true,
 		setupFiles: ["vitest-setup.ts"],
 		coverage: {
-			reporter: ["text", "json", "html"],
+			reporter: ["text", "json", "clover", "html"],
 		},
 		threads: true,
 	},
