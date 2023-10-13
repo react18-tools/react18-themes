@@ -1,0 +1,31 @@
+{
+	"name": "shared-ui",
+	"author": "Mayank Kumar Chaudhari <https://mayank-chaudhari.vercel.app>",
+	"private": true,
+	"version": "1.0.0",
+	"description": "Shared UI Package",
+	"main": "./index.ts",
+	"types": "./index.ts",
+	"scripts": {
+		"test": "vitest run --coverage",
+		"lint": "eslint . --quiet"
+	},
+	"devDependencies": {
+		"@testing-library/react": "^14.0.0",
+		"@turbo/gen": "^1.10.15",
+		"@types/node": "^20.8.4",
+		"@types/react": "^18.2.28",
+		"@types/react-dom": "^18.2.13",
+		"@vitejs/plugin-react": "^4.1.0",
+		"@vitest/coverage-v8": "^0.34.6",
+		"eslint-config-custom": "workspace:*",
+		"jsdom": "^22.1.0",
+		"next": "^13.5.4",
+		"react": "^18.2.0",
+		"tsconfig": "workspace:*",
+		"react18-themes": "workspace:*",
+		"typescript": "5.2.2",
+		"vite-tsconfig-paths": "^4.2.1",
+		"vitest": "^0.34.6"
+	}
+}
