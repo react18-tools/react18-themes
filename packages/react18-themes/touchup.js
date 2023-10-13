@@ -11,12 +11,6 @@ delete packageJson.scripts;
 packageJson.main = "index.js";
 packageJson.types = "index.d.ts";
 
-fs.writeFileSync(
-	path.resolve(process.cwd(), "dist", "package.json"),
-	JSON.stringify(packageJson, null, 2),
-);
+fs.writeFileSync(path.resolve(process.cwd(), "dist", "package.json"), JSON.stringify(packageJson, null, 2));
 
-fs.copyFileSync(
-	path.resolve(process.cwd(), "..", "..", "README.md"),
-	path.resolve(process.cwd(), "dist", "README.md"),
-);
+fs.copyFileSync(path.resolve(process.cwd(), "..", "..", "README.md"), path.resolve(process.cwd(), "dist", "README.md"));
