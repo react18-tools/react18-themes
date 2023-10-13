@@ -1,5 +1,11 @@
 # react18-themes
 
+## 1.0.10
+
+### Patch Changes
+
+- 9db6365: Add data-color-scheme-pref on server side as well
+
 ## 1.0.9
 
 ### Patch Changes
