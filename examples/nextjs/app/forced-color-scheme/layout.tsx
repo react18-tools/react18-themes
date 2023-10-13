@@ -1,14 +1,9 @@
-import Link from "next/link";
+import SubLayoutHeader from "../_components/sub-layout-header";
 
-export default function ForcedSchemeLayout({ children }): JSX.Element {
+export default function ForcedColorSchemeLayout({ children }): JSX.Element {
 	return (
 		<div>
-			<h1>
-				<Link href="/" style={{ display: "inline" }}>
-					🔙🏡
-				</Link>{" "}
-				Example page showing <code>forcedColorScheme</code>
-			</h1>
+			<SubLayoutHeader scope="forcedColorScheme" />
 			{children}
 		</div>
 	);

@@ -1,14 +1,9 @@
-import Link from "next/link";
+import SubLayoutHeader from "../_components/sub-layout-header";
 
-export default function ForcedSchemeLayout({ children }): JSX.Element {
+export default function ForcedThemeLayout({ children }): JSX.Element {
 	return (
 		<div>
-			<h1>
-				<Link href="/" style={{ display: "inline" }}>
-					🔙🏡
-				</Link>{" "}
-				Example page showing <code>forcedTheme</code>
-			</h1>
+			<SubLayoutHeader scope="forcedTheme" />
 			{children}
 		</div>
 	);

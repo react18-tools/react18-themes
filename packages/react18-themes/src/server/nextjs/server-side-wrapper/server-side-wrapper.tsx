@@ -8,11 +8,11 @@ export type ForcedPage = [
 	themes: { theme?: string; colorScheme?: ColorSchemeType },
 ];
 
-type ServerSideWrapperProps = {
+interface ServerSideWrapperProps extends HTMLProps<HTMLElement> {
 	children: ReactNode;
 	tag?: keyof JSX.IntrinsicElements;
 	forcedPages?: ForcedPage[];
-} & HTMLProps<HTMLElement>;
+}
 
 /**
  * # ServerSideWrapper
@@ -26,32 +26,38 @@ export function ServerSideWrapper({
 }: ServerSideWrapperProps) {
 	const Tag: keyof JSX.IntrinsicElements = tag || "html";
 	const dataTheme = cookies().get("data-theme")?.value || "";
+	const dataColorSchemePref = cookies().get("data-color-scheme-pref")?.value || "";
+
 	const path = headers().get("x-invoke-path");
-	let theme;
-	if (forcedPages) {
-		const dataThemeDark = cookies().get("data-theme-dark")?.value || "";
-		const dataThemeLight = cookies().get("data-theme-light")?.value || "";
-		const dataColorScheme = cookies().get("data-color-scheme")?.value || "";
-		for (const f of forcedPages) {
-			if (path?.match(f[0])) {
-				if (f[1].theme) {
-					theme = f[1].theme;
-				} else if (f[1].colorScheme === "") {
-					theme = dataTheme;
-				} else {
-					const colorScheme = f[1].colorScheme === "system" ? dataColorScheme : f[1].colorScheme;
-					theme = colorScheme === "dark" ? dataThemeDark : dataThemeLight;
-				}
-			}
-		}
-	}
+	const forcedPageData = forcedPages?.find(forcedPage => path?.match(forcedPage[0]));
+	const isForcedPage = forcedPageData !== undefined;
+
+	const forcedTheme = isForcedPage ? getForcedPageTheme(forcedPageData) : undefined;
+
 	return (
 		// @ts-expect-error -> svg props and html element props conflict
 		<Tag
-			data-theme={theme === undefined ? dataTheme : theme}
+			data-color-scheme={dataColorSchemePref}
+			data-theme={forcedTheme === undefined ? dataTheme : forcedTheme}
 			{...props}
 			data-testid="server-side-wrapper">
 			{children}
 		</Tag>
 	);
+}
+
+function getForcedPageTheme(forcedPageData: ForcedPage): string | undefined {
+	const dataColorScheme = cookies().get("data-color-scheme")?.value || "";
+	const dataThemeDark = cookies().get("data-theme-dark")?.value || "";
+	const dataThemeLight = cookies().get("data-theme-light")?.value || "";
+
+	let forcedTheme;
+	if (forcedPageData[1].theme) {
+		forcedTheme = forcedPageData[1].theme;
+	} else if (forcedPageData[1].colorScheme !== "") {
+		const colorScheme =
+			forcedPageData[1].colorScheme === "system" ? dataColorScheme : forcedPageData[1].colorScheme;
+		forcedTheme = colorScheme === "dark" ? dataThemeDark : dataThemeLight;
+	}
+	return forcedTheme;
 }

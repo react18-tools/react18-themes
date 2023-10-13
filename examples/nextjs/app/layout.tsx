@@ -8,7 +8,7 @@ import { StarMe } from "@mayank1513/fork-me";
 import { ThemeController } from "shared-ui";
 import { darkThemes, lightThemes } from "./themes";
 import styles from "./page.module.css";
-import PageNavigator from "./page-navigator";
+import PageNavigator from "./_components/page-navigator";
 
 const inter = Inter({ subsets: ["latin"] });
 const forcedPages: ForcedPage[] = [
