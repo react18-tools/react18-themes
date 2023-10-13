@@ -33,37 +33,31 @@ describe("server-side-wrapper", () => {
 		"data-theme-light": { value: "light-yellow" },
 		"data-theme": { value: "yellow" },
 		"data-color-scheme": { value: "dark" },
+		"data-color-scheme-pref": { value: "dark" },
 	};
 	test("forced color scheme dark", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme/dark";
 		render(
-			<ServerSideWrapper
-				forcedPages={[[/forced-color-scheme\/dark/, { colorScheme: "dark" }]]}
-				tag="div">
+			<ServerSideWrapper forcedPages={[[/forced-color-scheme\/dark/, { colorScheme: "dark" }]]} tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);
 		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("dark-blue");
+		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-color-scheme")).toBe("dark");
 	});
 	test("forced color scheme light", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme/light";
 		render(
-			<ServerSideWrapper
-				forcedPages={[[/forced-color-scheme\/light/, { colorScheme: "light" }]]}
-				tag="div">
+			<ServerSideWrapper forcedPages={[[/forced-color-scheme\/light/, { colorScheme: "light" }]]} tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);
-		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe(
-			"light-yellow",
-		);
+		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("light-yellow");
 	});
 	test("forced color scheme system", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme/system";
 		render(
-			<ServerSideWrapper
-				forcedPages={[[/forced-color-scheme\/system/, { colorScheme: "system" }]]}
-				tag="div">
+			<ServerSideWrapper forcedPages={[[/forced-color-scheme\/system/, { colorScheme: "system" }]]} tag="div">
 				ServerSideWrapper
 			</ServerSideWrapper>,
 		);
