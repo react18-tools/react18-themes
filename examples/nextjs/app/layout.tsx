@@ -7,11 +7,8 @@ import { darkThemes, lightThemes } from "./themes";
 import { Inter } from "next/font/google";
 import styles from "./page.module.css";
 import { StarMe } from "@mayank1513/fork-me";
-import ColorSchemePreference from "./color-scheme-preference";
-import ThemeSelector from "./theme-selector";
-import DarkThemeSelector from "./dark-theme-selector";
-import LightThemeSelector from "./light-theme-selector";
 import PageNavigator from "./page-navigator";
+import { ThemeController } from "shared-ui";
 
 const inter = Inter({ subsets: ["latin"] });
 const forcedPages: ForcedPage[] = [
@@ -58,16 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 								<p>Unleash the power of React Server Components!</p>
 							</div>
 						</div>
-						<div className={[styles.center, styles.prefs].join(" ")}>
-							<div>
-								<ColorSchemePreference />
-								<ThemeSelector />
-							</div>
-							<div>
-								<DarkThemeSelector />
-								<LightThemeSelector />
-							</div>
-						</div>
+						<ThemeController />
 						<div className={styles.cards}>
 							<PageNavigator />
 							<a
