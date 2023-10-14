@@ -73,22 +73,22 @@ function getNestedRouteActions(data: InquirerDataType) {
 	data.name = name.slice(lastSlashInd + 1);
 
 	const directories = name.slice(0, lastSlashInd).split(/\/|\\/);
-	const baseDir = path.resolve(process.cwd(), "..", "..", ...root.split(/\/|\\/));
+	const rootSegments = [...root.split(/\/|\\/)];
 
 	for (let i = 1; i <= directories.length; i++)
-		updateIndexFilesIfNeeded(nestedRouteActions, root, baseDir, directories.slice(0, i), isClient);
+		updateIndexFilesIfNeeded(nestedRouteActions, rootSegments, directories.slice(0, i), isClient);
 
 	return { nestedRouteActions, root: `${root + directories.join("/")}/` };
 }
 
 function updateIndexFilesIfNeeded(
 	nestedRouteActions: PlopTypes.ActionType[],
-	root: string,
-	baseDir: string,
+	rootSegments: string[],
 	currentDirSegments: string[],
 	isClient: boolean,
 ) {
-	const indexFilePath = path.resolve(baseDir, ...currentDirSegments, "index.ts");
+	const indexFilePath = path.resolve(process.cwd(), "..", "..", ...rootSegments, ...currentDirSegments, "index.ts");
+	const root = rootSegments.join("/");
 	if (!fs.existsSync(indexFilePath)) {
 		const content = `${isClient ? '"use client";\n' : ""}// ${currentDirSegments.join("/")} component exports\n`;
 		nestedRouteActions.push({
