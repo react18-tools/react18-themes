@@ -29,7 +29,10 @@ export function useThemeSwitcher(props: ThemeSwitcherProps) {
 				resolvedForcedTheme !== undefined
 					? resolvedForcedTheme
 					: resolveThemeFromColorScheme({ media, colorScheme, darkTheme, lightTheme }) || theme;
-			updateDOM({ newTheme, colorScheme, darkTheme, lightTheme, media, colorSchemePref });
+
+			const isForced = Boolean(resolvedForcedColorScheme) || resolvedForcedTheme !== undefined;
+			updateDOM({ newTheme, colorScheme, darkTheme, lightTheme, media, isForced });
+
 			restoreTransitions();
 		};
 		media.addEventListener("change", updateTheme);
@@ -62,17 +65,20 @@ function resolveThemeFromColorScheme({ media, colorScheme, darkTheme, lightTheme
 
 interface UpdateDOMProps extends ResolveThemeFromColorSchemeProps {
 	newTheme: string;
-	colorSchemePref: ColorSchemeType;
+	isForced: boolean /** Do not set cookies for forced pages -  */;
 }
 
-function updateDOM({ newTheme, colorScheme, darkTheme, lightTheme, media, colorSchemePref }: UpdateDOMProps) {
+function updateDOM({ newTheme, colorScheme, darkTheme, lightTheme, media, isForced }: UpdateDOMProps) {
 	document.documentElement.setAttribute("data-theme", newTheme);
 	document.documentElement.setAttribute("data-color-scheme", colorScheme);
-	/** Set cookies for server side rendering */
-	document.cookie = `data-theme=${newTheme}`;
+
+	/** update derived values only for non-forced pages */
+	if (!isForced) {
+		document.cookie = `data-theme=${newTheme}`;
+		document.cookie = `data-color-scheme-pref=${colorScheme}`;
+	}
 	document.cookie = `data-theme-dark=${darkTheme}`;
 	document.cookie = `data-theme-light=${lightTheme}`;
-	document.cookie = `data-color-scheme-pref=${colorSchemePref}`;
 	document.cookie = `data-color-scheme=${media.matches ? "dark" : "light"}`;
 }
 
