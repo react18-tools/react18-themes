@@ -25,8 +25,8 @@ export function ThemeSelector({ scope }: ThemeSelectorProps) {
 	}, [scope]);
 
 	useEffect(() => {
-		setTheme(themes[0]);
-	}, [setTheme, themes]);
+		if (!theme) setTheme(themes[0]);
+	}, [setTheme, themes, theme]);
 
 	const handleChange: (e: ChangeEvent<HTMLSelectElement>) => void = e => setTheme(e.target.value);
 
