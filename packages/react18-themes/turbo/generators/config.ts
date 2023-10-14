@@ -72,24 +72,36 @@ function getNestedRouteActions(data: InquirerDataType) {
 	/** following is required to make sure appropreate name is used while creating components */
 	data.name = name.slice(lastSlashInd + 1);
 
-	const dir = name.slice(0, lastSlashInd).split(/\/|\\/);
-	const r1 = root.split(/\/|\\/);
-	for (let i = 1; i <= dir.length; i++) {
-		const p = path.resolve(process.cwd(), "..", "..", ...r1, ...dir.slice(0, i), "index.ts");
-		if (!fs.existsSync(p)) {
-			const content = `${isClient ? '"use client";\n' : ""}// ${dir.slice(0, i).join("/")} component exports\n`;
-			nestedRouteActions.push({
-				type: "add",
-				path: `${root + dir.slice(0, i).join("/")}/index.ts`,
-				template: content,
-			});
-			nestedRouteActions.push({
-				type: "append",
-				pattern: /(?<insertion> component exports)/g,
-				path: `${root + (i === 1 ? "" : `${dir.slice(0, i - 1).join("/")}/`)}index.ts`,
-				template: `export * from "./${dir[i - 1]}"`,
-			});
-		}
+	const directories = name.slice(0, lastSlashInd).split(/\/|\\/);
+	const baseDir = path.resolve(process.cwd(), "..", "..", ...root.split(/\/|\\/));
+
+	for (let i = 1; i <= directories.length; i++)
+		updateIndexFilesIfNeeded(nestedRouteActions, root, baseDir, directories.slice(0, i), isClient);
+
+	return { nestedRouteActions, root: `${root + directories.join("/")}/` };
+}
+
+function updateIndexFilesIfNeeded(
+	nestedRouteActions: PlopTypes.ActionType[],
+	root: string,
+	baseDir: string,
+	currentDirSegments: string[],
+	isClient: boolean,
+) {
+	const indexFilePath = path.resolve(baseDir, ...currentDirSegments, "index.ts");
+	if (!fs.existsSync(indexFilePath)) {
+		const content = `${isClient ? '"use client";\n' : ""}// ${currentDirSegments.join("/")} component exports\n`;
+		nestedRouteActions.push({
+			type: "add",
+			path: `${root + currentDirSegments.join("/")}/index.ts`,
+			template: content,
+		});
+		const length = currentDirSegments.length;
+		nestedRouteActions.push({
+			type: "append",
+			pattern: /(?<insertion> component exports)/g,
+			path: `${root + (length === 1 ? "" : `${currentDirSegments.slice(0, length - 1).join("/")}/`)}index.ts`,
+			template: `export * from "./${currentDirSegments[length - 1]}"`,
+		});
 	}
-	return { nestedRouteActions, root: `${root + dir.join("/")}/` };
 }
