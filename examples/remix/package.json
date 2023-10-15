@@ -1,0 +1,37 @@
+{
+	"name": "remix-example",
+	"private": true,
+	"sideEffects": false,
+	"type": "module",
+	"scripts": {
+		"build": "remix build",
+		"dev": "remix dev --manual",
+		"start": "remix-serve ./build/index.js",
+		"typecheck": "tsc"
+	},
+	"dependencies": {
+		"@mayank1513/fork-me": "^1.1.2",
+		"@remix-run/css-bundle": "^2.0.1",
+		"@remix-run/node": "^2.0.1",
+		"@remix-run/react": "^2.0.1",
+		"@remix-run/serve": "^2.0.1",
+		"isbot": "^3.7.0",
+		"persist-and-sync": "^0.1.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"react18-themes": "workspace:*",
+		"shared-ui": "workspace:*",
+		"zustand": "^4.4.3"
+	},
+	"devDependencies": {
+		"@remix-run/dev": "^2.0.1",
+		"@remix-run/eslint-config": "^2.0.1",
+		"@types/react": "^18.2.25",
+		"@types/react-dom": "^18.2.11",
+		"eslint": "^8.51.0",
+		"typescript": "^5.2.2"
+	},
+	"engines": {
+		"node": ">=18.0.0"
+	}
+}
