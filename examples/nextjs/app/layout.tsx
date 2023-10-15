@@ -5,7 +5,7 @@ import type { ForcedPage } from "react18-themes/server";
 import { ServerSideWrapper } from "react18-themes/server";
 import { Inter } from "next/font/google";
 import { StarMe } from "@mayank1513/fork-me";
-import { ThemeController } from "shared-ui";
+import { Logo, ThemeController } from "shared-ui";
 import { darkThemes, lightThemes } from "./themes";
 import styles from "./page.module.css";
 import PageNavigator from "./_components/page-navigator";
@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
 								rel="noopener noreferrer"
 								target="_blank">
 								<p>
-									<code className={styles.code}>react18-themes</code>
+									<Logo className={styles.code} />
 								</p>
 							</a>
 							{children}
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
 						<div className={styles.center}>
 							<div>
 								<h1>
-									Build with <code>react18-themes</code>
+									Build with <Logo />
 								</h1>
 								<p>Unleash the power of React Server Components!</p>
 							</div>

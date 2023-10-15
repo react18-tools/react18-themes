@@ -2,13 +2,15 @@ import { ThemeSwitcher } from "react18-themes";
 import { ForkMe } from "@mayank1513/fork-me/server";
 import "./App.css";
 import { StarMe } from "@mayank1513/fork-me";
-import { ThemeController } from "shared-ui";
+import { ThemeController, Logo } from "shared-ui";
 
 function App() {
 	return (
 		<>
 			<ThemeSwitcher />
-			<h1>React18 Themes</h1>
+			<h1>
+				<Logo />
+			</h1>
 			<div className="card">
 				<StarMe gitHubUrl="https://github.com/mayank1513/react18-themes" />
 				<p>
