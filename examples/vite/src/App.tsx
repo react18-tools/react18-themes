@@ -2,7 +2,7 @@ import { ThemeSwitcher } from "react18-themes";
 import { ForkMe } from "@mayank1513/fork-me/server";
 import "./App.css";
 import { StarMe } from "@mayank1513/fork-me";
-import { ThemeController, Logo } from "shared-ui";
+import { ThemeController, Logo, Footer } from "shared-ui";
 
 function App() {
 	return (
@@ -19,6 +19,7 @@ function App() {
 			</div>
 			<ThemeController />
 			<ForkMe gitHubUrl="https://github.com/mayank1513/react18-themes" bgColor=" " />
+			<Footer />
 		</>
 	);
 }

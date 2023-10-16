@@ -87,18 +87,6 @@ body {
 	color: var(--text-color);
 }
 
-.container {
-	max-width: var(--max-width);
-	min-height: calc(100vh - 100px);
-	margin: auto;
-}
-
-.container header {
-	display: flex;
-	gap: 20px;
-	align-items: center;
-}
-
 footer {
 	text-align: center;
 	padding: 10px;
