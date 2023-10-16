@@ -1,25 +1,32 @@
 "use client";
+import type { ChangeEvent } from "react";
 import { useState } from "react";
-import { darkThemes, lightThemes } from "shared-ui";
+import { darkThemes, lightThemes, Select } from "shared-ui";
 import styles from "../root.module.css";
 import { Link } from "@remix-run/react";
 
-export default function PageNavigator() {
-	const [exampleType, _setExampleType] = useState("themed-page");
-	const [exampleOption, setExampleOption] = useState(darkThemes[0]);
+const exampleTypes: string[] = ["Themed Page", "Forced Color Scheme"];
+
+export default function PageNavigator(): JSX.Element {
+	const [exampleType, setExampleType] = useState("Themed Page");
+	const [example, setExample] = useState(darkThemes[0]);
 	const [exampleOptions, setExampleOptions] = useState([...darkThemes, ...lightThemes]);
-	const setExampleType = (exampleType: string) => {
+	const handleChangeExampleType: (e: ChangeEvent<HTMLSelectElement>) => void = e => {
+		const exampleType = e.target.value;
 		const exampleOptions =
 			exampleType === "themed-page" ? [...darkThemes, ...lightThemes] : ["system", "dark", "light"];
 		setExampleOptions(exampleOptions);
-		setExampleOption(exampleOptions[0]);
-		_setExampleType(exampleType);
+		setExample(exampleOptions[0]);
+		setExampleType(exampleType);
 	};
+
+	const handleChangeExample: (e: ChangeEvent<HTMLSelectElement>) => void = e => setExample(e.target.value);
+
 	return (
 		<div className={styles.card}>
 			<h2>
 				Pages Navigator
-				<Link to={`/${exampleType}/${exampleOption}`}>
+				<Link to={`/${exampleType.replace(/ +/g, "-").toLowerCase()}/${example}`}>
 					&nbsp;<span>-&gt;</span>
 				</Link>
 			</h2>
@@ -28,17 +35,8 @@ export default function PageNavigator() {
 			</p>
 			<br />
 			<nav>
-				<select value={exampleType} onChange={e => setExampleType(e.target.value)}>
-					<option value="themed-page">Themed Page</option>
-					<option value="forced-color-scheme">Forced ColorScheme</option>
-				</select>{" "}
-				<select value={exampleOption} onChange={e => setExampleOption(e.target.value)}>
-					{exampleOptions.map(o => (
-						<option key={o} value={o}>
-							{o}
-						</option>
-					))}
-				</select>
+				<Select onChange={handleChangeExampleType} options={exampleTypes} value={exampleType} />
+				<Select onChange={handleChangeExample} options={exampleOptions} value={example} />
 			</nav>
 		</div>
 	);
