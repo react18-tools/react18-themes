@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { darkThemes, lightThemes } from "shared-ui";
-import styles from "./root.module.css";
+import styles from "../root.module.css";
 import { Link } from "@remix-run/react";
 
 export default function PageNavigator() {

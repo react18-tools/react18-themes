@@ -7,7 +7,7 @@ import { Logo, ThemeController } from "shared-ui";
 import styles from "./root.module.css";
 // import { StarMe } from "@mayank1513/fork-me";
 import "./globals.css";
-import PageNavigator from "./page-navigator";
+import PageNavigator from "./components/page-navigator";
 
 export const links: LinksFunction = () => [...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : [])];
 
