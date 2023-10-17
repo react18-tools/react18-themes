@@ -1,7 +1,7 @@
 "use client";
 import type { ChangeEvent, HTMLProps } from "react";
 import { useState } from "react";
-import { darkThemes, lightThemes } from "../themes";
+import { darkThemes, lightThemes } from "../theme-controller/themes";
 import { Select } from "../select";
 import styles from "./cards.module.css";
 

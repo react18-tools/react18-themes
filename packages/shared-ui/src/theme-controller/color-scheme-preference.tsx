@@ -2,8 +2,8 @@
 import type { ColorSchemeType } from "react18-themes";
 import { useTheme } from "react18-themes";
 import type { ChangeEvent } from "react";
-import styles from "./page.module.css";
-import { Select } from "./select";
+import { Select } from "../select";
+import styles from "./theme-controller.module.css";
 
 const colorSchemes: ColorSchemeType[] = ["", "system", "light", "dark"];
 
