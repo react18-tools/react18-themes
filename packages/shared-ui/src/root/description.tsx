@@ -1,6 +1,6 @@
 import type { HTMLProps } from "react";
-import { Logo } from "./common/logo";
-import styles from "./root-layout.module.css";
+import { Logo } from "../common/logo";
+import styles from "../root-layout.module.css";
 
 export function Description({ children }: HTMLProps<HTMLElement>) {
 	return (

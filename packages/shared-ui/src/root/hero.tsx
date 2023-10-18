@@ -1,5 +1,5 @@
-import styles from "./root-layout.module.css";
-import { Logo } from "./common/logo";
+import styles from "../root-layout.module.css";
+import { Logo } from "../common/logo";
 
 export function Hero() {
 	return (
