@@ -1,10 +1,10 @@
-import SubLayoutHeader from "../_components/sub-layout-header";
+import Link from "next/link";
+import { ForcedPageLayout } from "shared-ui";
 
 export default function ForcedThemeLayout({ children }): JSX.Element {
 	return (
-		<div>
-			<SubLayoutHeader scope="forcedTheme" />
+		<ForcedPageLayout LinkElement={Link} scope="forcedTheme">
 			{children}
-		</div>
+		</ForcedPageLayout>
 	);
 }
