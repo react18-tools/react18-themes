@@ -1,14 +1,14 @@
 "use client";
-import type { ChangeEvent, HTMLProps } from "react";
+import type { ChangeEvent, FC, HTMLProps } from "react";
 import { useState } from "react";
 import { darkThemes, lightThemes } from "../theme-controller/themes";
-import { Select } from "../select";
+import { Select } from "../common/select";
 import styles from "./cards.module.css";
 
 const exampleTypes: string[] = ["Themed Page", "Forced Color Scheme"];
 
 export interface PageNavigatorCardProps {
-	LinkElement: (props: { to: string }) => JSX.Element;
+	LinkElement: unknown;
 }
 
 export function PageNavigatorCard({ LinkElement }: PageNavigatorCardProps): JSX.Element {
@@ -24,12 +24,15 @@ export function PageNavigatorCard({ LinkElement }: PageNavigatorCardProps): JSX.
 	};
 
 	const handleChangeExample: (e: ChangeEvent<HTMLSelectElement>) => void = e => setExample(e.target.value);
-
+	const href = `/${exampleType.replace(/ +/g, "-").toLowerCase()}/${example}`;
+	const Link = LinkElement as FC<{ to?: string } & HTMLProps<HTMLAnchorElement>>;
 	return (
 		<div className={styles.card}>
 			<h2>
 				Pages Navigator
-				<LinkElement to={`/${exampleType.replace(/ +/g, "-").toLowerCase()}/${example}`} />
+				<Link href={href} to={href}>
+					&nbsp;<span>-&gt;</span>
+				</Link>
 			</h2>
 			<p>
 				Pages with forced <code>theme</code>/<code>colorScheme</code>
