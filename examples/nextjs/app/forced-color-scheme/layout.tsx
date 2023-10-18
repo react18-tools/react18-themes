@@ -1,10 +1,10 @@
-import SubLayoutHeader from "../_components/sub-layout-header";
+import Link from "next/link";
+import { ForcedPageLayout } from "shared-ui";
 
 export default function ForcedColorSchemeLayout({ children }): JSX.Element {
 	return (
-		<div>
-			<SubLayoutHeader scope="forcedColorScheme" />
+		<ForcedPageLayout LinkElement={Link} scope="forcedColorScheme">
 			{children}
-		</div>
+		</ForcedPageLayout>
 	);
 }
