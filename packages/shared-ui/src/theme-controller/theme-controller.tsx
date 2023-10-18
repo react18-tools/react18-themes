@@ -1,5 +1,5 @@
+import styles from "../root-layout.module.css";
 import { ColorSchemePreference } from "./color-scheme-preference";
-import styles from "./page.module.css";
 import { ThemeSelector } from "./theme-selector";
 
 export function ThemeController() {

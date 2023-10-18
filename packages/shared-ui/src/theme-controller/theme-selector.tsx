@@ -3,9 +3,9 @@ import type { ColorSchemeType } from "react18-themes";
 import { useTheme } from "react18-themes";
 import { useEffect, useMemo } from "react";
 import type { ChangeEvent } from "react";
+import { Select } from "../common/select";
+import styles from "../root-layout.module.css";
 import { darkThemes, lightThemes } from "./themes";
-import styles from "./page.module.css";
-import { Select } from "./select";
 
 interface ThemeSelectorProps {
 	scope: "" | "dark" | "light";
