@@ -12,7 +12,7 @@ export default function PageWithForcedTheme(): JSX.Element {
 	return (
 		<ForcedPageLayout LinkElement={Link} scope="forcedTheme">
 			<ForceTheme theme={theme} />
-			<p>Theme is forced to {theme}. | Try changing theme or colorScheme and verify!</p>
+			<p>Theme is forced to {theme}. Try changing theme or colorScheme and verify!</p>
 		</ForcedPageLayout>
 	);
 }

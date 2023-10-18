@@ -17,7 +17,7 @@ export function SharedRootLayout({ children, className = "", LinkElement, ...pro
 		<>
 			<ThemeSwitcher />
 			<main className={`${styles.main} ${className}`} {...props}>
-				<Description />
+				<Description>{children}</Description>
 				<Hero />
 				<ThemeController />
 				<Cards LinkElement={LinkElement} />

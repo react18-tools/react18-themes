@@ -10,7 +10,7 @@ export function ForcedPageLayout({ LinkElement, scope, children }: ForcedPageLay
 	return (
 		<div>
 			<h1>
-				<Link href="/" style={{ display: "inline" }}>
+				<Link href="/" style={{ display: "inline" }} to="/">
 					🔙🏡
 				</Link>{" "}
 				Example page showing <code>{scope}</code>
