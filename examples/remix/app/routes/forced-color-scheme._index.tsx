@@ -1,16 +1,16 @@
+import { Link } from "@remix-run/react";
 import { ForceColorScheme } from "react18-themes";
-import SubLayoutHeader from "~/components/sub-layout-header";
+import { ForcedPageLayout } from "shared-ui";
 
 export default function PageWithForcedColorScheme(): JSX.Element {
 	return (
-		<div>
-			<SubLayoutHeader scope="forcedColorScheme" />
+		<ForcedPageLayout LinkElement={Link} scope="forcedColorScheme">
 			<ForceColorScheme colorScheme="" />
 			<p>
 				Color scheme is forced to &quot;&quot; (Empty string)
 				<br />
 				Thus, theme is applied irrespective of colorScheme
 			</p>
-		</div>
+		</ForcedPageLayout>
 	);
 }
