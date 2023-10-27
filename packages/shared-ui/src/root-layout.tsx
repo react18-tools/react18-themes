@@ -1,5 +1,6 @@
 import "./globals.css";
-import { ThemeSwitcher } from "react18-themes";
+import "react18-themes/styles.css";
+import { ColorSwitch, ThemeSwitcher } from "react18-themes";
 import { ForkMe } from "@mayank1513/fork-me/server/index.js"; // import directory not supported in remix
 import type { HTMLProps } from "react";
 import type { PageNavigatorCardProps } from "./cards/page-navigator-card";
@@ -19,6 +20,7 @@ export function SharedRootLayout({ children, className = "", LinkElement, ...pro
 			<main className={`${styles.main} ${className}`} {...props}>
 				<Description>{children}</Description>
 				<Hero />
+				<ColorSwitch />
 				<ThemeController />
 				<Cards LinkElement={LinkElement} />
 			</main>

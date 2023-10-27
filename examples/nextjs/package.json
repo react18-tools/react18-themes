@@ -1,6 +1,6 @@
 {
 	"name": "nextjs-example",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"private": true,
 	"scripts": {
 		"dev": "next dev --port 3002",
@@ -10,17 +10,17 @@
 	},
 	"dependencies": {
 		"@mayank1513/fork-me": "^1.1.2",
-		"next": "^13.5.4",
+		"next": "^14.0.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react18-themes": "workspace:*",
 		"shared-ui": "workspace:*"
 	},
 	"devDependencies": {
-		"@next/eslint-plugin-next": "^13.5.4",
-		"@types/node": "^20.8.6",
-		"@types/react": "^18.2.28",
-		"@types/react-dom": "^18.2.13",
+		"@next/eslint-plugin-next": "^14.0.0",
+		"@types/node": "^20.8.9",
+		"@types/react": "^18.2.33",
+		"@types/react-dom": "^18.2.14",
 		"eslint-config-custom": "workspace:*",
 		"tsconfig": "workspace:*",
 		"typescript": "^5.2.2"
