@@ -1,5 +1,11 @@
 # react18-themes
 
+## 1.1.0
+
+### Minor Changes
+
+- cdf0613: Added ColorSwitch component
+
 ## 1.0.10
 
 ### Patch Changes
