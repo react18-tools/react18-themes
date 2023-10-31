@@ -26,7 +26,7 @@
 	"devDependencies": {
 		"@testing-library/react": "^14.0.0",
 		"@turbo/gen": "^1.10.16",
-		"@types/node": "^20.8.9",
+		"@types/node": "^20.8.10",
 		"@types/react": "^18.2.33",
 		"@types/react-dom": "^18.2.14",
 		"@vitejs/plugin-react": "^4.1.0",
@@ -34,7 +34,7 @@
 		"esbuild-plugin-react18": "^0.0.5",
 		"eslint-config-custom": "workspace:*",
 		"jsdom": "^22.1.0",
-		"next": "^14.0.0",
+		"next": "^14.0.1",
 		"octokit": "^3.1.1",
 		"persist-and-sync": "^0.1.2",
 		"react": "^18.2.0",

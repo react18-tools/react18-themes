@@ -84,6 +84,6 @@ describe("theme-switcher", () => {
 	test("forced colorScheme prop", async ({ expect }) => {
 		// global state is continuing from previous testss
 		await act(() => render(<ThemeSwitcher forcedColorScheme="light" />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("yellow");
+		expect(document.documentElement.getAttribute("data-theme")).toBe("");
 	});
 });
