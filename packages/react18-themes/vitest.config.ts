@@ -12,6 +12,7 @@ export default defineConfig({
 		setupFiles: ["vitest-setup.ts"],
 		coverage: {
 			reporter: ["text", "json", "clover", "html"],
+			exclude: ["__mocks__"],
 		},
 		threads: true,
 	},
