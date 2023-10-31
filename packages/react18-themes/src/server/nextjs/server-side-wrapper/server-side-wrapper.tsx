@@ -20,7 +20,7 @@ export function ServerSideWrapper({ children, tag, forcedPages, ...props }: Serv
 	const dataTheme = cookies().get("data-theme")?.value || "";
 	const dataColorSchemePref = cookies().get("data-color-scheme-pref")?.value || "";
 
-	const path = headers().get("x-invoke-path");
+	const path = headers().get("referer");
 	const forcedPageData = forcedPages?.find(forcedPage => path?.match(forcedPage[0]));
 	const isForcedPage = forcedPageData !== undefined;
 
