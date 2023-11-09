@@ -182,7 +182,9 @@ Forcing color scheme will apply your defaultDark or defaultLight theme, configur
 - defaultLightTheme is renamed to lightTheme
 - setDefaultLightTheme is renamed to setLightTheme
 
-> Full docs coming soon!
+## Docs
+
+[Typedoc](https://react18-tools.github.io/react18-themes)
 
 ### 🤩 Don't forger to start this repo!
 

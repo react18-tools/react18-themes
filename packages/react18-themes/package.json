@@ -2,7 +2,7 @@
 	"name": "react18-themes",
 	"author": "Mayank Kumar Chaudhari <https://mayank-chaudhari.vercel.app>",
 	"private": false,
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Unleash the Power of React Server Components! Use multiple themes on your site with confidence, without losing any advantages of React Server Components.",
 	"main": "./index.ts",
 	"types": "./index.ts",
@@ -19,6 +19,7 @@
 	"scripts": {
 		"test": "vitest run --coverage",
 		"build": "tsup src && tsc --p tsconfig.build.json && node touchup.js",
+		"doc": "typedoc",
 		"publish-package": "cd dist && npm publish --access public",
 		"lint": "eslint .",
 		"postinstall": "yarn test && yarn build"
@@ -40,6 +41,7 @@
 		"react": "^18.2.0",
 		"tsconfig": "workspace:*",
 		"tsup": "^7.2.0",
+		"typedoc": "^0.25.3",
 		"typescript": "5.2.2",
 		"vite-tsconfig-paths": "^4.2.1",
 		"vitest": "^0.34.6",
@@ -62,8 +64,10 @@
 	"keywords": [
 		"nextjs",
 		"nextjs13",
+		"nextjs14",
 		"nextjs-themes",
 		"nextjs13-themes",
+		"nextjs14-themes",
 		"react",
 		"react18",
 		"react-themes",
