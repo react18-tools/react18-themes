@@ -1,5 +1,11 @@
 # react18-themes
 
+## 1.1.1
+
+### Patch Changes
+
+- Upgrade Next.js peer dependency
+
 ## 1.1.0
 
 ### Minor Changes
