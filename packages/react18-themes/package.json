@@ -19,6 +19,7 @@
 	"scripts": {
 		"test": "vitest run --coverage",
 		"build": "tsup src && tsc --p tsconfig.build.json && node touchup.js",
+		"doc": "typedoc",
 		"publish-package": "cd dist && npm publish --access public",
 		"lint": "eslint .",
 		"postinstall": "yarn test && yarn build"
@@ -40,6 +41,7 @@
 		"react": "^18.2.0",
 		"tsconfig": "workspace:*",
 		"tsup": "^7.2.0",
+		"typedoc": "^0.25.3",
 		"typescript": "5.2.2",
 		"vite-tsconfig-paths": "^4.2.1",
 		"vitest": "^0.34.6",
