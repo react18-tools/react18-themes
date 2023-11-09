@@ -8,12 +8,12 @@
 	"types": "./index.ts",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mayank1513/react18-themes.git"
+		"url": "git+https://github.com/react18-tools/react18-themes.git"
 	},
 	"bugs": {
-		"url": "https://github.com/mayank1513/react18-themes/issues"
+		"url": "https://github.com/react18-tools/react18-themes/issues"
 	},
-	"homepage": "https://github.com/mayank1513/react18-themes#readme",
+	"homepage": "https://github.com/react18-tools/react18-themes#readme",
 	"sideEffects": false,
 	"license": "MIT",
 	"scripts": {
