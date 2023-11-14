@@ -5,14 +5,13 @@ import type { ColorSchemeType } from "../../../store";
 
 export type ForcedPage = [pathMatcher: RegExp | string, themes: { theme?: string; colorScheme?: ColorSchemeType }];
 
-interface ServerSideWrapperProps extends HTMLProps<HTMLElement> {
+export interface ServerSideWrapperProps extends HTMLProps<HTMLElement> {
 	children: ReactNode;
 	tag?: keyof JSX.IntrinsicElements;
 	forcedPages?: ForcedPage[];
 }
 
 /**
- * # ServerSideWrapper
  * Server side wrapper for Next.js to replace &#x60;html&#x60; tag
  */
 export function ServerSideWrapper({ children, tag, forcedPages, ...props }: ServerSideWrapperProps) {
