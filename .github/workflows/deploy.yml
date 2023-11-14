@@ -1,0 +1,36 @@
+name: Publish to NPM
+
+# publish only when package json has changed - assuming version upgrade
+on:
+  push:
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v3
+        with:
+          registry-url: https://registry.npmjs.org
+          node-version: 18
+      - run: npm i -g pnpm && pnpm i
+        name: Install dependencies
+        # fail and not publish if any of the unit tests are failing
+      - name: Test
+        run: pnpm test && pnpm build
+      - name: Trigger deployment
+        run: |
+          git config --global user.name "mayank1513"
+          git config --global user.email "mayank.srmu@gmail.com"
+          git fetch
+          git checkout main
+          git remote add o https://github.com/mayank1513/react18-themes
+          git push o
