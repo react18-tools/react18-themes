@@ -1,13 +1,23 @@
 import * as React from "react";
 import { useTheme } from "../../store";
 
-interface ColorSwitchProps {
+export interface ColorSwitchProps {
+	/** Diameter of the color color switch */
 	size?: number;
 }
 
 /**
- * # ColorSwitch
  * Color switch button to quickly set user preference
+ *
+ * @example
+ * ```ts
+ * <ColorSwitch />
+ * ```
+ *
+ * custom size
+ * ```ts
+ * <ColorSwitch size={20} />
+ * ```
  */
 export function ColorSwitch({ size = 25 }: ColorSwitchProps) {
 	const [colorSchemePref, setColorSchemePref] = useTheme(state => [state.colorSchemePref, state.setColorSchemePref]);

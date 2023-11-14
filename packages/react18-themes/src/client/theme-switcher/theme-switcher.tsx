@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import type { ColorSchemeType } from "../../store";
 import { useTheme } from "../../store";
 
-interface ThemeSwitcherProps {
+export interface ThemeSwitcherProps {
 	forcedTheme?: string;
 	forcedColorScheme?: ColorSchemeType;
 }
@@ -43,7 +43,7 @@ export function useThemeSwitcher(props: ThemeSwitcherProps) {
 	}, [theme, darkTheme, lightTheme, resolvedForcedTheme, colorSchemePref, colorScheme, resolvedForcedColorScheme]);
 }
 
-interface ResolveThemeFromColorSchemeProps {
+export interface ResolveThemeFromColorSchemeProps {
 	media: MediaQueryList;
 	colorScheme: ColorSchemeType;
 	darkTheme: string;
