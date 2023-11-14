@@ -25,17 +25,17 @@
 		"postinstall": "yarn test && yarn build"
 	},
 	"devDependencies": {
-		"@testing-library/react": "^14.0.0",
+		"@testing-library/react": "^14.1.0",
 		"@turbo/gen": "^1.10.16",
-		"@types/node": "^20.8.10",
-		"@types/react": "^18.2.33",
-		"@types/react-dom": "^18.2.14",
-		"@vitejs/plugin-react": "^4.1.0",
+		"@types/node": "^20.9.0",
+		"@types/react": "^18.2.37",
+		"@types/react-dom": "^18.2.15",
+		"@vitejs/plugin-react": "^4.1.1",
 		"@vitest/coverage-v8": "^0.34.6",
-		"esbuild-plugin-react18": "^0.0.5",
+		"esbuild-plugin-react18": "^0.0.6",
 		"eslint-config-custom": "workspace:*",
 		"jsdom": "^22.1.0",
-		"next": "^14.0.1",
+		"next": "^14.0.2",
 		"octokit": "^3.1.1",
 		"persist-and-sync": "^0.1.2",
 		"react": "^18.2.0",
@@ -45,7 +45,7 @@
 		"typescript": "5.2.2",
 		"vite-tsconfig-paths": "^4.2.1",
 		"vitest": "^0.34.6",
-		"zustand": "^4.4.4"
+		"zustand": "^4.4.6"
 	},
 	"peerDependencies": {
 		"@types/react": "16.8 - 18",
@@ -84,6 +84,6 @@
 		"turborepo-trmplate"
 	],
 	"dependencies": {
-		"eslint": "^8.52.0"
+		"eslint": "^8.53.0"
 	}
 }
