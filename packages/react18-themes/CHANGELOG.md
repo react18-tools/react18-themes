@@ -1,5 +1,11 @@
 # react18-themes
 
+## 1.1.2
+
+### Patch Changes
+
+- Fix Readme and docs
+
 ## 1.1.1
 
 ### Patch Changes
