@@ -21,8 +21,7 @@
 		"build": "tsup src && tsc --p tsconfig.build.json && node touchup.js",
 		"doc": "typedoc",
 		"publish-package": "cd dist && npm publish --access public",
-		"lint": "eslint .",
-		"postinstall": "yarn test && yarn build"
+		"lint": "eslint ."
 	},
 	"devDependencies": {
 		"@testing-library/react": "^14.1.0",

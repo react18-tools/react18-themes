@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - run: npm i -g pnpm && pnpm i --ignore-scripts
+      - run: npm i -g pnpm
         name: Install dependencies
       - name: Run unit tests
         run: pnpm test
