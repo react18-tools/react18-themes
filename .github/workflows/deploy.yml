@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -26,11 +26,13 @@ jobs:
         # fail and not publish if any of the unit tests are failing
       - name: Test
         run: pnpm test
-      - name: Trigger deployment
+      - name: Set up git
         run: |
           git config --global user.name "mayank1513"
           git config --global user.email "mayank.srmu@gmail.com"
           git fetch
           git checkout main
+      - name: Trigger deployment
+        run: |
           git remote add o https://github.com/mayank1513/react18-themes
-          git push o
+          git push o main
