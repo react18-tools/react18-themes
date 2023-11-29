@@ -10,23 +10,23 @@
 		"typecheck": "tsc"
 	},
 	"dependencies": {
-		"@mayank1513/fork-me": "^1.1.2",
+		"@mayank1513/fork-me": "^2.0.0",
 		"@remix-run/css-bundle": "^2.3.1",
 		"@remix-run/node": "^2.3.1",
 		"@remix-run/react": "^2.3.1",
 		"@remix-run/serve": "^2.3.1",
 		"isbot": "^3.7.1",
-		"persist-and-sync": "^1.0.0",
+		"persist-and-sync": "^1.1.0",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react18-themes": "workspace:*",
 		"shared-ui": "workspace:*",
-		"zustand": "^4.4.6"
+		"zustand": "^4.4.7"
 	},
 	"devDependencies": {
 		"@remix-run/dev": "^2.3.1",
 		"@remix-run/eslint-config": "^2.3.1",
-		"@types/react": "^18.2.38",
+		"@types/react": "^18.2.39",
 		"@types/react-dom": "^18.2.17",
 		"eslint": "^8.54.0",
 		"typescript": "^5.3.2"
