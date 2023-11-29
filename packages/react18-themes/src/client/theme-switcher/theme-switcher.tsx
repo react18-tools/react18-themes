@@ -2,10 +2,12 @@ import * as React from "react";
 import { useEffect } from "react";
 import type { ColorSchemeType } from "../../store";
 import { useTheme } from "../../store";
+import { resolveThemeFromColorScheme } from "../../utils";
 
 export interface ThemeSwitcherProps {
 	forcedTheme?: string;
 	forcedColorScheme?: ColorSchemeType;
+	targetSelector?: string;
 }
 
 export function ThemeSwitcher(props: ThemeSwitcherProps) {
@@ -14,13 +16,15 @@ export function ThemeSwitcher(props: ThemeSwitcherProps) {
 }
 
 export function useThemeSwitcher(props: ThemeSwitcherProps) {
-	const { theme, darkTheme, lightTheme, colorSchemePref, forcedTheme, forcedColorScheme } = useTheme();
-
-	const resolvedForcedTheme = props.forcedTheme === undefined ? forcedTheme : props.forcedTheme;
-	const resolvedForcedColorScheme = props.forcedColorScheme === undefined ? forcedColorScheme : props.forcedColorScheme;
-	const colorScheme = resolvedForcedColorScheme === undefined ? colorSchemePref : resolvedForcedColorScheme;
+	const themeState = useTheme();
 
 	useEffect(() => {
+		const { colorSchemePref, forcedTheme, forcedColorScheme } = themeState;
+		const resolvedForcedTheme = props.forcedTheme === undefined ? forcedTheme : props.forcedTheme;
+		const resolvedForcedColorScheme =
+			props.forcedColorScheme === undefined ? forcedColorScheme : props.forcedColorScheme;
+		const colorScheme = resolvedForcedColorScheme === undefined ? colorSchemePref : resolvedForcedColorScheme;
+
 		const media = matchMedia("(prefers-color-scheme: dark)");
 		const updateTheme = () => {
 			const restoreTransitions = disableAnimation();
@@ -28,58 +32,36 @@ export function useThemeSwitcher(props: ThemeSwitcherProps) {
 			const newTheme =
 				resolvedForcedTheme !== undefined
 					? resolvedForcedTheme
-					: resolveThemeFromColorScheme({ media, colorScheme, darkTheme, lightTheme }) || theme;
+					: resolveThemeFromColorScheme({ ...themeState, colorSchemePref: colorScheme }, media.matches);
 
-			const isForced = Boolean(resolvedForcedColorScheme) || resolvedForcedTheme !== undefined;
-			updateDOM({ newTheme, colorScheme, darkTheme, lightTheme, media, isForced });
+			updateDOM({ newTheme, colorScheme, media }, props.targetSelector);
 
 			restoreTransitions();
 		};
-		media.addEventListener("change", updateTheme);
+
+		if (colorScheme === "system") media.addEventListener("change", updateTheme);
+		else media.removeEventListener("change", updateTheme);
+
 		updateTheme();
 		return () => {
 			media.removeEventListener("change", updateTheme);
 		};
-	}, [theme, darkTheme, lightTheme, resolvedForcedTheme, colorSchemePref, colorScheme, resolvedForcedColorScheme]);
+	}, [themeState]);
 }
 
-export interface ResolveThemeFromColorSchemeProps {
+interface UpdateDOMProps {
+	newTheme: string;
 	media: MediaQueryList;
 	colorScheme: ColorSchemeType;
-	darkTheme: string;
-	lightTheme: string;
 }
 
-function resolveThemeFromColorScheme({ media, colorScheme, darkTheme, lightTheme }: ResolveThemeFromColorSchemeProps) {
-	switch (colorScheme) {
-		case "system":
-			return media.matches ? darkTheme : lightTheme;
-		case "dark":
-			return darkTheme;
-		case "light":
-			return lightTheme;
-		default:
-			return undefined;
-	}
-}
+function updateDOM({ newTheme, colorScheme, media }: UpdateDOMProps, targetSelector?: string) {
+	const target = document.querySelector(targetSelector || "") || document.documentElement;
+	target.setAttribute("data-theme", newTheme);
+	target.setAttribute("data-color-scheme", colorScheme);
 
-interface UpdateDOMProps extends ResolveThemeFromColorSchemeProps {
-	newTheme: string;
-	isForced: boolean /** Do not set cookies for forced pages -  */;
-}
-
-function updateDOM({ newTheme, colorScheme, darkTheme, lightTheme, media, isForced }: UpdateDOMProps) {
-	document.documentElement.setAttribute("data-theme", newTheme);
-	document.documentElement.setAttribute("data-color-scheme", colorScheme);
-
-	/** update derived values only for non-forced pages */
-	if (!isForced) {
-		document.cookie = `data-theme=${newTheme}`;
-		document.cookie = `data-color-scheme-pref=${colorScheme}`;
-	}
-	document.cookie = `data-theme-dark=${darkTheme}`;
-	document.cookie = `data-theme-light=${lightTheme}`;
-	document.cookie = `data-color-scheme=${media.matches ? "dark" : "light"}`;
+	/** store system preference for computing data-theme on server side */
+	document.cookie = `data-color-scheme-system=${media.matches ? "dark" : "light"}`;
 }
 
 // todo: customizable transition time

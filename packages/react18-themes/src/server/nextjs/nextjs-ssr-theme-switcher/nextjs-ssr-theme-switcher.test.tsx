@@ -1,28 +1,28 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, test } from "vitest";
-import { ServerSideWrapper } from "./server-side-wrapper";
+import { NextJsSSRThemeSwitcher } from "./nextjs-ssr-theme-switcher";
 
 describe("server-side-wrapper", () => {
 	afterEach(cleanup);
 
 	test.concurrent("test tag", ({ expect }) => {
 		render(
-			<ServerSideWrapper>
+			<NextJsSSRThemeSwitcher>
 				<body>ServerSideWrapper</body>
-			</ServerSideWrapper>,
+			</NextJsSSRThemeSwitcher>,
 		);
 		expect(screen.getByTestId("server-side-wrapper").tagName).toBe("HTML");
 	});
 	test.concurrent("test custom tag", ({ expect }) => {
-		render(<ServerSideWrapper tag="div">ServerSideWrapper</ServerSideWrapper>);
+		render(<NextJsSSRThemeSwitcher tag="div">ServerSideWrapper</NextJsSSRThemeSwitcher>);
 		expect(screen.getByTestId("server-side-wrapper").tagName).toBe("DIV");
 	});
 	test.concurrent("forced theme", ({ expect }) => {
 		globalThis.path = "/themed-page/dark1";
 		render(
-			<ServerSideWrapper forcedPages={[[/themed-page\/dark1/, { theme: "dark1" }]]} tag="div">
+			<NextJsSSRThemeSwitcher forcedPages={[[/themed-page\/dark1/, { theme: "dark1" }]]} tag="div">
 				ServerSideWrapper
-			</ServerSideWrapper>,
+			</NextJsSSRThemeSwitcher>,
 		);
 		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("dark1");
 	});
@@ -38,9 +38,9 @@ describe("server-side-wrapper", () => {
 	test("forced color scheme dark", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme/dark";
 		render(
-			<ServerSideWrapper forcedPages={[[/forced-color-scheme\/dark/, { colorScheme: "dark" }]]} tag="div">
+			<NextJsSSRThemeSwitcher forcedPages={[[/forced-color-scheme\/dark/, { colorScheme: "dark" }]]} tag="div">
 				ServerSideWrapper
-			</ServerSideWrapper>,
+			</NextJsSSRThemeSwitcher>,
 		);
 		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("dark-blue");
 		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-color-scheme")).toBe("dark");
@@ -48,27 +48,27 @@ describe("server-side-wrapper", () => {
 	test("forced color scheme light", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme/light";
 		render(
-			<ServerSideWrapper forcedPages={[[/forced-color-scheme\/light/, { colorScheme: "light" }]]} tag="div">
+			<NextJsSSRThemeSwitcher forcedPages={[[/forced-color-scheme\/light/, { colorScheme: "light" }]]} tag="div">
 				ServerSideWrapper
-			</ServerSideWrapper>,
+			</NextJsSSRThemeSwitcher>,
 		);
 		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("light-yellow");
 	});
 	test("forced color scheme system", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme/system";
 		render(
-			<ServerSideWrapper forcedPages={[[/forced-color-scheme\/system/, { colorScheme: "system" }]]} tag="div">
+			<NextJsSSRThemeSwitcher forcedPages={[[/forced-color-scheme\/system/, { colorScheme: "system" }]]} tag="div">
 				ServerSideWrapper
-			</ServerSideWrapper>,
+			</NextJsSSRThemeSwitcher>,
 		);
 		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("dark-blue");
 	});
 	test("force disable color scheme", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme";
 		render(
-			<ServerSideWrapper forcedPages={[[/forced-color-scheme$/, { colorScheme: "" }]]} tag="div">
+			<NextJsSSRThemeSwitcher forcedPages={[[/forced-color-scheme$/, { colorScheme: "" }]]} tag="div">
 				ServerSideWrapper
-			</ServerSideWrapper>,
+			</NextJsSSRThemeSwitcher>,
 		);
 		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("yellow");
 	});
@@ -77,9 +77,9 @@ describe("server-side-wrapper", () => {
 		globalThis.cookies = {};
 		globalThis.path = "/forced-color-scheme";
 		render(
-			<ServerSideWrapper forcedPages={[[/forced-color-scheme$/, { colorScheme: "" }]]} tag="div">
+			<NextJsSSRThemeSwitcher forcedPages={[[/forced-color-scheme$/, { colorScheme: "" }]]} tag="div">
 				ServerSideWrapper
-			</ServerSideWrapper>,
+			</NextJsSSRThemeSwitcher>,
 		);
 		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("");
 	});
