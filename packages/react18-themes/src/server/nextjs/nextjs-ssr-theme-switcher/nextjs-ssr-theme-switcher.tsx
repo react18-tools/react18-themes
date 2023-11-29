@@ -8,7 +8,7 @@ import { ThemeSwitcher } from "../../../client";
 export type ForcedPage = [pathMatcher: RegExp | string, themes: { theme?: string; colorScheme?: ColorSchemeType }];
 
 export interface NextJsSSRThemeSwitcherProps extends HTMLProps<HTMLElement> {
-	children: ReactNode;
+	children?: ReactNode;
 	/** @default 'div' */
 	tag?: keyof JSX.IntrinsicElements;
 	forcedPages?: ForcedPage[];
@@ -43,7 +43,7 @@ export function NextJsSSRThemeSwitcher({ children, tag, forcedPages, ...props }:
 			data-theme={dataTheme}
 			{...props}
 			data-testid="server-side-wrapper">
-			<ThemeSwitcher targetSelector="#react18-themes" />
+			{/* <ThemeSwitcher targetSelector="#react18-themes" /> */}
 			{children}
 		</Tag>
 	);

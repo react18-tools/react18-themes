@@ -11,12 +11,18 @@ import { Description } from "./root/description";
 import { Hero } from "./root/hero";
 import { Footer } from "./root/footer";
 
-export type SharedRootLayoutProps = HTMLProps<HTMLElement> & PageNavigatorCardProps;
+export type SharedRootLayoutProps = HTMLProps<HTMLElement> & PageNavigatorCardProps & { noSwitcher?: boolean };
 
-export function SharedRootLayout({ children, className = "", LinkElement, ...props }: SharedRootLayoutProps) {
+export function SharedRootLayout({
+	children,
+	className = "",
+	LinkElement,
+	noSwitcher = false,
+	...props
+}: SharedRootLayoutProps) {
 	return (
 		<>
-			<ThemeSwitcher />
+			{noSwitcher ? null : <ThemeSwitcher />}
 			<main className={`${styles.main} ${className}`} {...props}>
 				<Description>{children}</Description>
 				<Hero />

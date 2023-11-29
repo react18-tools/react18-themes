@@ -56,7 +56,7 @@ interface UpdateDOMProps {
 }
 
 function updateDOM({ newTheme, colorScheme, media }: UpdateDOMProps, targetSelector?: string) {
-	const target = document.querySelector(targetSelector || "") || document.documentElement;
+	const target = document.querySelector(targetSelector || "#react18-themes") || document.documentElement;
 	target.setAttribute("data-theme", newTheme);
 	target.setAttribute("data-color-scheme", colorScheme);
 
