@@ -36,7 +36,6 @@
 		"jsdom": "^23.0.0",
 		"next": "^14.0.3",
 		"octokit": "^3.1.2",
-		"persist-and-sync": "^1.1.0",
 		"react": "^18.2.0",
 		"tsconfig": "workspace:*",
 		"tsup": "^8.0.1",
@@ -44,6 +43,10 @@
 		"typescript": "5.3.2",
 		"vite-tsconfig-paths": "^4.2.1",
 		"vitest": "^0.34.6",
+		"eslint": "^8.54.0"
+	},
+	"dependencies": {
+		"persist-and-sync": "^1.1.0",
 		"zustand": "^4.4.7"
 	},
 	"peerDependencies": {
@@ -81,8 +84,5 @@
 		"javascript",
 		"mayank1513",
 		"turborepo-trmplate"
-	],
-	"dependencies": {
-		"eslint": "^8.54.0"
-	}
+	]
 }
