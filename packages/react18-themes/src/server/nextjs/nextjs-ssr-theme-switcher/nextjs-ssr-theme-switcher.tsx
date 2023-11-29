@@ -41,7 +41,7 @@ export function NextJsSSRThemeSwitcher({ children, tag, forcedPages, ...props }:
 			data-color-scheme={dataColorScheme}
 			data-theme={dataTheme}
 			{...props}
-			data-testid="server-side-wrapper">
+			data-testid="nextjs-ssr-theme-switcher">
 			{children}
 		</Tag>
 	);

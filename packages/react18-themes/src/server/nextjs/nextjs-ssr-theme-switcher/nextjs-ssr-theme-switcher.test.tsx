@@ -2,7 +2,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, test } from "vitest";
 import { NextJsSSRThemeSwitcher } from "./nextjs-ssr-theme-switcher";
 
-describe("server-side-wrapper", () => {
+describe("nextjs-ssr-theme-switcher", () => {
 	afterEach(cleanup);
 
 	test.concurrent("test tag", ({ expect }) => {
@@ -11,11 +11,11 @@ describe("server-side-wrapper", () => {
 				<body>ServerSideWrapper</body>
 			</NextJsSSRThemeSwitcher>,
 		);
-		expect(screen.getByTestId("server-side-wrapper").tagName).toBe("HTML");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").tagName).toBe("HTML");
 	});
 	test.concurrent("test custom tag", ({ expect }) => {
 		render(<NextJsSSRThemeSwitcher tag="div">ServerSideWrapper</NextJsSSRThemeSwitcher>);
-		expect(screen.getByTestId("server-side-wrapper").tagName).toBe("DIV");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").tagName).toBe("DIV");
 	});
 	test.concurrent("forced theme", ({ expect }) => {
 		globalThis.path = "/themed-page/dark1";
@@ -24,7 +24,7 @@ describe("server-side-wrapper", () => {
 				ServerSideWrapper
 			</NextJsSSRThemeSwitcher>,
 		);
-		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("dark1");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").getAttribute("data-theme")).toBe("dark1");
 	});
 
 	/** test cookies and forced pages */
@@ -42,8 +42,8 @@ describe("server-side-wrapper", () => {
 				ServerSideWrapper
 			</NextJsSSRThemeSwitcher>,
 		);
-		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("dark-blue");
-		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-color-scheme")).toBe("dark");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").getAttribute("data-theme")).toBe("dark-blue");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").getAttribute("data-color-scheme")).toBe("dark");
 	});
 	test("forced color scheme light", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme/light";
@@ -52,7 +52,7 @@ describe("server-side-wrapper", () => {
 				ServerSideWrapper
 			</NextJsSSRThemeSwitcher>,
 		);
-		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("light-yellow");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").getAttribute("data-theme")).toBe("light-yellow");
 	});
 	test("forced color scheme system", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme/system";
@@ -61,7 +61,7 @@ describe("server-side-wrapper", () => {
 				ServerSideWrapper
 			</NextJsSSRThemeSwitcher>,
 		);
-		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("dark-blue");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").getAttribute("data-theme")).toBe("dark-blue");
 	});
 	test("force disable color scheme", ({ expect }) => {
 		globalThis.path = "/forced-color-scheme";
@@ -70,7 +70,7 @@ describe("server-side-wrapper", () => {
 				ServerSideWrapper
 			</NextJsSSRThemeSwitcher>,
 		);
-		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("yellow");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").getAttribute("data-theme")).toBe("yellow");
 	});
 	/** forced page but no cookies */
 	test("force disable color scheme", ({ expect }) => {
@@ -81,6 +81,6 @@ describe("server-side-wrapper", () => {
 				ServerSideWrapper
 			</NextJsSSRThemeSwitcher>,
 		);
-		expect(screen.getByTestId("server-side-wrapper").getAttribute("data-theme")).toBe("");
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").getAttribute("data-theme")).toBe("");
 	});
 });
