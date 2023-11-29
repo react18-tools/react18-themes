@@ -3,7 +3,6 @@ import type { HTMLProps, ReactNode } from "react";
 import { cookies, headers } from "next/headers";
 import type { ColorSchemeType, ThemeStoreType } from "../../../store";
 import { resolveThemeFromColorScheme } from "../../../utils";
-import { ThemeSwitcher } from "../../../client";
 
 export type ForcedPage = [pathMatcher: RegExp | string, themes: { theme?: string; colorScheme?: ColorSchemeType }];
 
@@ -43,7 +42,6 @@ export function NextJsSSRThemeSwitcher({ children, tag, forcedPages, ...props }:
 			data-theme={dataTheme}
 			{...props}
 			data-testid="server-side-wrapper">
-			{/* <ThemeSwitcher targetSelector="#react18-themes" /> */}
 			{children}
 		</Tag>
 	);
