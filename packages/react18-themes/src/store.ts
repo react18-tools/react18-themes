@@ -39,6 +39,6 @@ export const useTheme = create<ThemeStoreType & ThemeStoreActionsType>()(
 			setForcedColorScheme: forcedColorScheme => set({ ...get(), forcedColorScheme }),
 			setColorSchemePref: colorSchemePref => set({ ...get(), colorSchemePref }),
 		}),
-		{ name: "react18-themes", exclude: [/forced/] },
+		{ name: "react18-themes", exclude: [/forced/], storage: "cookies" },
 	),
 );
