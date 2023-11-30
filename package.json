@@ -15,5 +15,5 @@
 		"turbo": "^1.10.16"
 	},
 	"packageManager": "pnpm@8.9.0",
-	"name": "react18-themes"
+	"name": "react18-themes-turborepo"
 }

@@ -21,7 +21,8 @@
 		"build": "tsup src && tsc --p tsconfig.build.json && node touchup.js",
 		"doc": "typedoc",
 		"publish-package": "cd dist && npm publish --access public",
-		"lint": "eslint ."
+		"lint": "eslint .",
+		"gen": "turbo gen react-component"
 	},
 	"devDependencies": {
 		"@testing-library/react": "^14.1.2",
@@ -40,6 +41,7 @@
 		"react": "^18.2.0",
 		"tsconfig": "workspace:*",
 		"tsup": "^8.0.1",
+		"turbo": "^1.10.16",
 		"typedoc": "^0.25.4",
 		"typescript": "5.3.2",
 		"vite-tsconfig-paths": "^4.2.1",
