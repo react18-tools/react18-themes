@@ -8,14 +8,11 @@ export type ForcedPage = [pathMatcher: RegExp | string, themes: { theme?: string
 
 export interface NextJsSSRThemeSwitcherProps extends HTMLProps<HTMLElement> {
 	children?: ReactNode;
-	/** @default 'div' */
+	/** @defaultValue 'div' */
 	tag?: keyof JSX.IntrinsicElements;
 	forcedPages?: ForcedPage[];
 }
 
-/**
- * Server side wrapper for Next.js to replace &#x60;html&#x60; tag
- */
 export function NextJsSSRThemeSwitcher({ children, tag, forcedPages, ...props }: NextJsSSRThemeSwitcherProps) {
 	const Tag: keyof JSX.IntrinsicElements = tag || "div";
 
@@ -42,6 +39,11 @@ export function NextJsSSRThemeSwitcher({ children, tag, forcedPages, ...props }:
 		</Tag>
 	);
 }
+
+/**
+ * Server side wrapper for Next.js to replace &#x60;html&#x60; tag
+ */
+export { NextJsSSRThemeSwitcher as ServerSideWrapper };
 
 interface Theme {
 	dataTheme?: string;
