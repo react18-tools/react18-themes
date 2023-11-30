@@ -2,7 +2,7 @@ import type { HTMLProps } from "react";
 import { Logo } from "../common/logo";
 import styles from "../root-layout.module.css";
 
-export function Description({ children }: HTMLProps<HTMLElement>) {
+export function Description() {
 	return (
 		<div className={styles.description}>
 			<a
@@ -14,7 +14,6 @@ export function Description({ children }: HTMLProps<HTMLElement>) {
 					<Logo className={styles.code} />
 				</p>
 			</a>
-			{children}
 			<div>
 				<a href="https://mayank-chaudhari.vercel.app" rel="noopener noreferrer" target="_blank">
 					By Mayank
