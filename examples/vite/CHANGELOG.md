@@ -1,5 +1,13 @@
 # vite-example
 
+## 0.0.10
+
+### Patch Changes
+
+- Updated dependencies [6b46438]
+  - react18-themes@2.0.1
+  - shared-ui@1.0.1
+
 ## 0.0.9
 
 ### Patch Changes

@@ -77,20 +77,25 @@ Check out examples for advanced usage.
 
 ### With Next.js `app` router (Server Components)
 
-Update your `app/layout.jsx` to add `ThemeSwitcher` from `react18-themes`, and `NextJsSSRThemeSwitcher` from `react18-themes/server`. `NextJsSSRThemeSwitcher` is required to avoid flash of un-themed content on reload.
+#### Prefer static generation over SSR - No wrapper component
+
+> If your app is mostly serving static content, you do not want the overhead of SSR. Use `NextJsSSGThemeSwitcher` in this case.
+> When using this approach, you need to use CSS general sibling Combinator (~) to make sure your themed CSS is properly applied. See (HTML & CSS)[#html--css].
+
+Update your `app/layout.jsx` to add `ThemeSwitcher` from `react18-themes`, and `NextJsSSGThemeSwitcher` from `react18-themes/server`. `NextJsSSGThemeSwitcher` is required to avoid flash of un-themed content on reload.
 
 ```tsx
 // app/layout.jsx
 import { ThemeSwitcher } from "react18-themes";
-import { NextJsSSRThemeSwitcher } from "react18-themes/server/nextjs";
+import { NextJsSSGThemeSwitcher } from "react18-themes/server/nextjs";
 
 export default function Layout({ children }) {
 	return (
 		<html lang="en">
 			<head />
 			<body>
-				/** use NextJsSSRThemeSwitcher as first element inside body */
-				<NextJsSSRThemeSwitcher />
+				/** use NextJsSSGThemeSwitcher as first element inside body */
+				<NextJsSSGThemeSwitcher />
 				<ThemeSwitcher />
 				{children}
 			</body>
@@ -101,11 +106,13 @@ export default function Layout({ children }) {
 
 Woohoo! You just added multiple theme modes and you can also use Server Component! Isn't that awesome!
 
-#### Version 1 (Legacy)
+#### Prefer SSR over SSG - Use wrapper component
+
+> If your app is serving dynamic content and you want to utilize SSR, continue using `ServerSideWrapper` component to replace `html` tag in `layout.tsx` file.
 
 Update your `app/layout.jsx` to add `ThemeSwitcher` and `ServerSideWrapper` from `react18-themes`. `ServerSideWrapper` is required to avoid flash of un-themed content on reload.
 
-```js
+```tsx
 // app/layout.jsx
 import { ThemeSwitcher } from "react18-themes";
 import { ServerSideWrapper } from "react18-themes/server/nextjs";
@@ -141,7 +148,7 @@ That's it, your Next.js app fully supports dark mode, including System preferenc
 	--foreground: white;
 }
 
-// v2 onwards when using React18 server components, we need to use CSS Combinators
+// v2 onwards when using NextJsSSGThemeSwitcher, we need to use CSS Combinators
 [data-theme="dark"] ~ * {
 	--background: black;
 	--foreground: white;
@@ -212,14 +219,14 @@ Forcing color scheme will apply your defaultDark or defaultLight theme, configur
 
 #### Motivation:
 
-For server side syncing, we need to use cookies and headers. This means that this component and its children can not be static. They will be rendered server side for each request. Thus, we are avoiding the wrapper. Now, only the `NextJsSSRThemeSwitcher` will be rendered server side for each request and rest of your app can be server statically.
+For server side syncing, we need to use cookies and headers. This means that this component and its children can not be static. They will be rendered server side for each request. Thus, we are avoiding the wrapper. Now, only the `NextJsSSGThemeSwitcher` will be rendered server side for each request and rest of your app can be server statically.
 
 Take care of the following while migrating to `v2`.
 
-- No changes required for projects not using `Next.js` app router or server components.
+- No changes required for projects not using `Next.js` app router or server components other than updating cookies policy if needed.
 - The persistent storage is realized with `cookies` in place of `localStorage`. (You might want to update cookies policy accordingly.)
-- `ServerSideWrapper` for `Next.js` is rebranded to `NextJsSSRThemeSwitcher`. No longer need to use this as a wrapper.
-- Visit [With Next.js `app` router (Server Components)](<#with-next.js-app-router-(server-components)>)
+- We have provided `NextJsSSGThemeSwitcher` in addition to `ServerSideWrapper` for `Next.js`. You no longer need to use a wrapper component which broke static generation and forced SSR.
+- Visit [With Next.js `app` router (Server Components)](#with-nextjs-app-router-server-components)
 
 ## Migrating from v0 to v1
 
