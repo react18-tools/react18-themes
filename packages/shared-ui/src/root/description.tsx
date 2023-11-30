@@ -7,7 +7,7 @@ export function Description({ children }: HTMLProps<HTMLElement>) {
 		<div className={styles.description}>
 			<a
 				className={styles.logo}
-				href="https://github.com/mayank1513/react18-themes"
+				href="https://github.com/react18-tools/react18-themes"
 				rel="noopener noreferrer"
 				target="_blank">
 				<p>

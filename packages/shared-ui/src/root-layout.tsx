@@ -27,7 +27,7 @@ export function SharedRootLayout({ children, className = "", LinkElement, ...pro
 			<Footer />
 			<ForkMe
 				bgColor="var(--text-color)"
-				gitHubUrl="https://github.com/mayank1513/react18-themes"
+				gitHubUrl="https://github.com/react18-tools/react18-themes"
 				textColor="var(--bg-color)"
 			/>
 		</>
