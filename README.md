@@ -89,7 +89,7 @@ export default function Layout({ children }) {
 		<html lang="en">
 			<head />
 			<body>
-                /** use NextJsSSRThemeSwitcher as first element inside body */
+				/** use NextJsSSRThemeSwitcher as first element inside body */
 				<NextJsSSRThemeSwitcher />
 				<ThemeSwitcher />
 				{children}
@@ -212,14 +212,14 @@ Forcing color scheme will apply your defaultDark or defaultLight theme, configur
 
 #### Motivation:
 
-For server side syncing, we need to use cookies and headers. This means that this component and it's children can not be static. They will be rendered server side for each request. Thus, we are avoiding the wrapper. Now, only the `NextJsSSRThemeSwitcher` will be rendered server side for each request and rest of your app can be server statically.
+For server side syncing, we need to use cookies and headers. This means that this component and its children can not be static. They will be rendered server side for each request. Thus, we are avoiding the wrapper. Now, only the `NextJsSSRThemeSwitcher` will be rendered server side for each request and rest of your app can be server statically.
 
 Take care of the following while migrating to `v2`.
 
 - No changes required for projects not using `Next.js` app router or server components.
 - The persistent storage is realized with `cookies` in place of `localStorage`. (You might want to update cookies policy accordingly.)
-- `ServerSideWrapper` for `Next.js` is rebranded to `NextJsSSRThemeSwitcher` . No longer need to use this as a wrapper.
-- Visit [With Next.js `app` router (Server Components)](#with-next.js-app-router-(server-components))
+- `ServerSideWrapper` for `Next.js` is rebranded to `NextJsSSRThemeSwitcher`. No longer need to use this as a wrapper.
+- Visit [With Next.js `app` router (Server Components)](<#with-next.js-app-router-(server-components)>)
 
 ## Migrating from v0 to v1
 
