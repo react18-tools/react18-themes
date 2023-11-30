@@ -1,5 +1,5 @@
 import type { ForcedPage } from "react18-themes/server";
-import { NextJsSSRThemeSwitcher } from "react18-themes/server";
+import { NextJsSSGThemeSwitcher } from "react18-themes/server";
 import { Inter } from "next/font/google";
 import { SharedRootLayout, darkThemes, lightThemes } from "shared-ui";
 import Link from "next/link";
@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
 	return (
 		<html lang="en">
 			<body>
-				<NextJsSSRThemeSwitcher forcedPages={forcedPages} />
+				<NextJsSSGThemeSwitcher forcedPages={forcedPages} />
 				<SharedRootLayout LinkElement={Link} className={inter.className}>
 					{children}
 				</SharedRootLayout>

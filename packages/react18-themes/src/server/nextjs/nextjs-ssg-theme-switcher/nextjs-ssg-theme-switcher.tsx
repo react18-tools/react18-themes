@@ -42,7 +42,7 @@ function sharedServerComponentRenderer(
 	);
 }
 
-export function NextJsSSRThemeSwitcher(props: NextJsSSRThemeSwitcherProps) {
+export function NextJsSSGThemeSwitcher(props: NextJsSSRThemeSwitcherProps) {
 	return sharedServerComponentRenderer(props, "div");
 }
 
