@@ -1,5 +1,11 @@
 # react18-themes
 
+## 2.0.1
+
+### Patch Changes
+
+- 6b46438: export ServerSideWrapper for backward compatibility and also for avoiding CSS Combinators when SSR is desired over static.
+
 ## 2.0.0
 
 ### Major Changes
