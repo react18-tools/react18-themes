@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, test } from "vitest";
-import { NextJsSSRThemeSwitcher } from "./nextjs-ssr-theme-switcher";
+import { NextJsSSRThemeSwitcher, ServerSideWrapper } from "./nextjs-ssr-theme-switcher";
 
 describe("nextjs-ssr-theme-switcher", () => {
 	afterEach(cleanup);
@@ -20,10 +20,14 @@ describe("nextjs-ssr-theme-switcher", () => {
 		globalThis.path = "";
 	});
 
-	test("test tag", ({ expect }) => {
+	test("test default tag", ({ expect }) => {
 		globalThis.cookies = {};
 		render(<NextJsSSRThemeSwitcher />);
 		expect(screen.getByTestId("nextjs-ssr-theme-switcher").tagName).toBe("DIV");
+	});
+	test("test default tag for ServerSideWrapper", ({ expect }) => {
+		render(<ServerSideWrapper />);
+		expect(screen.getByTestId("nextjs-ssr-theme-switcher").tagName).toBe("HTML");
 	});
 	test("test custom tag", ({ expect }) => {
 		render(<NextJsSSRThemeSwitcher tag="main" />);

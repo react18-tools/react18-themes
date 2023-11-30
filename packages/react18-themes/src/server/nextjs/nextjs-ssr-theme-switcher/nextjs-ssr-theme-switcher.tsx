@@ -13,9 +13,11 @@ export interface NextJsSSRThemeSwitcherProps extends HTMLProps<HTMLElement> {
 	forcedPages?: ForcedPage[];
 }
 
-export function NextJsSSRThemeSwitcher({ children, tag, forcedPages, ...props }: NextJsSSRThemeSwitcherProps) {
-	const Tag: keyof JSX.IntrinsicElements = tag || "div";
-
+function sharedServerComponentRenderer(
+	{ children, tag, forcedPages, ...props }: NextJsSSRThemeSwitcherProps,
+	defaultTag: "div" | "html",
+) {
+	const Tag: keyof JSX.IntrinsicElements = tag || defaultTag;
 	const state = cookies().get("react18-themes")?.value;
 
 	const path = headers().get("referer");
@@ -40,10 +42,20 @@ export function NextJsSSRThemeSwitcher({ children, tag, forcedPages, ...props }:
 	);
 }
 
+export function NextJsSSRThemeSwitcher(props: NextJsSSRThemeSwitcherProps) {
+	return sharedServerComponentRenderer(props, "div");
+}
+
+export interface ServerSideWrapperProps extends NextJsSSRThemeSwitcherProps {
+	/** @defaultValue 'html' */
+	tag?: keyof JSX.IntrinsicElements;
+}
 /**
  * Server side wrapper for Next.js to replace &#x60;html&#x60; tag
  */
-export { NextJsSSRThemeSwitcher as ServerSideWrapper };
+export function ServerSideWrapper(props: ServerSideWrapperProps) {
+	return sharedServerComponentRenderer(props, "html");
+}
 
 interface Theme {
 	dataTheme?: string;
