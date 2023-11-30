@@ -1,5 +1,5 @@
 import type { ForcedPage } from "react18-themes/server";
-import { ServerSideWrapper } from "react18-themes/server";
+import { NextJsSSRThemeSwitcher } from "react18-themes/server";
 import { Inter } from "next/font/google";
 import { SharedRootLayout, darkThemes, lightThemes } from "shared-ui";
 import Link from "next/link";
@@ -13,12 +13,13 @@ const forcedPages: ForcedPage[] = [
 
 export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
 	return (
-		<ServerSideWrapper forcedPages={forcedPages} lang="en">
+		<html lang="en">
 			<body>
+				<NextJsSSRThemeSwitcher forcedPages={forcedPages} />
 				<SharedRootLayout LinkElement={Link} className={inter.className}>
 					{children}
 				</SharedRootLayout>
 			</body>
-		</ServerSideWrapper>
+		</html>
 	);
 }

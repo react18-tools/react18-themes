@@ -25,10 +25,7 @@ Object.defineProperty(window, "media", {
 	value: "dark",
 });
 
-globalThis.cookies = {
-	"data-theme-dark": { value: "dark-blue" },
-	"data-theme": { value: "light-yellow" },
-};
+globalThis.cookies = {};
 globalThis.path = "";
 
 vi.mock("next/headers", () => ({

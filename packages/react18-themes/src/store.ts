@@ -3,7 +3,7 @@ import { persistNSync } from "persist-and-sync";
 
 export type ColorSchemeType = "" | "system" | "dark" | "light";
 
-type ThemeStoreType = {
+export type ThemeStoreType = {
 	theme: string;
 	darkTheme: string;
 	lightTheme: string;
@@ -39,6 +39,6 @@ export const useTheme = create<ThemeStoreType & ThemeStoreActionsType>()(
 			setForcedColorScheme: forcedColorScheme => set({ ...get(), forcedColorScheme }),
 			setColorSchemePref: colorSchemePref => set({ ...get(), colorSchemePref }),
 		}),
-		{ name: "react18-themes", exclude: [/forced/] },
+		{ name: "react18-themes", exclude: [/forced/], storage: "cookies" },
 	),
 );
