@@ -36,7 +36,7 @@ function sharedServerComponentRenderer(
 
 	return (
 		// @ts-expect-error -> svg props and html element props conflict
-		<Tag id="react18-themes" {...dataProps} {...props} data-testid="nextjs-ssr-theme-switcher">
+		<Tag id="react18-themes" {...dataProps} {...props} data-testid="nextjs-server-theme-switcher">
 			{children}
 		</Tag>
 	);
