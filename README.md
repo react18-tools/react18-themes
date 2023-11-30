@@ -1,7 +1,5 @@
 # React 18 Themes
 
-<!-- Todo: update tests, docs -->
-
 [![test](https://github.com/react18-tools/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/react18-tools/react18-themes/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/19169c3e7d35a02a3dec/maintainability)](https://codeclimate.com/github/mayank1513/react18-themes/maintainability) [![codecov](https://codecov.io/gh/react18-tools/react18-themes/graph/badge.svg)](https://codecov.io/gh/react18-tools/react18-themes) [![Version](https://img.shields.io/npm/v/react18-themes.svg?colorB=green)](https://www.npmjs.com/package/react18-themes) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes.svg)](https://www.npmjs.com/package/react18-themes) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes) [![Get help](codementor.svg)](https://www.codementor.io/@mayank1513?refer=badge) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
 
 🤟 👉 [Unleash the Power of React Server Components](https://medium.com/javascript-in-plain-english/unleash-the-power-of-react-server-components-eb3fe7201231)
@@ -24,6 +22,7 @@ This project is inspired by `next-themes`. `next-themes` is an awesome package, 
 - ✅ Force pages to specific themes
 - ✅ Class or data attribute selector
 - ✅ Manipulate theme via `useTheme` hook
+- ✅ Doccumented with [Typedoc](https://react18-tools.github.io/react18-themes) ([Docs](https://react18-tools.github.io/react18-themes))
 
 Check out the [live example](https://react18-themes.vercel.app/).
 
@@ -49,9 +48,9 @@ $ yarn add react18-themes-lite
 
 > You need Zustand as a peer-dependency
 
-## Use
+## Usage
 
-### With pages/
+### SPA (e.g., Vite, CRA) and Next.js pages directory (No server components)
 
 The best way is to add a [Custom `App`](https://nextjs.org/docs/advanced-features/custom-app) to use by modifying `_app` as follows:
 
@@ -76,7 +75,33 @@ export default MyApp;
 
 Check out examples for advanced usage.
 
-### With app/
+### With Next.js `app` router (Server Components)
+
+Update your `app/layout.jsx` to add `ThemeSwitcher` from `react18-themes`, and `NextJsSSRThemeSwitcher` from `react18-themes/server`. `NextJsSSRThemeSwitcher` is required to avoid flash of un-themed content on reload.
+
+```tsx
+// app/layout.jsx
+import { ThemeSwitcher } from "react18-themes";
+import { NextJsSSRThemeSwitcher } from "react18-themes/server/nextjs";
+
+export default function Layout({ children }) {
+	return (
+		<html lang="en">
+			<head />
+			<body>
+                /** use NextJsSSRThemeSwitcher as first element inside body */
+				<NextJsSSRThemeSwitcher />
+				<ThemeSwitcher />
+				{children}
+			</body>
+		</html>
+	);
+}
+```
+
+Woohoo! You just added multiple theme modes and you can also use Server Component! Isn't that awesome!
+
+#### Version 1 (Legacy)
 
 Update your `app/layout.jsx` to add `ThemeSwitcher` and `ServerSideWrapper` from `react18-themes`. `ServerSideWrapper` is required to avoid flash of un-themed content on reload.
 
@@ -112,6 +137,12 @@ That's it, your Next.js app fully supports dark mode, including System preferenc
 }
 
 [data-theme="dark"] {
+	--background: black;
+	--foreground: white;
+}
+
+// v2 onwards when using React18 server components, we need to use CSS Combinators
+[data-theme="dark"] ~ * {
 	--background: black;
 	--foreground: white;
 }
@@ -177,12 +208,25 @@ In a similar way, you can also force color scheme.
 
 Forcing color scheme will apply your defaultDark or defaultLight theme, configurable via hooks.
 
+## Migrating from v1 to v2
+
+#### Motivation:
+
+For server side syncing, we need to use cookies and headers. This means that this component and it's children can not be static. They will be rendered server side for each request. Thus, we are avoiding the wrapper. Now, only the `NextJsSSRThemeSwitcher` will be rendered server side for each request and rest of your app can be server statically.
+
+Take care of the following while migrating to `v2`.
+
+- No changes required for projects not using `Next.js` app router or server components.
+- The persistent storage is realized with `cookies` in place of `localStorage`. (You might want to update cookies policy accordingly.)
+- `ServerSideWrapper` for `Next.js` is rebranded to `NextJsSSRThemeSwitcher` . No longer need to use this as a wrapper.
+- Visit [With Next.js `app` router (Server Components)](#with-next.js-app-router-(server-components))
+
 ## Migrating from v0 to v1
 
-- defaultDarkTheme is renamed to darkTheme
-- setDefaultDarkTheme is renamed to setDarkTheme
-- defaultLightTheme is renamed to lightTheme
-- setDefaultLightTheme is renamed to setLightTheme
+- `defaultDarkTheme` is renamed to `darkTheme`
+- `setDefaultDarkTheme` is renamed to `setDarkTheme`
+- `defaultLightTheme` is renamed to `lightTheme`
+- `setDefaultLightTheme` is renamed to `setLightTheme`
 
 ## Docs
 
@@ -192,7 +236,7 @@ Forcing color scheme will apply your defaultDark or defaultLight theme, configur
 
 Want handson course for getting started with Turborepo? Check out [React and Next.js with TypeScript](https://www.udemy.com/course/react-and-next-js-with-typescript/?referralCode=7202184A1E57C3DCA8B2)
 
-![Alt](https://repobeats.axiom.co/api/embed/212c15d25de3d653995014d1e5d27df1b7e20d13.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/846d01d5bb0cc683bffe0a25e289334b49acebd1.svg "Repobeats analytics image")
 
 ## License
 
