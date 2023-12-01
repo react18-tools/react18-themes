@@ -46,6 +46,9 @@ export function NextJsSSGThemeSwitcher(props: NextJsSSRThemeSwitcherProps) {
 	return sharedServerComponentRenderer(props, "div");
 }
 
+/** For naming consistancy, clarity, and minimizing API updates */
+export { NextJsSSGThemeSwitcher as NextJsServerTarget };
+
 export interface ServerSideWrapperProps extends NextJsSSRThemeSwitcherProps {
 	/** @defaultValue 'html' */
 	tag?: keyof JSX.IntrinsicElements;
