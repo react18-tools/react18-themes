@@ -1,5 +1,11 @@
 # react18-themes
 
+## 2.1.0
+
+### Minor Changes
+
+- 170b3f2: Add support for Remix server side theming
+
 ## 2.0.1
 
 ### Patch Changes
