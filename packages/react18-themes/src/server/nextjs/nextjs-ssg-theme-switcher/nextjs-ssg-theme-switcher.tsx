@@ -2,7 +2,8 @@ import * as React from "react";
 import type { HTMLProps, ReactNode } from "react";
 import { cookies, headers } from "next/headers";
 import type { ColorSchemeType, ThemeStoreType } from "../../../store";
-import { resolveThemeFromColorScheme } from "../../../utils";
+import type { Theme } from "../../../utils";
+import { getTheme, resolveThemeFromColorScheme } from "../../../utils";
 
 export type ForcedPage = [pathMatcher: RegExp | string, themes: { theme?: string; colorScheme?: ColorSchemeType }];
 
@@ -58,17 +59,6 @@ export interface ServerSideWrapperProps extends NextJsSSRThemeSwitcherProps {
  */
 export function ServerSideWrapper(props: ServerSideWrapperProps) {
 	return sharedServerComponentRenderer(props, "html");
-}
-
-interface Theme {
-	dataTheme?: string;
-	dataColorScheme?: ColorSchemeType;
-}
-
-function getTheme(themeState: ThemeStoreType | undefined, isSystemDark: boolean): Theme {
-	if (!themeState) return {};
-	const dataTheme = resolveThemeFromColorScheme(themeState, isSystemDark);
-	return { dataTheme, dataColorScheme: themeState.colorSchemePref };
 }
 
 function getForcedPageTheme(

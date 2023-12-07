@@ -25,6 +25,8 @@
 		"gen": "turbo gen react-component"
 	},
 	"devDependencies": {
+		"@remix-run/node": "^2.3.1",
+		"@remix-run/react": "^2.3.1",
 		"@testing-library/react": "^14.1.2",
 		"@turbo/gen": "^1.10.16",
 		"@types/node": "^20.10.1",
@@ -35,7 +37,7 @@
 		"esbuild-plugin-react18": "^0.0.6",
 		"eslint": "^8.54.0",
 		"eslint-config-custom": "workspace:*",
-		"jsdom": "^23.0.0",
+		"jsdom": "^23.0.1",
 		"next": "^14.0.3",
 		"octokit": "^3.1.2",
 		"react": "^18.2.0",
@@ -52,12 +54,20 @@
 		"zustand": "^4.4.7"
 	},
 	"peerDependencies": {
+		"@remix-run/node": "^2.3.1",
+		"@remix-run/react": "^2.3.1",
 		"@types/react": "16.8 - 18",
 		"next": "10 - 14",
 		"react": "16.8 - 18"
 	},
 	"peerDependenciesMeta": {
 		"next": {
+			"optional": true
+		},
+		"@remix-run/node": {
+			"optional": true
+		},
+		"@remix-run/react": {
 			"optional": true
 		}
 	},

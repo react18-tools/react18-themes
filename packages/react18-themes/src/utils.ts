@@ -1,4 +1,4 @@
-import { ThemeStoreType } from "./store";
+import type { ColorSchemeType, ThemeStoreType } from "./store";
 
 export function resolveThemeFromColorScheme(state: ThemeStoreType, isSystemDark: boolean) {
 	const { colorSchemePref, darkTheme, lightTheme, theme } = state;
@@ -13,4 +13,15 @@ export function resolveThemeFromColorScheme(state: ThemeStoreType, isSystemDark:
 		default:
 			return theme;
 	}
+}
+
+export interface Theme {
+	dataTheme?: string;
+	dataColorScheme?: ColorSchemeType;
+}
+
+export function getTheme(themeState: ThemeStoreType | undefined, isSystemDark: boolean): Theme {
+	if (!themeState) return {};
+	const dataTheme = resolveThemeFromColorScheme(themeState, isSystemDark);
+	return { dataTheme, dataColorScheme: themeState.colorSchemePref };
 }

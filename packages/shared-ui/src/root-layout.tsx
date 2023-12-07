@@ -1,5 +1,5 @@
 import "./globals.css";
-import "react18-themes/styles.css";
+import "react18-themes/src/styles.css";
 import { ColorSwitch, ThemeSwitcher } from "react18-themes";
 import { ForkMe } from "@mayank1513/fork-me/server/index.js"; // import directory not supported in remix
 import type { HTMLProps } from "react";
