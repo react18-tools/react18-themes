@@ -2,4 +2,3 @@
 
 /** to make sure import statements remain same for monorepo setup and install via npm */
 export * from "./src";
-export * from "./src/server/remix";
