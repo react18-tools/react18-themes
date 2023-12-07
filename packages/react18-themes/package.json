@@ -27,6 +27,7 @@
 	"devDependencies": {
 		"@remix-run/node": "^2.3.1",
 		"@remix-run/react": "^2.3.1",
+		"@remix-run/testing": "^2.3.1",
 		"@testing-library/react": "^14.1.2",
 		"@turbo/gen": "^1.11.0",
 		"@types/node": "^20.10.4",

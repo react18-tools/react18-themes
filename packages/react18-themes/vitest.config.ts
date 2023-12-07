@@ -12,7 +12,8 @@ export default defineConfig({
 		setupFiles: ["vitest.setup.ts"],
 		coverage: {
 			reporter: ["text", "json", "clover", "html"],
-			exclude: ["__mocks__", "**/index.ts"],
+			/** temporarily exclude remix until apropreate test methos is found */
+			exclude: ["__mocks__", "**/index.ts", "**/remix/**"],
 			include: ["src/**/*.{ts,tsx}"],
 		},
 	},
