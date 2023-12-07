@@ -46,7 +46,7 @@ export function useThemeSwitcher(props: ThemeSwitcherProps) {
 		return () => {
 			media.removeEventListener("change", updateTheme);
 		};
-	}, [themeState]);
+	}, [props.forcedColorScheme, props.forcedTheme, props.targetSelector, themeState]);
 }
 
 interface UpdateDOMProps {
@@ -56,9 +56,10 @@ interface UpdateDOMProps {
 }
 
 function updateDOM({ newTheme, colorScheme, media }: UpdateDOMProps, targetSelector?: string) {
-	const target = document.querySelector(targetSelector || "#react18-themes") || document.documentElement;
-	target.setAttribute("data-theme", newTheme);
-	target.setAttribute("data-color-scheme", colorScheme);
+	[document.querySelector(targetSelector || "#react18-themes"), document.documentElement].forEach(target => {
+		target?.setAttribute("data-theme", newTheme);
+		target?.setAttribute("data-color-scheme", colorScheme);
+	});
 
 	/** store system preference for computing data-theme on server side */
 	document.cookie = `data-color-scheme-system=${media.matches ? "dark" : "light"}`;

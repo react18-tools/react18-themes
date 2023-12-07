@@ -15,7 +15,7 @@ This project is inspired by `next-themes`. `next-themes` is an awesome package, 
 - ✅ Perfect dark mode in 2 lines of code
 - ✅ System setting with prefers-color-scheme
 - ✅ Themed browser UI with color-scheme
-- ✅ Support for Next.js 13 `appDir`
+- ✅ Support for Next.js 13 & Next.js 14 `appDir`
 - ✅ Sync theme across tabs and windows
 - ✅ Theme in sync with server component
 - ✅ Disable flashing when changing themes

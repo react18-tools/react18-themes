@@ -9,11 +9,12 @@ export default defineConfig({
 	test: {
 		environment: "jsdom",
 		globals: true,
-		setupFiles: ["vitest-setup.ts"],
+		setupFiles: ["vitest.setup.ts"],
 		coverage: {
 			reporter: ["text", "json", "clover", "html"],
-			exclude: ["__mocks__"],
+			/** temporarily exclude remix until apropreate test methos is found */
+			exclude: ["__mocks__", "**/index.ts", "**/remix/**"],
+			include: ["src/**/*.{ts,tsx}"],
 		},
-		threads: true,
 	},
 });
