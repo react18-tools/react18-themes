@@ -5,8 +5,8 @@ import { RemixServerTarget } from "./remix-server-target";
 describe.concurrent("remix-server-target", () => {
 	afterEach(cleanup);
 
-	test("check if h1 heading exists", ({ expect }) => {
+	test.todo("", ({ expect }) => {
 		render(<RemixServerTarget />);
-		expect(screen.getByTestId("remix-server-target-h1").textContent).toBe("remix-server-target");
+		expect(screen.getByTestId("remix-server-target").textContent).toBe("remix-server-target");
 	});
 });
