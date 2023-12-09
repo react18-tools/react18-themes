@@ -16,7 +16,7 @@ export type SharedRootLayoutProps = HTMLProps<HTMLElement> & PageNavigatorCardPr
 export function SharedRootLayout({ children, className = "", LinkElement, ...props }: SharedRootLayoutProps) {
 	return (
 		<>
-			<ThemeSwitcher />
+			<ThemeSwitcher themeTransition="all 0.5s ease-in-out" />
 			<main className={`${styles.main} ${className}`} {...props}>
 				<Description />
 				{children}
