@@ -2,7 +2,7 @@ import * as React from "react";
 import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { ColorSchemeType, ThemeStoreType } from "../../../store";
-import { getTheme } from "../../../utils";
+import { getDataProps, resolveTheme } from "../../../utils";
 
 interface ForcedPage {
 	pathMatcher: RegExp | string;
@@ -26,12 +26,8 @@ export function loader({ request }: LoaderFunctionArgs) {
 	const state = parseCookie(cookieHeader, "react18-themes");
 	const isSystemDark = parseCookie(cookieHeader, "data-color-scheme-system") === "dark";
 	const themeState = state ? (JSON.parse(state) as ThemeStoreType) : undefined;
-	const { dataTheme, dataColorScheme } = getTheme(themeState, isSystemDark);
-
-	const dataProps: { "data-theme"?: string; "data-color-scheme"?: ColorSchemeType } = {};
-	if (dataTheme !== undefined) dataProps["data-theme"] = dataTheme;
-	if (dataColorScheme !== undefined) dataProps["data-color-scheme"] = dataColorScheme;
-
+	const resolvedData = resolveTheme(isSystemDark, themeState);
+	const dataProps = getDataProps(resolvedData);
 	return json(dataProps);
 }
 

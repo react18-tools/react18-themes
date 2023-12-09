@@ -4,8 +4,8 @@
 	"sideEffects": false,
 	"type": "module",
 	"scripts": {
-		"build": "remix build",
-		"dev": "remix dev --manual",
+		"build-remix": "remix build",
+		"dev-remix": "remix dev --manual",
 		"start": "remix-serve ./build/index.js",
 		"typecheck": "tsc"
 	},

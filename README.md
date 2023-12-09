@@ -23,6 +23,8 @@ This project is inspired by `next-themes`. `next-themes` is an awesome package, 
 - ✅ Class or data attribute selector
 - ✅ Manipulate theme via `useTheme` hook
 - ✅ Doccumented with [Typedoc](https://react18-tools.github.io/react18-themes) ([Docs](https://react18-tools.github.io/react18-themes))
+- ✅ Use combinations of [data-th=""] and [data-color-scheme=""] for dark/light varients of themes
+- ✅ Use [data-csp=""] to style based on colorSchemePreference.
 
 Check out the [live example](https://react18-themes.vercel.app/).
 

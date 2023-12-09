@@ -2,9 +2,10 @@ import { act, cleanup, render, renderHook } from "@testing-library/react";
 import { afterEach, describe, test } from "vitest";
 import { useTheme } from "../../store";
 import { ThemeSwitcher } from "./theme-switcher";
+import { getResolvedColorScheme, getResolvedTheme } from "../../utils";
 
-/** Test if proper data-theme is added to documentElement
- * concurrency is not feasible because of global store conflicts
+/**
+ * -> concurrency is not feasible because of global store conflicts
  */
 describe("theme-switcher", () => {
 	afterEach(cleanup);
@@ -24,10 +25,11 @@ describe("theme-switcher", () => {
 		act(() => result.current.setLightTheme("light1"));
 		window.media = "dark";
 		await act(() => render(<ThemeSwitcher />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("dark1");
+		expect(getResolvedTheme()).toBe("dark1");
 		window.media = "light";
 		await act(() => render(<ThemeSwitcher />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("light1");
+		expect(getResolvedTheme()).toBe("light1");
+		expect(getResolvedColorScheme()).toBe("light");
 	});
 
 	// colorScheme has higher preference
@@ -36,7 +38,7 @@ describe("theme-switcher", () => {
 		act(() => result.current.setColorSchemePref(""));
 		act(() => result.current.setTheme("blue"));
 		await act(() => render(<ThemeSwitcher />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("blue");
+		expect(getResolvedTheme()).toBe("blue");
 	});
 
 	test("test color scheme preference", async ({ expect }) => {
@@ -45,11 +47,11 @@ describe("theme-switcher", () => {
 		act(() => result.current.setLightTheme("yellow"));
 		act(() => result.current.setTheme("blue"));
 		await act(() => render(<ThemeSwitcher />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("yellow");
+		expect(getResolvedTheme()).toBe("yellow");
 		act(() => result.current.setDarkTheme("dark-blue"));
 		act(() => result.current.setColorSchemePref("dark"));
 		await act(() => render(<ThemeSwitcher />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("dark-blue");
+		expect(getResolvedTheme()).toBe("dark-blue");
 	});
 
 	test("test forcedTheme", async ({ expect }) => {
@@ -59,7 +61,7 @@ describe("theme-switcher", () => {
 		act(() => result.current.setColorSchemePref("light"));
 		act(() => result.current.setTheme("f1"));
 		await act(() => render(<ThemeSwitcher />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("forced1");
+		expect(getResolvedTheme()).toBe("forced1");
 	});
 
 	test("forced colorScheme only", async ({ expect }) => {
@@ -71,19 +73,19 @@ describe("theme-switcher", () => {
 		act(() => result.current.setLightTheme("yellow"));
 		act(() => result.current.setDarkTheme("black"));
 		await act(() => render(<ThemeSwitcher />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("");
+		expect(getResolvedTheme()).toBe("");
 		act(() => result.current.setForcedTheme(undefined));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("black");
+		expect(getResolvedTheme()).toBe("black");
 	});
 
 	test("forced theme prop", async ({ expect }) => {
 		await act(() => render(<ThemeSwitcher forcedTheme="theme1" />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("theme1");
+		expect(getResolvedTheme()).toBe("theme1");
 	});
 
 	test("forced colorScheme prop", async ({ expect }) => {
 		// global state is continuing from previous testss
 		await act(() => render(<ThemeSwitcher forcedColorScheme="light" />));
-		expect(document.documentElement.getAttribute("data-theme")).toBe("");
+		expect(getResolvedTheme()).toBe("");
 	});
 });

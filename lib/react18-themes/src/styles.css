@@ -1,4 +1,5 @@
 .react18-themes--color-switch {
+	all: unset;
 	position: relative;
 	box-shadow: none;
 	color: #aaa;
@@ -8,11 +9,12 @@
 	--size: 25px;
 	height: var(--size);
 	width: var(--size);
+	transition: all 0.3s ease-in-out !important;
 }
 
-[data-color-scheme="system"] .react18-themes--color-switch::after,
-[data-color-scheme="system"] ~ .react18-themes--color-switch::after,
-[data-color-scheme="system"] ~ * .react18-themes--color-switch::after {
+[data-csp="system"] .react18-themes--color-switch::after,
+[data-csp="system"] ~ .react18-themes--color-switch::after,
+[data-csp="system"] ~ * .react18-themes--color-switch::after {
 	position: absolute;
 	height: 100%;
 	width: 100%;
@@ -26,17 +28,17 @@
 	content: "A";
 }
 
-[data-color-scheme="dark"] .react18-themes--color-switch,
-[data-color-scheme="dark"] ~ .react18-themes--color-switch,
-[data-color-scheme="dark"] ~ * .react18-themes--color-switch {
+[data-csp="dark"] .react18-themes--color-switch,
+[data-csp="dark"] ~ .react18-themes--color-switch,
+[data-csp="dark"] ~ * .react18-themes--color-switch {
 	box-shadow: calc(var(--size) / 4) calc(var(--size) / -4) calc(var(--size) / 8) inset #fff;
 	border: none;
 	background: transparent;
 }
 
-[data-color-scheme="light"] .react18-themes--color-switch,
-[data-color-scheme="light"] ~ .react18-themes--color-switch,
-[data-color-scheme="light"] ~ * .react18-themes--color-switch {
+[data-csp="light"] .react18-themes--color-switch,
+[data-csp="light"] ~ .react18-themes--color-switch,
+[data-csp="light"] ~ * .react18-themes--color-switch {
 	box-shadow: 0 0 50px 10px yellow;
 	background-color: yellow;
 	border: 1px solid orangered;
