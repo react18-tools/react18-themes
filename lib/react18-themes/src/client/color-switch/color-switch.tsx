@@ -36,7 +36,7 @@ export function ColorSwitch({ size = 25 }: ColorSwitchProps) {
 	};
 	return (
 		<button
-			className="nextjs-themes--color-switch"
+			className="react18-themes--color-switch"
 			data-testid="color-switch"
 			onClick={toggleColorScheme}
 			// @ts-expect-error -- setting custom attribute
