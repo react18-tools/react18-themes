@@ -25,6 +25,7 @@ This project is inspired by `next-themes`. `next-themes` is an awesome package, 
 - ✅ Doccumented with [Typedoc](https://react18-tools.github.io/react18-themes) ([Docs](https://react18-tools.github.io/react18-themes))
 - ✅ Use combinations of [data-th=""] and [data-color-scheme=""] for dark/light varients of themes
 - ✅ Use [data-csp=""] to style based on colorSchemePreference.
+- ✅ Starting from version 2.3, `localStorage` is used as default storage. **No** `cookies` by default. Use storage="cookies" for smooth initial rendering of server components.
 
 Check out the [live example](https://react18-themes.vercel.app/).
 
@@ -32,9 +33,17 @@ Check out the [live example](https://react18-themes.vercel.app/).
 
 ```bash
 $ pnpm add react18-themes
-# or
+```
+
+**or**
+
+```bash
 $ npm install react18-themes
-# or
+```
+
+**or**
+
+```bash
 $ yarn add react18-themes
 ```
 
@@ -42,9 +51,17 @@ $ yarn add react18-themes
 
 ```bash
 $ pnpm add react18-themes-lite
-# or
+```
+
+**or**
+
+```bash
 $ npm install react18-themes-lite
-# or
+```
+
+**or**
+
+```bash
 $ yarn add react18-themes-lite
 ```
 
@@ -217,6 +234,10 @@ In a similar way, you can also force color scheme.
 
 Forcing color scheme will apply your defaultDark or defaultLight theme, configurable via hooks.
 
+## Changelog
+
+Find changelog here [CHANGELOG.md](lib/react18-themes/CHANGELOG.md)
+
 ## Migrating from v1 to v2
 
 #### Motivation:
@@ -226,7 +247,8 @@ For server side syncing, we need to use cookies and headers. This means that thi
 Take care of the following while migrating to `v2`.
 
 - No changes required for projects not using `Next.js` app router or server components other than updating cookies policy if needed.
-- The persistent storage is realized with `cookies` in place of `localStorage`. (You might want to update cookies policy accordingly.)
+- ~~The persistent storage is realized with `cookies` in place of `localStorage`. (You might want to update cookies policy accordingly.)~~
+- Starting from version 2.3, persistent storage is again set to `localStorage`. You can change it to `cookies` or `sassionStorage` by passing `storage` prop to `<ThemeSwitcher />` component.
 - We have provided `NextJsSSGThemeSwitcher` in addition to `ServerSideWrapper` for `Next.js`. You no longer need to use a wrapper component which broke static generation and forced SSR.
 - Visit [With Next.js `app` router (Server Components)](#with-nextjs-app-router-server-components)
 
