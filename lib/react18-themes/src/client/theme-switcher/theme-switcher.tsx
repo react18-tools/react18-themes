@@ -3,48 +3,18 @@ import { useEffect } from "react";
 import type { ColorSchemeType } from "../../store";
 import { useTheme } from "../../store";
 import { resolveTheme } from "../../utils";
+import { StorageType } from "persist-and-sync";
 
 export interface ThemeSwitcherProps {
 	forcedTheme?: string;
 	forcedColorScheme?: ColorSchemeType;
 	targetSelector?: string;
 	themeTransition?: string;
-}
-
-export function ThemeSwitcher(props: ThemeSwitcherProps) {
-	useThemeSwitcher(props);
-	return null;
-}
-
-export function useThemeSwitcher(props: ThemeSwitcherProps) {
-	const depArray = useTheme(state => [
-		state.theme,
-		state.darkTheme,
-		state.lightTheme,
-		state.colorSchemePref,
-		state.forcedColorScheme,
-		state.forcedTheme,
-	]);
-
-	useEffect(() => {
-		const themeState = useTheme.getState();
-		const media = matchMedia("(prefers-color-scheme: dark)");
-		const updateTheme = () => {
-			const restoreTransitions = disableAnimation(props.themeTransition);
-
-			const resolvedData = resolveTheme(media.matches, themeState, props);
-			themeState.setResolved(resolvedData);
-			updateDOM(resolvedData, media.matches, props.targetSelector);
-
-			restoreTransitions();
-		};
-
-		media.addEventListener("change", updateTheme);
-		updateTheme();
-		return () => {
-			media.removeEventListener("change", updateTheme);
-		};
-	}, [props, ...depArray]);
+	/**
+	 * defaultValue `"localStorage"`
+	 * set storage to `cookies` (recommended when using server components) or `sessionsStorage` when using only client side or when you must avoid using cookies
+	 */
+	storage?: StorageType;
 }
 
 export interface DataProps {
@@ -99,3 +69,48 @@ const disableAnimation = (themeTransition = "none") => {
 		}, 1);
 	};
 };
+
+/**
+ * You can use this hook in place of `<ThemeSwitcher />` component.
+ * Please note that you need to add "use client" on top of the component in which you are using this hook.
+ */
+export function useThemeSwitcher(props: ThemeSwitcherProps) {
+	const [setStorage, ...depArray] = useTheme(state => [
+		state.setStorage,
+		state.theme,
+		state.darkTheme,
+		state.lightTheme,
+		state.colorSchemePref,
+		state.forcedColorScheme,
+		state.forcedTheme,
+	]);
+
+	useEffect(() => {
+		setStorage(props.storage ?? "localStorage");
+	}, [props.storage]);
+
+	useEffect(() => {
+		const themeState = useTheme.getState();
+		const media = matchMedia("(prefers-color-scheme: dark)");
+		const updateTheme = () => {
+			const restoreTransitions = disableAnimation(props.themeTransition);
+
+			const resolvedData = resolveTheme(media.matches, themeState, props);
+			themeState.setResolved(resolvedData);
+			updateDOM(resolvedData, media.matches, props.targetSelector);
+
+			restoreTransitions();
+		};
+
+		media.addEventListener("change", updateTheme);
+		updateTheme();
+		return () => {
+			media.removeEventListener("change", updateTheme);
+		};
+	}, [props, ...depArray]);
+}
+
+export function ThemeSwitcher(props: ThemeSwitcherProps) {
+	useThemeSwitcher(props);
+	return null;
+}

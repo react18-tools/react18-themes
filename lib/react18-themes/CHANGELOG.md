@@ -1,5 +1,11 @@
 # react18-themes
 
+## 2.3.0
+
+### Minor Changes
+
+- Add storage prop - No cookies by default!
+
 ## 2.2.0
 
 ### Minor Changes
