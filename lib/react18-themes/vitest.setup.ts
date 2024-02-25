@@ -32,5 +32,3 @@ vi.mock("next/headers", () => ({
   cookies: () => ({ get: (cookieName: string) => globalThis.cookies[cookieName] }),
   headers: () => ({ get: (h: string) => globalThis.path }),
 }));
-
-vi.mock("zustand");
