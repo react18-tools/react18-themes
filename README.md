@@ -65,7 +65,7 @@ $ npm install react18-themes-lite
 $ yarn add react18-themes-lite
 ```
 
-> You need Zustand as a peer-dependency
+> You need r18gs as a peer-dependency
 
 ## Usage
 
