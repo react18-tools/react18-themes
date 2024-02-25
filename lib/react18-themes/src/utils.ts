@@ -1,20 +1,21 @@
 import type { DataProps, ThemeSwitcherProps, UpdateProps } from "./client";
-import type { ThemeStoreType } from "./store";
+import type { ThemeStoreType } from "./constants";
 
-export function resolveTheme(isSystemDark: boolean, state?: ThemeStoreType, props?: ThemeSwitcherProps): UpdateProps {
+export function resolveTheme(state?: ThemeStoreType, props?: ThemeSwitcherProps): UpdateProps {
   const resolvedForcedTheme = props?.forcedTheme === undefined ? state?.forcedTheme : props.forcedTheme;
   const resolvedForcedColorScheme =
     props?.forcedColorScheme === undefined ? state?.forcedColorScheme : props.forcedColorScheme;
   const resolvedColorSchemePref =
     (resolvedForcedColorScheme === undefined ? state?.colorSchemePref : resolvedForcedColorScheme) || "";
 
+  const isSystemDark = state?.systemColorScheme === "dark";
   let resolvedColorScheme: "dark" | "light" = isSystemDark ? "dark" : "light";
   let resolvedTheme = resolvedForcedTheme === undefined ? state?.theme || "" : resolvedForcedTheme;
 
   if (resolvedForcedTheme === undefined)
     switch (resolvedColorSchemePref) {
       case "system":
-        resolvedTheme = (isSystemDark ? state?.darkTheme : state?.lightTheme) || "";
+        resolvedTheme = (isSystemDark ? state.darkTheme : state?.lightTheme) || "";
         break;
       case "dark":
         [resolvedTheme, resolvedColorScheme] = [state?.darkTheme || "", "dark"];
