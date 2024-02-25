@@ -14,23 +14,23 @@ import { Footer } from "./root/footer";
 export type SharedRootLayoutProps = HTMLProps<HTMLElement> & PageNavigatorCardProps;
 
 export function SharedRootLayout({ children, className = "", LinkElement, ...props }: SharedRootLayoutProps) {
-	return (
-		<>
-			<ThemeSwitcher themeTransition="all 0.5s ease-in-out" />
-			<main className={`${styles.main} ${className}`} {...props}>
-				<Description />
-				{children}
-				<Hero />
-				<ColorSwitch />
-				<ThemeController />
-				<Cards LinkElement={LinkElement} />
-			</main>
-			<Footer />
-			<ForkMe
-				bgColor="var(--text-color)"
-				gitHubUrl="https://github.com/react18-tools/react18-themes"
-				textColor="var(--bg-color)"
-			/>
-		</>
-	);
+  return (
+    <>
+      <ThemeSwitcher themeTransition="all 0.5s ease-in-out" />
+      <main className={`${styles.main} ${className}`} {...props}>
+        <Description />
+        {children}
+        <Hero />
+        <ColorSwitch />
+        <ThemeController />
+        <Cards LinkElement={LinkElement} />
+      </main>
+      <Footer />
+      <ForkMe
+        bgColor="var(--text-color)"
+        gitHubUrl="https://github.com/react18-tools/react18-themes"
+        textColor="var(--bg-color)"
+      />
+    </>
+  );
 }

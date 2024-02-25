@@ -5,5 +5,5 @@
  * */
 
 // server component exports
-export * from "./remix"
+export * from "./remix";
 export * from "./nextjs";

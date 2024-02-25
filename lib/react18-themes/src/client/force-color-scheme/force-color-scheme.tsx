@@ -5,8 +5,8 @@ import type { ColorSchemeType } from "../../store";
 import { useTheme } from "../../store";
 
 export interface ForceColorSchemeProps {
-	/** colorScheme to force on a page */
-	colorScheme: ColorSchemeType;
+  /** colorScheme to force on a page */
+  colorScheme: ColorSchemeType;
 }
 
 /**
@@ -17,12 +17,12 @@ export interface ForceColorSchemeProps {
  */
 
 export function ForceColorScheme(props: ForceColorSchemeProps) {
-	const [setForcedColorScheme] = useTheme(state => [state.setForcedColorScheme]);
-	useEffect(() => {
-		setForcedColorScheme(props.colorScheme);
-		return () => {
-			setForcedColorScheme(undefined);
-		};
-	}, [props.colorScheme, setForcedColorScheme]);
-	return null;
+  const [setForcedColorScheme] = useTheme(state => [state.setForcedColorScheme]);
+  useEffect(() => {
+    setForcedColorScheme(props.colorScheme);
+    return () => {
+      setForcedColorScheme(undefined);
+    };
+  }, [props.colorScheme, setForcedColorScheme]);
+  return null;
 }

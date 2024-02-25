@@ -5,30 +5,30 @@ import type { ColorSchemeType, ThemeStoreType } from "../../../store";
 import { getDataProps, resolveTheme } from "../../../utils";
 
 interface ForcedPage {
-	pathMatcher: RegExp | string;
-	themes: { theme?: string; colorScheme?: ColorSchemeType };
+  pathMatcher: RegExp | string;
+  themes: { theme?: string; colorScheme?: ColorSchemeType };
 }
 
 interface RemixServerTargetProps extends React.HTMLProps<HTMLElement> {
-	children?: React.ReactNode;
-	/** @defaultValue 'div' */
-	tag?: keyof JSX.IntrinsicElements;
-	/** not implemented yet */
-	forcedPages?: ForcedPage[];
+  children?: React.ReactNode;
+  /** @defaultValue 'div' */
+  tag?: keyof JSX.IntrinsicElements;
+  /** not implemented yet */
+  forcedPages?: ForcedPage[];
 }
 
 /**
  * import and export this function from your Remix app
  */
 export function loader({ request }: LoaderFunctionArgs) {
-	const cookieHeader = request.headers.get("Cookie");
-	if (!cookieHeader) return json({});
-	const state = parseCookie(cookieHeader, "react18-themes");
-	const isSystemDark = parseCookie(cookieHeader, "data-color-scheme-system") === "dark";
-	const themeState = state ? (JSON.parse(state) as ThemeStoreType) : undefined;
-	const resolvedData = resolveTheme(isSystemDark, themeState);
-	const dataProps = getDataProps(resolvedData);
-	return json(dataProps);
+  const cookieHeader = request.headers.get("Cookie");
+  if (!cookieHeader) return json({});
+  const state = parseCookie(cookieHeader, "react18-themes");
+  const isSystemDark = parseCookie(cookieHeader, "data-color-scheme-system") === "dark";
+  const themeState = state ? (JSON.parse(state) as ThemeStoreType) : undefined;
+  const resolvedData = resolveTheme(isSystemDark, themeState);
+  const dataProps = getDataProps(resolvedData);
+  return json(dataProps);
 }
 
 /**
@@ -37,25 +37,25 @@ export function loader({ request }: LoaderFunctionArgs) {
  * <RemixServerTarget />
  */
 export function RemixServerTarget({ children, tag, forcedPages, ...props }: RemixServerTargetProps) {
-	const Tag: keyof JSX.IntrinsicElements = tag || "div";
+  const Tag: keyof JSX.IntrinsicElements = tag || "div";
 
-	const dataProps = useLoaderData<typeof loader>();
+  const dataProps = useLoaderData<typeof loader>();
 
-	return (
-		// @ts-expect-error -> svg props and html element props conflict
-		<Tag id="react18-themes" {...dataProps} {...props} data-testid="remix-server-target">
-			{children}
-		</Tag>
-	);
+  return (
+    // @ts-expect-error -> svg props and html element props conflict
+    <Tag id="react18-themes" {...dataProps} {...props} data-testid="remix-server-target">
+      {children}
+    </Tag>
+  );
 }
 
 function parseCookie(cookieHeader: string, name: string) {
-	const cookiePrefix = `${name}=`;
-	return (
-		cookieHeader
-			.split(";")
-			.filter(cookie => cookie.trim().startsWith(cookiePrefix))[0]
-			.trim()
-			.replace(cookiePrefix, "") || "{}"
-	);
+  const cookiePrefix = `${name}=`;
+  return (
+    cookieHeader
+      .split(";")
+      .filter(cookie => cookie.trim().startsWith(cookiePrefix))[0]
+      .trim()
+      .replace(cookiePrefix, "") || "{}"
+  );
 }
