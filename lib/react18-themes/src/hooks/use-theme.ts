@@ -24,7 +24,7 @@ function createSetterWithFirstTimeDelay(setThemeState: SetStateAction<ThemeStore
 export function useTheme(targetId?: string) {
   const [themeState, setThemeState] = useRGS<ThemeStoreType>(targetId ?? DEFAULT_ID, initialState);
   const { resolvedColorScheme, resolvedTheme } = resolveTheme(themeState);
-  const setterWithFirstTimeDelay = useMemo(() => createSetterWithFirstTimeDelay(setThemeState), []);
+  const setterWithFirstTimeDelay = useMemo(() => createSetterWithFirstTimeDelay(setThemeState), [setThemeState]);
   return {
     ...themeState,
     resolvedColorScheme,
@@ -34,7 +34,7 @@ export function useTheme(targetId?: string) {
     setLightTheme: setterWithFirstTimeDelay<string>("lightTheme"),
     setThemeSet: useCallback(
       (themeSet: { darkTheme: string; lightTheme: string }) => setThemeState(state => ({ ...state, ...themeSet })),
-      [],
+      [setThemeState],
     ),
     setColorSchemePref: setterWithFirstTimeDelay<ColorSchemeType>("colorSchemePref"),
     setForcedTheme: setterWithFirstTimeDelay<string | undefined>("forcedTheme"),

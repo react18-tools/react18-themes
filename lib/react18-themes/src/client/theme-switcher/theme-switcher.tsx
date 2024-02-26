@@ -44,7 +44,7 @@ function useLoadSyncedState(setThemeState: SetStateAction<ThemeStoreType>, targe
     return () => {
       window.removeEventListener("storage", storageListener);
     };
-  }, [targetSelector]);
+  }, [setThemeState, targetSelector]);
 }
 
 export interface DataProps {
