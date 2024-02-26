@@ -1,9 +1,9 @@
 import * as React from "react";
 import type { HTMLProps, ReactNode } from "react";
 import { cookies, headers } from "next/headers";
-import type { ThemeStoreType } from "../../../constants";
-import { getDataProps, resolveTheme } from "../../../utils";
-import type { ThemeSwitcherProps, UpdateProps } from "../../../client";
+import { DEFAULT_ID } from "../../../constants";
+import { getDataProps, parseState, resolveTheme } from "../../../utils";
+import type { ThemeSwitcherProps } from "../../../client";
 
 export type ForcedPage = { pathMatcher: RegExp | string; props: ThemeSwitcherProps };
 
@@ -12,26 +12,28 @@ export interface NextJsSSRThemeSwitcherProps extends HTMLProps<HTMLElement> {
   /** @defaultValue 'div' */
   tag?: keyof JSX.IntrinsicElements;
   forcedPages?: ForcedPage[];
+  /** id of target element to apply classes to. This is useful when you want to apply theme only to specific container. */
+  targetId?: string;
 }
 
 function sharedServerComponentRenderer(
-  { children, tag, forcedPages, ...props }: NextJsSSRThemeSwitcherProps,
+  { children, tag, forcedPages, targetId, ...props }: NextJsSSRThemeSwitcherProps,
   defaultTag: "div" | "html",
 ) {
   const Tag: keyof JSX.IntrinsicElements = tag || defaultTag;
-  const state = cookies().get("react18-themes")?.value;
+  const state = cookies().get(DEFAULT_ID)?.value;
 
   const path = headers().get("referer");
   const forcedPageProps = forcedPages?.find(forcedPage => path?.match(forcedPage.pathMatcher))?.props;
 
-  const themeState = state ? (JSON.parse(state) as ThemeStoreType) : undefined;
-  const isSystemDark = cookies().get("data-color-scheme-system")?.value === "dark";
-  const resolvedData = resolveTheme(isSystemDark, themeState, forcedPageProps);
+  const themeState = state ? parseState(state) : undefined;
+  const resolvedData = resolveTheme(themeState, forcedPageProps);
   const dataProps = getDataProps(resolvedData);
+  if (targetId) dataProps.className += " nth-scoped";
 
   return (
     // @ts-expect-error -> svg props and html element props conflict
-    <Tag id="react18-themes" {...dataProps} {...props} data-testid="nextjs-server-side-target">
+    <Tag id={targetId || DEFAULT_ID} {...dataProps} {...props} data-nth="next" data-testid="nextjs-server-side-target">
       {children}
     </Tag>
   );
