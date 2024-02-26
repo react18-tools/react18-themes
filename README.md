@@ -2,6 +2,10 @@
 
 [![test](https://github.com/react18-tools/react18-themes/actions/workflows/test.yml/badge.svg)](https://github.com/react18-tools/react18-themes/actions/workflows/test.yml) [![Maintainability](https://api.codeclimate.com/v1/badges/55a85ada9dd24603340f/maintainability)](https://codeclimate.com/github/react18-tools/react18-themes/maintainability) [![codecov](https://codecov.io/gh/react18-tools/react18-themes/graph/badge.svg)](https://codecov.io/gh/react18-tools/react18-themes) [![Version](https://img.shields.io/npm/v/react18-themes.svg?colorB=green)](https://www.npmjs.com/package/react18-themes) [![Downloads](https://img.jsdelivr.com/img.shields.io/npm/dt/react18-themes.svg)](https://www.npmjs.com/package/react18-themes) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/react18-themes) [![Get help](codementor.svg)](https://www.codementor.io/@mayank1513?refer=badge) [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/from-referrer/)
 
+> We are launching version 3.0 with minor API changes and major performance improvement and fixes.
+> We have tried our best to ensure minimum changes to existing APIs.
+> For most users we recommend using [nthul](https://github.com/react18-tools/nextjs-themes-ultralight) package.
+
 🤟 👉 [Unleash the Power of React Server Components](https://medium.com/javascript-in-plain-english/unleash-the-power-of-react-server-components-eb3fe7201231)
 
 This project is inspired by `next-themes`. `next-themes` is an awesome package, however, it requires wrapping everything in a client side provider. And thus, it takes away all the benefits of Server Components.
@@ -65,7 +69,7 @@ $ npm install react18-themes-lite
 $ yarn add react18-themes-lite
 ```
 
-> You need Zustand as a peer-dependency
+> You need r18gs as a peer-dependency
 
 ## Usage
 
@@ -79,12 +83,12 @@ Adding dark mode support takes 2 lines of code:
 import { ThemeSwitcher } from "react18-themes";
 
 function MyApp({ Component, pageProps }) {
-	return (
-		<>
-			<ThemeSwitcher forcedTheme={Component.theme} />
-			<Component {...pageProps} />
-		</>
-	);
+  return (
+    <>
+      <ThemeSwitcher forcedTheme={Component.theme} />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp;
@@ -109,17 +113,17 @@ import { ThemeSwitcher } from "react18-themes";
 import { NextJsSSGThemeSwitcher } from "react18-themes/server/nextjs";
 
 export default function Layout({ children }) {
-	return (
-		<html lang="en">
-			<head />
-			<body>
-				/** use NextJsSSGThemeSwitcher as first element inside body */
-				<NextJsSSGThemeSwitcher />
-				<ThemeSwitcher />
-				{children}
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <head />
+      <body>
+        /** use NextJsSSGThemeSwitcher as first element inside body */
+        <NextJsSSGThemeSwitcher />
+        <ThemeSwitcher />
+        {children}
+      </body>
+    </html>
+  );
 }
 ```
 
@@ -137,15 +141,15 @@ import { ThemeSwitcher } from "react18-themes";
 import { ServerSideWrapper } from "react18-themes/server/nextjs";
 
 export default function Layout({ children }) {
-	return (
-		<ServerSideWrapper tag="html" lang="en">
-			<head />
-			<body>
-				<ThemeSwitcher />
-				{children}
-			</body>
-		</ServerSideWrapper>
-	);
+  return (
+    <ServerSideWrapper tag="html" lang="en">
+      <head />
+      <body>
+        <ThemeSwitcher />
+        {children}
+      </body>
+    </ServerSideWrapper>
+  );
 }
 ```
 
@@ -157,20 +161,20 @@ That's it, your Next.js app fully supports dark mode, including System preferenc
 
 ```css
 :root {
-	/* Your default theme */
-	--background: white;
-	--foreground: black;
+  /* Your default theme */
+  --background: white;
+  --foreground: black;
 }
 
 [data-theme="dark"] {
-	--background: black;
-	--foreground: white;
+  --background: black;
+  --foreground: white;
 }
 
 // v2 onwards when using NextJsSSGThemeSwitcher, we need to use CSS Combinators
 [data-theme="dark"] ~ * {
-	--background: black;
-	--foreground: white;
+  --background: black;
+  --foreground: white;
 }
 ```
 
@@ -182,18 +186,15 @@ In case your components need to know the current theme and be able to change it.
 import { useTheme } from "react18-themes";
 
 const ThemeChanger = () => {
-	/* you can also improve performance by using selectors
-	 * const [theme, setTheme] = useTheme(state => [state.theme, state.setTheme]);
-	 */
-	const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
-	return (
-		<div>
-			The current theme is: {theme}
-			<button onClick={() => setTheme("light")}>Light Mode</button>
-			<button onClick={() => setTheme("dark")}>Dark Mode</button>
-		</div>
-	);
+  return (
+    <div>
+      The current theme is: {theme}
+      <button onClick={() => setTheme("light")}>Light Mode</button>
+      <button onClick={() => setTheme("dark")}>Dark Mode</button>
+    </div>
+  );
 };
 ```
 
@@ -205,12 +206,12 @@ const ThemeChanger = () => {
 import { ForceTheme } from "react18-themes";
 
 function MyPage() {
-	return (
-		<>
-			<ForceTheme theme={"my-theme"} />
-			...
-		</>
-	);
+  return (
+    <>
+      <ForceTheme theme={"my-theme"} />
+      ...
+    </>
+  );
 }
 
 export default MyPage;
@@ -222,7 +223,7 @@ For pages router, you have 2 options. One is the same as the app router and the 
 
 ```javascript
 function MyPage() {
-	return <>...</>;
+  return <>...</>;
 }
 
 MyPage.theme = "my-theme";

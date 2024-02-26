@@ -1,10 +1,10 @@
 "use client";
 import * as React from "react";
 import { useEffect } from "react";
-import { useTheme } from "../../store";
+import { useTheme } from "../../hooks";
 
 export interface ForceThemeProps {
-	theme: string;
+  theme: string;
 }
 
 /**
@@ -14,12 +14,12 @@ export interface ForceThemeProps {
  */
 
 export function ForceTheme(props: ForceThemeProps) {
-	const [setForcedTheme] = useTheme(state => [state.setForcedTheme]);
-	useEffect(() => {
-		setForcedTheme(props.theme);
-		return () => {
-			setForcedTheme(undefined);
-		};
-	}, [props.theme, setForcedTheme]);
-	return null;
+  const { setForcedTheme } = useTheme();
+  useEffect(() => {
+    setForcedTheme(props.theme);
+    return () => {
+      setForcedTheme(undefined);
+    };
+  }, [props.theme, setForcedTheme]);
+  return null;
 }

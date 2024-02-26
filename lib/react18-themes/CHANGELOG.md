@@ -1,5 +1,17 @@
 # react18-themes
 
+## 3.0.0
+
+### Major Changes
+
+- "Replaced Zustand with r18gs. Added more functionality and perfomance improvements. Minor changes to existing APIs."
+
+  better support for tree-shaking
+  reduced package size
+  improved performance
+  Ability to create localized themes
+  Create cookies only if ServerTarget is used.
+
 ## 2.3.1
 
 ### Patch Changes

@@ -5,19 +5,19 @@ import { json } from "@remix-run/node";
 import { RemixServerTarget } from "./remix-server-target";
 
 const RemixStub = createRemixStub([
-	{
-		path: "/",
-		Component: RemixServerTarget,
-		loader() {
-			return json({ dataProps: { "data-theme": "dark", "data-color-scheme": "dark" } });
-		},
-	},
+  {
+    path: "/",
+    Component: RemixServerTarget,
+    loader() {
+      return json({ dataProps: { "data-theme": "dark", "data-color-scheme": "dark" } });
+    },
+  },
 ]);
 
 describe.concurrent("remix-server-target", () => {
-	afterEach(cleanup);
+  afterEach(cleanup);
 
-	test("", ({ expect }) => {
-		render(<RemixStub />);
-	});
+  test("", ({ expect }) => {
+    render(<RemixStub />);
+  });
 });

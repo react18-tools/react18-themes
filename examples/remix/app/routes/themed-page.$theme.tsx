@@ -4,15 +4,15 @@ import { ForceTheme } from "react18-themes";
 import { ForcedPageLayout } from "shared-ui";
 
 export async function loader({ params }: LoaderFunctionArgs) {
-	return params.theme;
+  return params.theme;
 }
 
 export default function PageWithForcedTheme(): JSX.Element {
-	const theme = useLoaderData();
-	return (
-		<ForcedPageLayout LinkElement={Link} scope="forcedTheme">
-			<ForceTheme theme={theme} />
-			<p>Theme is forced to {theme}. Try changing theme or colorScheme and verify!</p>
-		</ForcedPageLayout>
-	);
+  const theme = useLoaderData();
+  return (
+    <ForcedPageLayout LinkElement={Link} scope="forcedTheme">
+      <ForceTheme theme={theme} />
+      <p>Theme is forced to {theme}. Try changing theme or colorScheme and verify!</p>
+    </ForcedPageLayout>
+  );
 }

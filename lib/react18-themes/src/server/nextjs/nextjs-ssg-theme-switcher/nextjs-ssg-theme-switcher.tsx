@@ -1,40 +1,43 @@
 import * as React from "react";
 import type { HTMLProps, ReactNode } from "react";
 import { cookies, headers } from "next/headers";
-import type { ThemeStoreType } from "../../../store";
-import { getDataProps, resolveTheme } from "../../../utils";
-import type { ThemeSwitcherProps, UpdateProps } from "../../../client";
+import { DEFAULT_ID } from "../../../constants";
+import { getDataProps, parseState, resolveTheme } from "../../../utils";
+import type { ThemeSwitcherProps } from "../../../client";
 
 export type ForcedPage = { pathMatcher: RegExp | string; props: ThemeSwitcherProps };
 
 export interface NextJsSSRThemeSwitcherProps extends HTMLProps<HTMLElement> {
-	children?: ReactNode;
-	/** @defaultValue 'div' */
-	tag?: keyof JSX.IntrinsicElements;
-	forcedPages?: ForcedPage[];
+  children?: ReactNode;
+  /** @defaultValue 'div' */
+  tag?: keyof JSX.IntrinsicElements;
+  forcedPages?: ForcedPage[];
+  /** id of target element to apply classes to. This is useful when you want to apply theme only to specific container. */
+  targetId?: string;
 }
 
 function sharedServerComponentRenderer(
-	{ children, tag, forcedPages, ...props }: NextJsSSRThemeSwitcherProps,
-	defaultTag: "div" | "html",
+  { children, tag, forcedPages, targetId, ...props }: NextJsSSRThemeSwitcherProps,
+  defaultTag: "div" | "html",
 ) {
-	const Tag: keyof JSX.IntrinsicElements = tag || defaultTag;
-	const state = cookies().get("react18-themes")?.value;
+  const Tag: keyof JSX.IntrinsicElements = tag || defaultTag;
+  const key = targetId ? `#${targetId}` : DEFAULT_ID;
+  const state = cookies().get(key)?.value;
 
-	const path = headers().get("referer");
-	const forcedPageProps = forcedPages?.find(forcedPage => path?.match(forcedPage.pathMatcher))?.props;
+  const path = headers().get("referer");
+  const forcedPageProps = forcedPages?.find(forcedPage => path?.match(forcedPage.pathMatcher))?.props;
 
-	const themeState = state ? (JSON.parse(state) as ThemeStoreType) : undefined;
-	const isSystemDark = cookies().get("data-color-scheme-system")?.value === "dark";
-	const resolvedData = resolveTheme(isSystemDark, themeState, forcedPageProps);
-	const dataProps = getDataProps(resolvedData);
+  const themeState = state ? parseState(state) : undefined;
+  const resolvedData = resolveTheme(themeState, forcedPageProps);
+  const dataProps = getDataProps(resolvedData);
+  if (targetId) dataProps.className += " nth-scoped";
 
-	return (
-		// @ts-expect-error -> svg props and html element props conflict
-		<Tag id="react18-themes" {...dataProps} {...props} data-testid="nextjs-server-side-target">
-			{children}
-		</Tag>
-	);
+  return (
+    // @ts-expect-error -> svg props and html element props conflict
+    <Tag id={targetId || DEFAULT_ID} {...dataProps} {...props} data-nth="next" data-testid="nextjs-server-side-target">
+      {children}
+    </Tag>
+  );
 }
 
 /**
@@ -44,15 +47,15 @@ function sharedServerComponentRenderer(
  * ```
  */
 export function NextJsSSGThemeSwitcher(props: NextJsSSRThemeSwitcherProps) {
-	return sharedServerComponentRenderer(props, "div");
+  return sharedServerComponentRenderer(props, "div");
 }
 
 /** For naming consistancy, clarity, and minimizing API updates */
 export { NextJsSSGThemeSwitcher as NextJsServerTarget };
 
 export interface ServerSideWrapperProps extends NextJsSSRThemeSwitcherProps {
-	/** @defaultValue 'html' */
-	tag?: keyof JSX.IntrinsicElements;
+  /** @defaultValue 'html' */
+  tag?: keyof JSX.IntrinsicElements;
 }
 
 /**
@@ -68,5 +71,5 @@ export interface ServerSideWrapperProps extends NextJsSSRThemeSwitcherProps {
  * ```
  */
 export function ServerSideWrapper(props: ServerSideWrapperProps) {
-	return sharedServerComponentRenderer(props, "html");
+  return sharedServerComponentRenderer(props, "html");
 }

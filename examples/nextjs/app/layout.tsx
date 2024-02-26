@@ -6,22 +6,22 @@ import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 const forcedPages: ForcedPage[] = [
-	{ pathMatcher: /forced-color-scheme\/dark/, props: { forcedColorScheme: "dark" } },
-	{ pathMatcher: /forced-color-scheme\/light/, props: { forcedColorScheme: "light" } },
-	...[...darkThemes, ...lightThemes].map(
-		theme => ({ pathMatcher: new RegExp(`themed-page/${theme}`), props: { forcedTheme: theme } }) as ForcedPage,
-	),
+  { pathMatcher: /forced-color-scheme\/dark/, props: { forcedColorScheme: "dark" } },
+  { pathMatcher: /forced-color-scheme\/light/, props: { forcedColorScheme: "light" } },
+  ...[...darkThemes, ...lightThemes].map(
+    theme => ({ pathMatcher: new RegExp(`themed-page/${theme}`), props: { forcedTheme: theme } }) as ForcedPage,
+  ),
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
-	return (
-		<html lang="en">
-			<body>
-				<NextJsSSGThemeSwitcher forcedPages={forcedPages} />
-				<SharedRootLayout LinkElement={Link} className={inter.className}>
-					{children}
-				</SharedRootLayout>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en">
+      <body>
+        <NextJsSSGThemeSwitcher forcedPages={forcedPages} />
+        <SharedRootLayout LinkElement={Link} className={inter.className}>
+          {children}
+        </SharedRootLayout>
+      </body>
+    </html>
+  );
 }
