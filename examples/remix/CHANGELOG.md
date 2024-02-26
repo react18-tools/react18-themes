@@ -5,6 +5,14 @@
 ### Patch Changes
 
 - Updated dependencies
+  - react18-themes@3.0.0
+  - shared-ui@1.0.1
+
+## null
+
+### Patch Changes
+
+- Updated dependencies
   - react18-themes@2.3.1
   - shared-ui@1.0.1
 
