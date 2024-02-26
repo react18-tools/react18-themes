@@ -1,5 +1,7 @@
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, test } from "vitest";
+import { afterEach, beforeEach, describe, test } from "vitest";
+import { DEFAULT_ID } from "../../../constants";
+import { encodeState } from "../../../utils";
 import { NextJsSSGThemeSwitcher, ServerSideWrapper } from ".";
 
 describe("nextjs-server-side-target", () => {
@@ -7,12 +9,13 @@ describe("nextjs-server-side-target", () => {
 
   beforeEach(() => {
     globalThis.cookies = {
-      "react18-themes": {
-        value: JSON.stringify({
+      [DEFAULT_ID]: {
+        value: encodeState({
           theme: "yellow",
           darkTheme: "dark-blue",
           lightTheme: "light-yellow",
           colorSchemePref: "dark",
+          systemColorScheme: "dark",
         }),
       },
       "data-color-scheme-system": { value: "dark" },
