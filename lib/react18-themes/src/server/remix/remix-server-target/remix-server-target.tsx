@@ -1,8 +1,8 @@
 import * as React from "react";
 import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { ColorSchemeType, ThemeStoreType } from "../../../constants";
-import { getDataProps, resolveTheme } from "../../../utils";
+import { DEFAULT_ID, type ColorSchemeType, type ThemeStoreType } from "../../../constants";
+import { getDataProps, parseState, resolveTheme } from "../../../utils";
 
 interface ForcedPage {
   pathMatcher: RegExp | string;
@@ -23,9 +23,8 @@ interface RemixServerTargetProps extends React.HTMLProps<HTMLElement> {
 export function loader({ request }: LoaderFunctionArgs) {
   const cookieHeader = request.headers.get("Cookie");
   if (!cookieHeader) return json({});
-  const state = parseCookie(cookieHeader, "react18-themes");
-  const isSystemDark = parseCookie(cookieHeader, "data-color-scheme-system") === "dark";
-  const themeState = state ? (JSON.parse(state) as ThemeStoreType) : undefined;
+  const state = parseCookie(cookieHeader, DEFAULT_ID);
+  const themeState = state ? parseState(state) : undefined;
   const resolvedData = resolveTheme(themeState);
   const dataProps = getDataProps(resolvedData);
   return json(dataProps);
@@ -43,7 +42,7 @@ export function RemixServerTarget({ children, tag, forcedPages, ...props }: Remi
 
   return (
     // @ts-expect-error -> svg props and html element props conflict
-    <Tag id="react18-themes" {...dataProps} {...props} data-testid="remix-server-target">
+    <Tag id={DEFAULT_ID} {...dataProps} {...props} data-testid="remix-server-target">
       {children}
     </Tag>
   );

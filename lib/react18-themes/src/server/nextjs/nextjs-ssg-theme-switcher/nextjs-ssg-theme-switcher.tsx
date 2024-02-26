@@ -21,7 +21,8 @@ function sharedServerComponentRenderer(
   defaultTag: "div" | "html",
 ) {
   const Tag: keyof JSX.IntrinsicElements = tag || defaultTag;
-  const state = cookies().get(DEFAULT_ID)?.value;
+  const key = targetId ? `#${targetId}` : DEFAULT_ID;
+  const state = cookies().get(key)?.value;
 
   const path = headers().get("referer");
   const forcedPageProps = forcedPages?.find(forcedPage => path?.match(forcedPage.pathMatcher))?.props;
