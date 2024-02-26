@@ -1,20 +1,14 @@
 import * as React from "react";
 import { useEffect } from "react";
-import type { ColorSchemeType } from "../../store";
-import { useTheme } from "../../store";
+import type { ColorSchemeType } from "../../constants";
+import { useTheme } from "../../hooks";
 import { resolveTheme } from "../../utils";
-import { StorageType } from "persist-and-sync";
 
 export interface ThemeSwitcherProps {
   forcedTheme?: string;
   forcedColorScheme?: ColorSchemeType;
   targetSelector?: string;
   themeTransition?: string;
-  /**
-   * defaultValue `"localStorage"`
-   * set storage to `cookies` (recommended when using server components) or `sessionsStorage` when using only client side or when you must avoid using cookies
-   */
-  storage?: StorageType;
 }
 
 export interface DataProps {

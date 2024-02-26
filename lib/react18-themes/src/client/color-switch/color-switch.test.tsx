@@ -1,5 +1,5 @@
 import { act, cleanup, fireEvent, render, renderHook, screen } from "@testing-library/react";
-import { useTheme } from "../../store";
+import { useTheme } from "../../hooks";
 import { ColorSwitch } from "./color-switch";
 
 describe("color-switch", () => {

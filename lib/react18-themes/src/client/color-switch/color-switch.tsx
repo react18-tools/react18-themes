@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useTheme } from "../../store";
+import { useTheme } from "../../hooks";
 
 export interface ColorSwitchProps {
   /** Diameter of the color color switch */
@@ -20,7 +20,7 @@ export interface ColorSwitchProps {
  * ```
  */
 export function ColorSwitch({ size = 25 }: ColorSwitchProps) {
-  const [colorSchemePref, setColorSchemePref] = useTheme(state => [state.colorSchemePref, state.setColorSchemePref]);
+  const { colorSchemePref, setColorSchemePref } = useTheme();
   const toggleColorScheme = () => {
     switch (colorSchemePref) {
       case "":

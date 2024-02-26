@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { HTMLProps, ReactNode } from "react";
 import { cookies, headers } from "next/headers";
-import type { ThemeStoreType } from "../../../store";
+import type { ThemeStoreType } from "../../../constants";
 import { getDataProps, resolveTheme } from "../../../utils";
 import type { ThemeSwitcherProps, UpdateProps } from "../../../client";
 

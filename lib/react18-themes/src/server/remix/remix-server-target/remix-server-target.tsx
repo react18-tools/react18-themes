@@ -1,7 +1,7 @@
 import * as React from "react";
 import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import type { ColorSchemeType, ThemeStoreType } from "../../../store";
+import type { ColorSchemeType, ThemeStoreType } from "../../../constants";
 import { getDataProps, resolveTheme } from "../../../utils";
 
 interface ForcedPage {
@@ -26,7 +26,7 @@ export function loader({ request }: LoaderFunctionArgs) {
   const state = parseCookie(cookieHeader, "react18-themes");
   const isSystemDark = parseCookie(cookieHeader, "data-color-scheme-system") === "dark";
   const themeState = state ? (JSON.parse(state) as ThemeStoreType) : undefined;
-  const resolvedData = resolveTheme(isSystemDark, themeState);
+  const resolvedData = resolveTheme(themeState);
   const dataProps = getDataProps(resolvedData);
   return json(dataProps);
 }
