@@ -3,6 +3,7 @@ import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { DEFAULT_ID, type ColorSchemeType, type ThemeStoreType } from "../../../constants";
 import { getDataProps, parseState, resolveTheme } from "../../../utils";
+import { UpdateProps } from "../../../client";
 
 interface ForcedPage {
   pathMatcher: RegExp | string;
@@ -15,6 +16,8 @@ interface RemixServerTargetProps extends React.HTMLProps<HTMLElement> {
   tag?: keyof JSX.IntrinsicElements;
   /** not implemented yet */
   forcedPages?: ForcedPage[];
+  /** provide styles object imported from CSS/SCSS modules, if you are using CSS/SCSS modules. */
+  styles?: Record<string, string>;
 }
 
 /**
@@ -26,8 +29,7 @@ export function loader({ request }: LoaderFunctionArgs) {
   const state = parseCookie(cookieHeader, DEFAULT_ID);
   const themeState = state ? parseState(state) : undefined;
   const resolvedData = resolveTheme(themeState);
-  const dataProps = getDataProps(resolvedData);
-  return json(dataProps);
+  return json(resolvedData);
 }
 
 /**
@@ -35,10 +37,11 @@ export function loader({ request }: LoaderFunctionArgs) {
  * @example
  * <RemixServerTarget />
  */
-export function RemixServerTarget({ children, tag, forcedPages, ...props }: RemixServerTargetProps) {
+export function RemixServerTarget({ children, tag, forcedPages, styles, ...props }: RemixServerTargetProps) {
   const Tag: keyof JSX.IntrinsicElements = tag || "div";
 
-  const dataProps = useLoaderData<typeof loader>();
+  const resolvedData = useLoaderData<typeof loader>() as UpdateProps;
+  const dataProps = getDataProps(resolvedData, styles);
 
   return (
     // @ts-expect-error -> svg props and html element props conflict

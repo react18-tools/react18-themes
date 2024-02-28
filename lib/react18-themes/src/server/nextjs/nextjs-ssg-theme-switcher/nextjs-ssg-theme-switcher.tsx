@@ -14,10 +14,12 @@ export interface NextJsSSRThemeSwitcherProps extends HTMLProps<HTMLElement> {
   forcedPages?: ForcedPage[];
   /** id of target element to apply classes to. This is useful when you want to apply theme only to specific container. */
   targetId?: string;
+  /** provide styles object imported from CSS/SCSS modules, if you are using CSS/SCSS modules. */
+  styles?: Record<string, string>;
 }
 
 function sharedServerComponentRenderer(
-  { children, tag, forcedPages, targetId, ...props }: NextJsSSRThemeSwitcherProps,
+  { children, tag, forcedPages, targetId, styles, ...props }: NextJsSSRThemeSwitcherProps,
   defaultTag: "div" | "html",
 ) {
   const Tag: keyof JSX.IntrinsicElements = tag || defaultTag;
@@ -29,7 +31,7 @@ function sharedServerComponentRenderer(
 
   const themeState = state ? parseState(state) : undefined;
   const resolvedData = resolveTheme(themeState, forcedPageProps);
-  const dataProps = getDataProps(resolvedData);
+  const dataProps = getDataProps(resolvedData, styles);
   if (targetId) dataProps.className += " nth-scoped";
 
   return (

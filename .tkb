@@ -1,0 +1,29 @@
+{
+  "scope": "Workspace",
+  "tasks": {
+    "task-EX1RcYGqdrQ7qjJhKjiPE": {
+      "id": "task-EX1RcYGqdrQ7qjJhKjiPE",
+      "description": "Add css modules support",
+      "columnId": "column-todo"
+    }
+  },
+  "columns": [
+    {
+      "id": "column-todo",
+      "title": "To do",
+      "tasksIds": [
+        "task-EX1RcYGqdrQ7qjJhKjiPE"
+      ]
+    },
+    {
+      "id": "column-doing",
+      "title": "Doing",
+      "tasksIds": []
+    },
+    {
+      "id": "column-done",
+      "title": "Done",
+      "tasksIds": []
+    }
+  ]
+}
