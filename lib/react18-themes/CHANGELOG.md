@@ -1,5 +1,11 @@
 # react18-themes
 
+## 3.1.0
+
+### Minor Changes
+
+- Add support fot CSS modules.
+
 ## 3.0.0
 
 ### Major Changes
