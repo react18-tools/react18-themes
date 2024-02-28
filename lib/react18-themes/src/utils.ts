@@ -31,24 +31,27 @@ export function resolveTheme(state?: ThemeStoreType, props?: ThemeSwitcherProps)
   return { resolvedTheme, resolvedColorScheme, resolvedColorSchemePref, th };
 }
 
-export function getDataProps(resolvedData?: UpdateProps) {
+export function getDataProps(resolvedData?: UpdateProps, styles?: Record<string, string>) {
   const dataProps: DataProps = { className: "" };
+  let classNames = [];
   if (resolvedData?.resolvedColorScheme !== undefined) {
     dataProps["data-color-scheme"] = resolvedData.resolvedColorScheme;
-    dataProps.className = resolvedData.resolvedColorScheme;
+    classNames.push(resolvedData.resolvedColorScheme);
   }
   if (resolvedData?.resolvedTheme !== undefined) {
     dataProps["data-theme"] = resolvedData.resolvedTheme;
-    dataProps.className += `theme-${resolvedData.resolvedTheme}`;
+    classNames.push(`theme-${resolvedData.resolvedTheme}`);
   }
   if (resolvedData?.th) {
     dataProps["data-th"] = resolvedData.th;
-    dataProps.className += ` th-${resolvedData.th}`;
+    classNames.push(`th-${resolvedData.th}`);
   }
   if (resolvedData?.resolvedColorSchemePref !== undefined) {
     dataProps["data-csp"] = resolvedData.resolvedColorSchemePref;
-    dataProps.className += ` csp-${resolvedData.resolvedColorSchemePref}`;
+    classNames.push(`csp-${resolvedData.resolvedColorSchemePref}`);
   }
+  if (styles) classNames = classNames.map(cls => styles[cls] ?? cls);
+  dataProps.className = classNames.join(" ");
   return dataProps;
 }
 
