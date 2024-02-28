@@ -21,8 +21,8 @@ function createSetterWithFirstTimeDelay(setThemeState: SetStateAction<ThemeStore
   };
 }
 
-export function useTheme(targetId?: string) {
-  const [themeState, setThemeState] = useRGS<ThemeStoreType>(targetId ?? DEFAULT_ID, initialState);
+export function useTheme(targetSelector?: string) {
+  const [themeState, setThemeState] = useRGS<ThemeStoreType>(targetSelector ?? DEFAULT_ID, initialState);
   const { resolvedColorScheme, resolvedTheme } = resolveTheme(themeState);
   const setterWithFirstTimeDelay = useMemo(() => createSetterWithFirstTimeDelay(setThemeState), [setThemeState]);
   return {

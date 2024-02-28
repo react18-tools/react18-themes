@@ -11,6 +11,8 @@ export interface ThemeSwitcherProps {
   forcedColorScheme?: ColorSchemeType;
   targetSelector?: string;
   themeTransition?: string;
+  /** provide styles object imported from CSS/SCSS modules, if you are using CSS/SCSS modules. */
+  styles?: Record<string, string>;
 }
 
 function useMediaQuery(setThemeState: SetStateAction<ThemeStoreType>) {
@@ -64,13 +66,17 @@ export interface UpdateProps {
 
 function updateDOM(
   { resolvedTheme, resolvedColorScheme, resolvedColorSchemePref, th }: UpdateProps,
-  targetSelector?: string,
+  props: ThemeSwitcherProps,
 ) {
+  const { targetSelector, styles } = props;
   const target = document.querySelector(targetSelector || `#${DEFAULT_ID}`);
+
+  let classNames = [resolvedColorScheme, `theme-${resolvedTheme}`, `th-${th}`, `csp-${resolvedColorSchemePref}`];
+  if (styles) classNames = classNames.map(cls => styles[cls] ?? cls);
   /** don't apply theme to documentElement for localized targets */
   [target, targetSelector && target ? null : document.documentElement].forEach(t => {
     /** ensuring that class 'dark' is always present when dark color scheme is applied to support Tailwind  */
-    if (t) t.className = `${resolvedColorScheme} theme-${resolvedTheme} th-${th} csp-${resolvedColorSchemePref}`;
+    if (t) t.className = classNames.join(" ");
     t?.setAttribute("data-th", th);
     t?.setAttribute("data-theme", resolvedTheme);
     t?.setAttribute("data-color-scheme", resolvedColorScheme);
@@ -115,7 +121,7 @@ export function useThemeSwitcher(props: ThemeSwitcherProps) {
     const restoreTransitions = disableAnimation(props.themeTransition);
 
     const resolvedData = resolveTheme(themeState, props);
-    const shouldCreateCookie = updateDOM(resolvedData, props.targetSelector);
+    const shouldCreateCookie = updateDOM(resolvedData, props);
     if (tInit < Date.now() - 300) {
       const stateStr = encodeState(themeState);
       const key = props.targetSelector || DEFAULT_ID;
