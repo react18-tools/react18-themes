@@ -13,7 +13,7 @@
 		"@mayank1513/fork-me": "^2.0.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-router-dom": "^6.22.1",
+		"react-router-dom": "^6.22.2",
 		"react18-themes": "workspace:*",
 		"shared-ui": "workspace:*"
 	},
