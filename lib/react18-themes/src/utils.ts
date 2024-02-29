@@ -33,7 +33,7 @@ export function resolveTheme(state?: ThemeStoreType, props?: ThemeSwitcherProps)
 
 export function getDataProps(resolvedData?: UpdateProps, styles?: Record<string, string>) {
   const dataProps: DataProps = { className: "" };
-  let classNames = [];
+  let classNames: string[] = [];
   if (resolvedData?.resolvedColorScheme !== undefined) {
     dataProps["data-color-scheme"] = resolvedData.resolvedColorScheme;
     classNames.push(resolvedData.resolvedColorScheme);
