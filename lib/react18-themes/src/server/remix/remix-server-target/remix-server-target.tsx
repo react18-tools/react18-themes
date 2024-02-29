@@ -3,7 +3,7 @@ import { json, type LoaderFunctionArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { DEFAULT_ID, type ColorSchemeType, type ThemeStoreType } from "../../../constants";
 import { getDataProps, parseState, resolveTheme } from "../../../utils";
-import { UpdateProps } from "../../../client";
+import type { UpdateProps } from "../../../client";
 
 interface ForcedPage {
   pathMatcher: RegExp | string;
