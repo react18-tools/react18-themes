@@ -1,19 +1,35 @@
 {
   "private": true,
   "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "test": "turbo run test",
-    "doc": "turbo run doc",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,css,scss}\""
+    "build": "turbo build",
+    "clean": "turbo clean",
+    "dev": "turbo dev",
+    "doc": "node scripts/doc.js && typedoc",
+    "format": "prettier --write \"**/*.{ts,tsx,md,css,scss}\"",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "typecheck": "turbo typecheck",
+    "preinstall": "node scripts/update-pm.js"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.1",
-    "eslint": "^9.1.1",
-    "prettier": "^3.2.5",
-    "tsconfig": "workspace:*",
-    "turbo": "^1.13.2"
+    "@changesets/cli": "^2.27.5",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^20.14.8",
+    "enquirer": "^2.4.1",
+    "plop": "^4.0.1",
+    "prettier": "^3.3.2",
+    "turbo": "^2.0.4",
+    "typedoc": "^0.26.1",
+    "typedoc-plugin-extras": "^3.0.0",
+    "typedoc-plugin-inline-sources": "^1.0.2",
+    "typedoc-plugin-mdn-links": "^3.2.1",
+    "typedoc-plugin-missing-exports": "^3.0.0",
+    "typedoc-plugin-rename-defaults": "^0.7.1",
+    "typedoc-plugin-zod": "^1.2.0"
   },
-  "name": "react18-themes-turborepo"
+  "packageManager": "pnpm@9.4.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "name": "turborepo-template"
 }
