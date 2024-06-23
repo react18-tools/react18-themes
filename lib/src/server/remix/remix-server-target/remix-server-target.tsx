@@ -1,5 +1,6 @@
 import * as React from "react";
-import { DEFAULT_ID, type ColorSchemeType } from "../../../constants";
+import { DEFAULT_ID } from "../../../constants";
+import { ColorSchemeType } from "../../../types";
 
 /** @deprecated */
 interface ForcedPage {
