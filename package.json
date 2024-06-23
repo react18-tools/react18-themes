@@ -4,7 +4,7 @@
     "build": "turbo build",
     "clean": "turbo clean",
     "dev": "turbo dev",
-    "doc": "node scripts/doc.js && typedoc",
+    "doc": "typedoc",
     "format": "prettier --write \"**/*.{ts,tsx,md,css,scss}\"",
     "lint": "turbo lint",
     "test": "turbo test",
