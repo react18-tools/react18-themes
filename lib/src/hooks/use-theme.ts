@@ -1,43 +1,82 @@
-import type { SetStateAction } from "r18gs";
-import useRGS from "r18gs";
-import { useCallback, useMemo } from "react";
-import type { ColorSchemeType, ThemeStoreType } from "../constants";
-import { DEFAULT_ID, initialState } from "../constants";
-import { resolveTheme } from "../utils";
+import { useEffect } from "react";
+import { useForcedStore, useThemeStore } from "../store";
+import { ResolveFunc } from "../client/theme-switcher/no-fouc";
+import { ColorSchemeType, ResolvedColorSchemeType } from "../types";
+import { DARK, LIGHT, SYSTEM } from "../constants";
 
-const DELAY = 200; // ms - delay to allow reading from localStorage so that local storage does not override the new state
-// eslint-disable-next-line @typescript-eslint/ban-types -- REquired as funtion with different generic arguments
-const map: Record<string, Function | number | undefined> = {};
-function createSetterWithFirstTimeDelay(setThemeState: SetStateAction<ThemeStoreType>) {
-  return <T>(key: string) => {
-    if (map[key] === undefined) {
-      map[key] = 1;
-      return (arg: T) => setTimeout(() => setThemeState(state => ({ ...state, [key]: arg })), DELAY);
-    } else if (map[key] === 1) {
-      const fn = (arg: T) => setThemeState(state => ({ ...state, [key]: arg }));
-      map[key] = fn;
-    }
-    return map[key] as (arg: T) => void;
-  };
+const colorSchemes = [SYSTEM, DARK, LIGHT] as ColorSchemeType[];
+let resolveTheme: ResolveFunc;
+
+interface UseThemeYield {
+  theme: string;
+  darkTheme: string;
+  lightTheme: string;
+  colorSchemePref: ColorSchemeType;
+  systemColorScheme: ResolvedColorSchemeType;
+  resolvedColorScheme: ResolvedColorSchemeType;
+  resolvedTheme: string;
+  // actions
+  setTheme: (theme: string) => void;
+  setDarkTheme: (darkTheme: string) => void;
+  setLightTheme: (lightTheme: string) => void;
+  setThemeSet: (themeSet: { darkTheme: string; lightTheme: string }) => void;
+  setColorSchemePref: (colorSchemePref: ColorSchemeType) => void;
+  toggleColorScheme: (skipSystem?: boolean) => void;
+  setForcedTheme: (forcedTheme: string) => void;
+  setForcedColorScheme: (forcedColorScheme: ColorSchemeType) => void;
 }
 
-export function useTheme(targetSelector?: string) {
-  const [themeState, setThemeState] = useRGS<ThemeStoreType>(targetSelector ?? DEFAULT_ID, initialState);
-  const { resolvedColorScheme, resolvedTheme } = resolveTheme(themeState);
-  const setterWithFirstTimeDelay = useMemo(() => createSetterWithFirstTimeDelay(setThemeState), [setThemeState]);
-  return {
-    ...themeState,
-    resolvedColorScheme,
-    resolvedTheme,
-    setTheme: setterWithFirstTimeDelay<string>("theme"),
-    setDarkTheme: setterWithFirstTimeDelay<string>("darkTheme"),
-    setLightTheme: setterWithFirstTimeDelay<string>("lightTheme"),
-    setThemeSet: useCallback(
-      (themeSet: { darkTheme: string; lightTheme: string }) => setThemeState(state => ({ ...state, ...themeSet })),
-      [setThemeState],
-    ),
-    setColorSchemePref: setterWithFirstTimeDelay<ColorSchemeType>("colorSchemePref"),
-    setForcedTheme: setterWithFirstTimeDelay<string | undefined>("forcedTheme"),
-    setForcedColorScheme: setterWithFirstTimeDelay<ColorSchemeType | undefined>("forcedColorScheme"),
+/**
+ *
+ *
+ * @example
+ * ```tsx
+ * const [] = useTheme(options);
+ * ```
+ */
+
+export const useTheme = (targetSelector?: string): UseThemeYield => {
+  const [state, setState] = useThemeStore(targetSelector);
+  const [_, setForcedState] = useForcedStore(targetSelector);
+  useEffect(() => {
+    resolveTheme = window.r;
+  }, []);
+
+  /** helper */
+  const setter =
+    <T>(key: string) =>
+    (arg: T) =>
+      setState(state => ({ ...state, [key]: arg }));
+
+  const hookResult: UseThemeYield = {
+    theme: state.t,
+    darkTheme: state.d,
+    lightTheme: state.l,
+    colorSchemePref: state.c,
+    systemColorScheme: state.s,
+    resolvedColorScheme: state.c === SYSTEM || state.c === "" ? state.s : state.c,
+    resolvedTheme: state.t,
+    setTheme: setter<string>("t"),
+    setDarkTheme: setter<string>("d"),
+    setLightTheme: setter<string>("l"),
+    setThemeSet: ({ darkTheme: d, lightTheme: l }) => setState(state => ({ ...state, d, l })),
+    setColorSchemePref: setter<ColorSchemeType>("c"),
+    toggleColorScheme(skipSystem) {
+      let index = colorSchemes.indexOf(state.c);
+      const len = colorSchemes.length;
+      if (index === -1 || (skipSystem && index === len - 1)) index = 0;
+      setter("c")(colorSchemes[(index + 1) % len]);
+    },
+    setForcedColorScheme: forcedColorScheme =>
+      setForcedState(state => ({ ...state, fc: forcedColorScheme })),
+    setForcedTheme: forcedTheme => setForcedState(state => ({ ...state, f: forcedTheme })),
   };
-}
+
+  if (resolveTheme) {
+    const resolvedValues = resolveTheme(state);
+    hookResult.resolvedColorScheme = resolvedValues[0];
+    hookResult.resolvedTheme = resolvedValues[1];
+  }
+
+  return hookResult;
+};
