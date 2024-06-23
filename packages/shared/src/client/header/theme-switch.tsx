@@ -1,15 +1,37 @@
 "use client";
 
-import { useMode } from "nextjs-darkmode/hooks";
-import { Switch } from "nextjs-darkmode/switch";
+import { useTheme } from "nextjs-themes/hooks";
+import { ColorSwitch } from "nextjs-themes/color-switch";
 import styles from "./header.module.scss";
+import { KeyboardEvent, useCallback } from "react";
 
-/** This is a wrapper around `nextjs-darkmode's ColorSwitch component to improve mobile view. */
-export default function ThemeSwitch(): JSX.Element {
-  const { mode } = useMode();
+/** This is a wrapper around `nextjs-themes's ColorSwitch component to improve mobile view. */
+
+export function ThemeSwitch(): JSX.Element {
+  const { colorSchemePref, toggleColorScheme } = useTheme();
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLDivElement>) => {
+      if (event.key === "Enter") {
+        toggleColorScheme();
+      }
+    },
+    [toggleColorScheme],
+  );
+
+  const handleClick = useCallback(() => toggleColorScheme(), [toggleColorScheme]);
+
   return (
-    <Switch className={styles.themeswitch}>
-      <span className="mb">{mode}</span>
-    </Switch>
+    <div
+      className={styles.themeswitch}
+      onClick={handleClick}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="button">
+      <ColorSwitch />
+      <span className="mb" suppressHydrationWarning>
+        {colorSchemePref}
+      </span>
+    </div>
   );
 }

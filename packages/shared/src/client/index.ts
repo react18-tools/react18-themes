@@ -11,3 +11,5 @@ export * from "./demo";
 export * from "./header";
 export * from "./global-loader";
 export * from "./drawer-button";
+export * from "./theme-controller";
+export * from "./page-navigator";
