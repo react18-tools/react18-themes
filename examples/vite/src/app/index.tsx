@@ -1,27 +1,23 @@
-import React, { useCallback } from "react";
+import React from "react";
 import "./styles.css";
-import { Bars1, Bars2, Dots1, Dots2 } from "react18-loaders/dist/server";
-import { LoaderContainer, useLoader } from "react18-loaders";
-import { LandingPage, Layout } from "@repo/shared/dist/server";
-import { Core } from "nextjs-darkmode";
-import { Demo, Header } from "@repo/shared";
+import { Cards, LandingPage } from "@repo/shared/dist/server";
+import { ColorSwitch } from "nextjs-themes";
+import { Header, PageNavigatorCard, ThemeController } from "@repo/shared";
+import { Link } from "react-router-dom";
 
 /** Vite App */
 function App(): JSX.Element {
-  const { setLoading } = useLoader();
-  const handleClick = useCallback(() => setLoading(true), []);
   return (
-    <Layout>
-      <Core t="background .5s" />
-      <Header />
+    <>
+      <Header linkComponent={Link} />
       <LandingPage title="Vite Example">
-        <Demo />
+        <ColorSwitch className="center" />
+        <ThemeController />
+        <Cards>
+          <PageNavigatorCard LinkElement={Link} />{" "}
+        </Cards>
       </LandingPage>
-      <button onClick={handleClick}>Show loader</button>
-      <LoaderContainer>
-        <Bars1 color="red" width={50} />
-      </LoaderContainer>
-    </Layout>
+    </>
   );
 }
 
