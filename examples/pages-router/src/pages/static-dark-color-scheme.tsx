@@ -1,5 +1,5 @@
 import { Editor } from "@repo/shared";
-import { ColorSchemeType } from "nextjs-themes";
+import { ColorSchemeType } from "react18-themes";
 
 const code = `function MyPage() {
     return (<>...</>)

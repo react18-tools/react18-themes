@@ -1,4 +1,4 @@
 module.exports = {
   reactStrictMode: true,
-  transpilePackages: ["nextjs-themes"],
+  transpilePackages: ["react18-themes"],
 };

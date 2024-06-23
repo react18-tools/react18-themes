@@ -1,6 +1,6 @@
 "use client";
-import type { ColorSchemeType } from "nextjs-themes";
-import { useTheme } from "nextjs-themes";
+import type { ColorSchemeType } from "react18-themes";
+import { useTheme } from "react18-themes";
 import { useEffect, useMemo } from "react";
 import type { ChangeEvent } from "react";
 import { Select } from "../select";

@@ -1,6 +1,6 @@
 "use client";
-import type { ColorSchemeType } from "nextjs-themes";
-import { useTheme } from "nextjs-themes";
+import type { ColorSchemeType } from "react18-themes";
+import { useTheme } from "react18-themes";
 import type { ChangeEvent } from "react";
 import { Select } from "../select";
 import styles from "./theme-controller.module.scss";

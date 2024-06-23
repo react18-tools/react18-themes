@@ -6,7 +6,7 @@ import ForcedColorSchemePage from "./app/forced-color-scheme-page";
 import ThemedPage from "./app/themed-page";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { Layout } from "@repo/shared/dist/server";
-import { ThemeSwitcher } from "nextjs-themes";
+import { ThemeSwitcher } from "react18-themes";
 
 const routes = [
   {

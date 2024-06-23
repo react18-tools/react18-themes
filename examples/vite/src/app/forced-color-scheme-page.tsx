@@ -1,5 +1,5 @@
 import React from "react";
-import { ColorSchemeType, ForceColorScheme } from "nextjs-themes";
+import { ColorSchemeType, ForceColorScheme } from "react18-themes";
 import { Link, useParams } from "react-router-dom";
 import { Header } from "@repo/shared";
 

@@ -4,18 +4,18 @@ import { ReactNode } from "react";
 
 export const cards = [
   {
-    href: "https://react18-tools.github.io/nextjs-themes/",
+    href: "https://react18-tools.github.io/react18-themes/",
     title: "Docs",
     description: "Check out the official documentation for more information.",
   },
   {
-    href: "https://github.com/react18-tools/nextjs-themes/tree/main/examples",
+    href: "https://github.com/react18-tools/react18-themes/tree/main/examples",
     title: "More Examples",
     description:
       "Check out more examples on the official GitHub Repo. Feel free to suggest additional examples in the discussions section.",
   },
   {
-    href: "https://github.com/react18-tools/nextjs-themes",
+    href: "https://github.com/react18-tools/react18-themes",
     title: "Star this repo",
     description:
       "Star this repo for your new library! This also motivates us and helps us understand that community is interested in this work.",

@@ -1,4 +1,4 @@
-import { ForceTheme } from "nextjs-themes";
+import { ForceTheme } from "react18-themes";
 
 interface PageProps {
   params: { theme: string };

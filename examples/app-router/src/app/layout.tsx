@@ -1,13 +1,13 @@
 import "./styles.css";
 import "react18-loaders/dist/index.css";
-import { ThemeSwitcher } from "nextjs-themes";
+import { ThemeSwitcher } from "react18-themes";
 import { Layout } from "@repo/shared/dist/server";
 import { GlobalLoader, Header } from "@repo/shared";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import { Cards, LandingPage } from "@repo/shared/dist/server";
 import { PageNavigatorCard, ThemeController } from "@repo/shared";
-import { ColorSwitch } from "nextjs-themes";
+import { ColorSwitch } from "react18-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 

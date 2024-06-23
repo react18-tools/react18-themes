@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AppProps } from "next/app";
-import { ColorSchemeType, ThemeSwitcher } from "nextjs-themes";
+import { ColorSchemeType, ThemeSwitcher } from "react18-themes";
 import { CardProps, Layout } from "@repo/shared/dist/server";
 import "../styles/global.css";
 import { Inter } from "next/font/google";
@@ -8,7 +8,7 @@ import { Header } from "@repo/shared";
 import Link from "next/link";
 import { Card, Cards, LandingPage } from "@repo/shared/dist/server";
 import { ThemeController, PageNavigatorCard } from "@repo/shared";
-import { ColorSwitch } from "nextjs-themes";
+import { ColorSwitch } from "react18-themes";
 
 const inter = Inter({ subsets: ["latin"] });
 
