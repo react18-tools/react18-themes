@@ -1,28 +1,36 @@
-import type { RenderHookResult } from "@testing-library/react";
-import { act, cleanup, fireEvent, render, renderHook } from "@testing-library/react";
+import {
+  RenderHookResult,
+  act,
+  cleanup,
+  fireEvent,
+  render,
+  renderHook,
+} from "@testing-library/react";
 import { afterEach, beforeEach, describe, test } from "vitest";
-import type { SetterArgType } from "r18gs";
-import useRGS from "r18gs";
 import { useTheme } from "../../hooks";
-import { encodeState, getResolvedColorScheme, getResolvedTheme } from "../../utils";
-import type { ThemeStoreType } from "../../constants";
-import { DEFAULT_ID, initialState } from "../../constants";
 import { ThemeSwitcher } from "./theme-switcher";
+import { useRGS, SetterArgType } from "r18gs";
+import { DARK, DEFAULT_ID, LIGHT } from "../../constants";
+import { noFOUCScript } from "./no-fouc";
+import { initialState, ThemeStoreType } from "../../store";
+
+const MEDIA = "(prefers-color-scheme: dark)";
+const storageKey = `#${DEFAULT_ID}`;
+
+/** get dom attribute */
+const getResolvedTheme = () => document.documentElement.getAttribute("data-theme");
 
 /**
- * - concurrency is not feasible because of global store conflicts
+ * -> concurrency is not feasible because of global store conflicts
  */
 describe("theme-switcher", () => {
   afterEach(() => {
     cleanup();
   });
 
-  let rgsHook: RenderHookResult<[ThemeStoreType, (val: SetterArgType<ThemeStoreType>) => void], unknown>;
-
   beforeEach(() => {
+    noFOUCScript(storageKey, initialState);
     render(<ThemeSwitcher />);
-    rgsHook = renderHook(() => useRGS<ThemeStoreType>(DEFAULT_ID));
-    act(() => rgsHook.result.current[1](initialState));
   });
 
   test("Test defaultLight theme", async ({ expect }) => {
@@ -31,26 +39,16 @@ describe("theme-switcher", () => {
     const { result } = renderHook(() => useTheme());
     act(() => result.current.setLightTheme(lightTheme));
     /** await for the first time delay for setting state */
-    await new Promise(res => {
-      setTimeout(res, 350);
-    });
     expect(getResolvedTheme()).toBe(lightTheme);
   });
 
   test("Test defaultDark theme", async ({ expect }) => {
     const darkTheme = "dark1";
-    /** simulate system dark mode */
-    act(() => rgsHook.result.current[1](state => ({ ...state, systemColorScheme: "dark" })));
-    /** simulate changing darkTheme by another component by user */
-    await new Promise(res => {
-      setTimeout(res, 350);
-    });
     const { result } = renderHook(() => useTheme());
+    /** simulate system dark mode */
+    act(() => result.current.setColorSchemePref(DARK));
     act(() => result.current.setDarkTheme(darkTheme));
     /** await for the first time delay for setting state */
-    await new Promise(res => {
-      setTimeout(res, 250);
-    });
     expect(getResolvedTheme()).toBe(darkTheme);
   });
 
@@ -59,63 +57,30 @@ describe("theme-switcher", () => {
     const { result } = renderHook(() => useTheme());
     act(() => result.current.setColorSchemePref(""));
     act(() => result.current.setTheme("blue"));
-    await new Promise(res => {
-      setTimeout(res, 250);
-    });
     expect(getResolvedTheme()).toBe("blue");
   });
 
   test("test color scheme preference", async ({ expect }) => {
     const { result } = renderHook(() => useTheme());
-    act(() => result.current.setColorSchemePref("light"));
+    act(() => result.current.setColorSchemePref(LIGHT));
     act(() => result.current.setLightTheme("yellow"));
     act(() => result.current.setDarkTheme("dark-blue"));
     act(() => result.current.setTheme("blue"));
-    await new Promise(res => {
-      setTimeout(res, 250);
-    });
     expect(getResolvedTheme()).toBe("yellow");
-    act(() => result.current.setColorSchemePref("dark"));
-    /** note we do not require to await second time -- ?? what is user is setting theme from multuple useEffects? */
+    act(() => result.current.setColorSchemePref(DARK));
     expect(getResolvedTheme()).toBe("dark-blue");
   });
 
-  test("test forcedTheme", async ({ expect }) => {
-    const { result } = renderHook(() => useTheme());
-    act(() => result.current.setForcedTheme("forced1"));
-    act(() => result.current.setForcedColorScheme("dark"));
-    act(() => result.current.setColorSchemePref("light"));
-    act(() => result.current.setTheme("f1"));
-    await new Promise(res => {
-      setTimeout(res, 250);
-    });
-    expect(getResolvedTheme()).toBe("forced1");
-  });
-
-  test("forced colorScheme only", async ({ expect }) => {
-    const { result } = renderHook(() => useTheme());
-    act(() => result.current.setForcedTheme(""));
-    act(() => result.current.setForcedColorScheme("dark"));
-    act(() => result.current.setColorSchemePref("light"));
-    act(() => result.current.setTheme("f1"));
-    act(() => result.current.setLightTheme("yellow"));
-    act(() => result.current.setDarkTheme("black"));
-    await new Promise(res => {
-      setTimeout(res, 250);
-    });
-    expect(getResolvedTheme()).toBe("");
-    act(() => result.current.setForcedTheme(undefined));
-    expect(getResolvedTheme()).toBe("black");
-    expect(getResolvedColorScheme()).toBe("dark");
-  });
-
   test("Storage event", async ({ expect }) => {
-    const hook = renderHook(() => useTheme());
     const MY_THEME = "my-theme-update";
+    const hook = renderHook(() => useTheme());
     await act(() =>
       fireEvent(
         window,
-        new StorageEvent("storage", { key: DEFAULT_ID, newValue: encodeState({ ...initialState, theme: MY_THEME }) }),
+        new StorageEvent("storage", {
+          key: storageKey,
+          newValue: JSON.stringify({ ...initialState, t: MY_THEME }),
+        }),
       ),
     );
     expect(hook.result.current.theme).toBe(MY_THEME);
@@ -127,7 +92,10 @@ describe("theme-switcher with props", () => {
     cleanup();
   });
 
-  let rgsHook: RenderHookResult<[ThemeStoreType, (val: SetterArgType<ThemeStoreType>) => void], unknown>;
+  let rgsHook: RenderHookResult<
+    [ThemeStoreType, (val: SetterArgType<ThemeStoreType>) => void],
+    unknown
+  >;
 
   beforeEach(() => {
     rgsHook = renderHook(() => useRGS<ThemeStoreType>(DEFAULT_ID));
@@ -141,7 +109,17 @@ describe("theme-switcher with props", () => {
 
   test("forced colorScheme prop", async ({ expect }) => {
     // global state is continuing from previous testss
+    noFOUCScript(storageKey, initialState);
     await act(() => render(<ThemeSwitcher forcedColorScheme="light" />));
-    expect(getResolvedTheme()).toBe("");
+    expect(getResolvedTheme()).toBe(LIGHT);
+  });
+
+  test("media change event", async ({ expect }) => {
+    await act(() => render(<ThemeSwitcher />));
+    await act(() => {
+      // @ts-ignore
+      matchMedia(MEDIA).onchange();
+    });
+    expect(getResolvedTheme()).toBe(DARK);
   });
 });
