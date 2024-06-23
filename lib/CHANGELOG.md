@@ -1,5 +1,18 @@
 # react18-themes
 
+## 3.2.0
+
+### Minor Changes
+
+- 5906c24: Add nonce for securly handling styles and Script
+- d81e123: Return toggleTheme function in addition to other setters form useTheme hook.
+- e92a92f: Add targetSelector and skipSystem props to color-switch.
+
+### Patch Changes
+
+- 710d40a: Use https://www.npmjs.com/package/esbuild-plugin-rdi to better minify the build.
+- 006da8d: Rewrite without changing APIs
+
 ## 3.1.0
 
 ### Minor Changes
