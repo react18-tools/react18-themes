@@ -1,17 +1,19 @@
-import { act, cleanup, render, renderHook } from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import { afterEach, describe, test } from "vitest";
-import { useTheme } from "../../hooks";
 import { ForceColorScheme } from "./force-color-scheme";
+import { DARK, DEFAULT_ID } from "../../constants";
+import { ThemeSwitcher } from "../theme-switcher";
+import { noFOUCScript } from "../theme-switcher/no-fouc";
+import { initialState } from "../../store";
 
+const key = `#${DEFAULT_ID}`;
 describe.concurrent("force-color-scheme", () => {
   afterEach(cleanup);
-  /** Test only the things that this component is responsible for - changing state*/
+  /** Test only the things that this component is responsible for - chanding state*/
   test("Force theme with force color scheme", async ({ expect }) => {
-    const { result } = renderHook(() => useTheme());
-    act(() => result.current.setForcedColorScheme("light"));
-    const { unmount } = await act(() => render(<ForceColorScheme colorScheme="dark" />));
-    expect(result.current.forcedColorScheme).toBe("dark");
-    act(() => unmount());
-    expect(result.current.forcedColorScheme).toBe(undefined);
+    noFOUCScript(key, initialState);
+    await render(<ThemeSwitcher />);
+    await render(<ForceColorScheme colorScheme={DARK} />);
+    expect(document.documentElement.classList).toContain(DARK);
   });
 });
