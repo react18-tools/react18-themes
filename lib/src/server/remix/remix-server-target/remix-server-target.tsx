@@ -1,11 +1,13 @@
 import * as React from "react";
 import { DEFAULT_ID, type ColorSchemeType } from "../../../constants";
 
+/** @deprecated */
 interface ForcedPage {
   pathMatcher: RegExp | string;
   themes: { theme?: string; colorScheme?: ColorSchemeType };
 }
 
+/** @deprecated */
 interface RemixServerTargetProps extends React.HTMLProps<HTMLElement> {
   children?: React.ReactNode;
   /** @defaultValue 'div' */
@@ -17,6 +19,7 @@ interface RemixServerTargetProps extends React.HTMLProps<HTMLElement> {
 }
 
 /**
+ * @deprecated - We no longer need server side wrappers or targets.
  *
  * @example
  * <RemixServerTarget />
