@@ -1,7 +1,8 @@
 import React from "react";
-import { ColorSchemeType, ForceColorScheme } from "react18-themes";
+import { ColorSchemeType } from "react18-themes";
 import { Link, useParams } from "react-router-dom";
 import { Header } from "@repo/shared";
+import { ForceColorScheme } from "react18-themes/client/force-color-scheme";
 
 export default function ForcedColorSchemePage() {
   const { colorScheme } = useParams();
