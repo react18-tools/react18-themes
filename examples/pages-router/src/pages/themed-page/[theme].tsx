@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ForceTheme } from "react18-themes";
+import { ForceTheme } from "react18-themes/force-theme";
 
 export default function PageWithForcedTheme() {
   const router = useRouter();

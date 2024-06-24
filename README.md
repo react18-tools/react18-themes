@@ -221,7 +221,7 @@ interface UseThemeYield {
 ### Next.js App Router
 
 ```tsx
-import { ForceTheme } from "react18-themes";
+import { ForceTheme } from "react18-themes/force-theme";
 
 function MyPage() {
   return (
