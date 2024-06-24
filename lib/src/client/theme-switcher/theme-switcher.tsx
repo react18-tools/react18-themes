@@ -7,10 +7,7 @@ import { DARK, DEFAULT_ID, LIGHT } from "../../constants";
 export interface ThemeSwitcherProps {
   forcedTheme?: string;
   forcedColorScheme?: ColorSchemeType;
-  targetSelector?: string;
   themeTransition?: string;
-  /** provide styles object imported from CSS/SCSS modules, if you are using CSS/SCSS modules. */
-  styles?: Record<string, string>;
   /** The nonce value for your Content Security Policy. */
   nonce?: string;
 }
@@ -20,8 +17,6 @@ interface ScriptProps {
   k: string;
   /** nonce */
   n?: string;
-  /** styles */
-  s?: Record<string, string>;
   /** forcedTheme */
   t?: string;
   /** forcedColorScheme */
@@ -35,7 +30,7 @@ let updateForcedProps: UpdateForcedPropsFunc;
 let updateForcedState: UpdateForcedPropsFunc;
 
 const Script = memo(
-  ({ k, n = "", s, t, c }: ScriptProps) => {
+  ({ k, n = "", t, c }: ScriptProps) => {
     if (typeof m !== "undefined")
       [media, updateDOM, resolveTheme, updateForcedProps, updateForcedState] = [m, u, r, f, g];
     return (
@@ -43,7 +38,7 @@ const Script = memo(
         suppressHydrationWarning
         // skipcq: JS-0440
         dangerouslySetInnerHTML={{
-          __html: `(${noFOUCScript.toString()})(${JSON.stringify([k, initialState, s, t, c]).slice(1, -1)})`,
+          __html: `(${noFOUCScript.toString()})(${JSON.stringify([k, initialState, t, c]).slice(1, -1)})`,
         }}
         nonce={n}
       />
@@ -78,18 +73,16 @@ const modifyTransition = (themeTransition = "none") => {
 export const ThemeSwitcher = ({
   forcedTheme,
   forcedColorScheme,
-  targetSelector,
   themeTransition,
-  styles,
   nonce,
 }: ThemeSwitcherProps) => {
-  const k = targetSelector || `#${DEFAULT_ID}`;
+  const k = DEFAULT_ID;
   // handle client side exceptions when script is not run. <- for client side apps like vite or CRA
   if (typeof window !== "undefined" && !window.m)
-    noFOUCScript(k, initialState, styles, forcedTheme, forcedColorScheme);
+    noFOUCScript(k, initialState, forcedTheme, forcedColorScheme);
 
-  const [state, setState] = useThemeStore(targetSelector);
-  const [forced] = useForcedStore(targetSelector);
+  const [state, setState] = useThemeStore();
+  const [forced] = useForcedStore();
 
   useEffect(() => {
     media.addEventListener("change", () =>
@@ -117,5 +110,5 @@ export const ThemeSwitcher = ({
     updateDOM(resolveTheme(state));
   }, [forced]);
 
-  return <Script {...{ k, n: nonce, s: styles, t: forcedTheme, c: forcedColorScheme }} />;
+  return <Script {...{ k, n: nonce, t: forcedTheme, c: forcedColorScheme }} />;
 };

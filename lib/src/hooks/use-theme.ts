@@ -35,9 +35,9 @@ interface UseThemeYield {
  * ```
  */
 
-export const useTheme = (targetSelector?: string): UseThemeYield => {
-  const [state, setState] = useThemeStore(targetSelector);
-  const [_, setForcedState] = useForcedStore(targetSelector);
+export const useTheme = (): UseThemeYield => {
+  const [state, setState] = useThemeStore();
+  const [_, setForcedState] = useForcedStore();
   useEffect(() => {
     resolveTheme = window.r;
   }, []);

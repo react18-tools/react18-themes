@@ -28,7 +28,6 @@ declare global {
 export const noFOUCScript = (
   key: string,
   initialState: ThemeStoreType,
-  styles?: Record<string, string>,
   forcedTheme_?: string,
   forcedColorScheme_?: ColorSchemeType,
 ) => {
@@ -42,7 +41,6 @@ export const noFOUCScript = (
       el.setAttribute(`data-${key}`, values[index]);
     });
     classes[0] = values[0];
-    if (styles) classes = classes.map(cls => styles[cls] ?? cls);
     el.className = classes.join(" ");
   };
 
