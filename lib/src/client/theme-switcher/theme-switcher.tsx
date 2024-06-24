@@ -74,8 +74,6 @@ const modifyTransition = (themeTransition = "none") => {
  * ```tsx
  * <ThemeSwitcher />
  * ```
- *
- * @source - Source code
  */
 export const ThemeSwitcher = ({
   forcedTheme,
