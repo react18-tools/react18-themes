@@ -1,4 +1,4 @@
-import { memo, useEffect } from "react";
+import { useEffect } from "react";
 import { ColorSchemeType } from "../../types";
 import { ResolveFunc, UpdateDOMFunc, UpdateForcedPropsFunc, noFOUCScript } from "./no-fouc";
 import { initialState, useForcedStore, useThemeStore } from "../../store";
@@ -12,40 +12,29 @@ export interface ThemeSwitcherProps {
   nonce?: string;
 }
 
-interface ScriptProps {
-  /** key */
-  k: string;
-  /** nonce */
-  n?: string;
-  /** forcedTheme */
-  t?: string;
-  /** forcedColorScheme */
-  c?: ColorSchemeType;
-}
-
 let media: MediaQueryList;
 let updateDOM: UpdateDOMFunc;
 let resolveTheme: ResolveFunc;
 let updateForcedProps: UpdateForcedPropsFunc;
 let updateForcedState: UpdateForcedPropsFunc;
 
-const Script = memo(
-  ({ k, n = "", t, c }: ScriptProps) => {
-    if (typeof m !== "undefined")
-      [media, updateDOM, resolveTheme, updateForcedProps, updateForcedState] = [m, u, r, f, g];
-    return (
-      <script
-        suppressHydrationWarning
-        // skipcq: JS-0440
-        dangerouslySetInnerHTML={{
-          __html: `(${noFOUCScript.toString()})(${JSON.stringify([k, initialState, t, c]).slice(1, -1)})`,
-        }}
-        nonce={n}
-      />
-    );
-  },
-  () => true,
-);
+const Script = ({ nonce, forcedTheme, forcedColorScheme }: ThemeSwitcherProps) => {
+  // handle client side exceptions when script is not run. <- for client side apps like vite or CRA
+  if (typeof window !== "undefined" && !window.m)
+    noFOUCScript(DEFAULT_ID, initialState, forcedTheme, forcedColorScheme);
+  if (typeof m !== "undefined")
+    [media, updateDOM, resolveTheme, updateForcedProps, updateForcedState] = [m, u, r, f, g];
+  return (
+    <script
+      suppressHydrationWarning
+      // skipcq: JS-0440
+      dangerouslySetInnerHTML={{
+        __html: `(${noFOUCScript.toString()})(${JSON.stringify([DEFAULT_ID, initialState, forcedTheme, forcedColorScheme]).slice(1, -1)})`,
+      }}
+      nonce={nonce}
+    />
+  );
+};
 
 /** disable transition while switching theme */
 const modifyTransition = (themeTransition = "none") => {
@@ -62,25 +51,7 @@ const modifyTransition = (themeTransition = "none") => {
   };
 };
 
-/**
- *
- *
- * @example
- * ```tsx
- * <ThemeSwitcher />
- * ```
- */
-export const ThemeSwitcher = ({
-  forcedTheme,
-  forcedColorScheme,
-  themeTransition,
-  nonce,
-}: ThemeSwitcherProps) => {
-  const k = DEFAULT_ID;
-  // handle client side exceptions when script is not run. <- for client side apps like vite or CRA
-  if (typeof window !== "undefined" && !window.m)
-    noFOUCScript(k, initialState, forcedTheme, forcedColorScheme);
-
+const Switcher = ({ forcedTheme, forcedColorScheme, themeTransition }: ThemeSwitcherProps) => {
   const [state, setState] = useThemeStore();
   const [forced] = useForcedStore();
 
@@ -89,7 +60,8 @@ export const ThemeSwitcher = ({
       setState(state => ({ ...state, s: media.matches ? DARK : LIGHT })),
     );
     addEventListener("storage", e => {
-      if (e.key === k) setState(state => ({ ...state, ...JSON.parse(e.newValue || "{}") }));
+      if (e.key === DEFAULT_ID)
+        setState(state => ({ ...state, ...JSON.parse(e.newValue || "{}") }));
     });
   }, []);
 
@@ -97,7 +69,7 @@ export const ThemeSwitcher = ({
     const restoreThansitions = modifyTransition(themeTransition);
     updateDOM(resolveTheme(state));
     restoreThansitions();
-    localStorage.setItem(k, JSON.stringify(state));
+    localStorage.setItem(DEFAULT_ID, JSON.stringify(state));
   }, [state]);
 
   useEffect(() => {
@@ -109,6 +81,22 @@ export const ThemeSwitcher = ({
     updateForcedState(forced.f, forced.fc);
     updateDOM(resolveTheme(state));
   }, [forced]);
+  return null;
+};
 
-  return <Script {...{ k, n: nonce, t: forcedTheme, c: forcedColorScheme }} />;
+/**
+ *
+ *
+ * @example
+ * ```tsx
+ * <ThemeSwitcher />
+ * ```
+ */
+export const ThemeSwitcher = (props: ThemeSwitcherProps) => {
+  return (
+    <>
+      <Script {...props} />
+      <Switcher {...props} />
+    </>
+  );
 };
