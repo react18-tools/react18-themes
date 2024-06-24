@@ -1,5 +1,5 @@
 import type { ColorSchemeType } from "react18-themes";
-import { ForceColorScheme } from "react18-themes";
+import { ForceColorScheme } from "react18-themes/force-color-scheme";
 
 interface PageWithForcedColorSchemeProps {
   params: { colorScheme: ColorSchemeType };

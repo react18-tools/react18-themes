@@ -46,6 +46,26 @@
       "import": "./dist/client/theme-switcher/index.mjs",
       "types": "./dist/client/theme-switcher/index.d.ts"
     },
+    "./client/force-color-scheme": {
+      "require": "./dist/client/force-color-scheme/index.js",
+      "import": "./dist/client/force-color-scheme/index.mjs",
+      "types": "./dist/client/force-color-scheme/index.d.ts"
+    },
+    "./force-color-scheme": {
+      "require": "./dist/client/force-color-scheme/index.js",
+      "import": "./dist/client/force-color-scheme/index.mjs",
+      "types": "./dist/client/force-color-scheme/index.d.ts"
+    },
+    "./client/force-theme": {
+      "require": "./dist/client/force-theme/index.js",
+      "import": "./dist/client/force-theme/index.mjs",
+      "types": "./dist/client/force-theme/index.d.ts"
+    },
+    "./force-theme": {
+      "require": "./dist/client/force-theme/index.js",
+      "import": "./dist/client/force-theme/index.mjs",
+      "types": "./dist/client/force-theme/index.d.ts"
+    },
     "./server": {
       "require": "./dist/server/index.js",
       "import": "./dist/server/index.mjs",
@@ -81,9 +101,9 @@
       "import": "./dist/hooks/index.mjs",
       "types": "./dist/hooks/index.d.ts"
     },
-    "./styles.css": "./dist/index.css",
-    "./styles": "./dist/index.css",
-    "./css": "./dist/index.css"
+    "./styles.css": "./dist/client/color-switch/index.css",
+    "./styles": "./dist/client/color-switch/index.css",
+    "./css": "./dist/client/color-switch/index.css"
   },
   "scripts": {
     "build": "tsup && tsc -p tsconfig-build.json",
