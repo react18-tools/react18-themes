@@ -15,7 +15,7 @@ export default defineConfig(
       minify: !options.watch,
       esbuildPlugins: [
         react18Plugin({ disableJSXRequireDedup: true }),
-        cssPlugin({ generateScopedName: "react18-themes--[local]" }),
+        cssPlugin({ generateScopedName: "rth-[local]" }),
         rdiPlugin(),
       ],
       ...options,
