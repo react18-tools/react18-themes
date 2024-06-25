@@ -1,5 +1,12 @@
 # react18-themes
 
+## 4.0.0-v4.0
+
+### Major Changes
+
+- a4b539b: Do not export force-theme and force-color-scheme components from the root.
+- 88f5f17: Remove support for passing styles object from CSS modules or CSS-in-JS for the theme classes.
+
 ## 3.2.0
 
 ### Minor Changes
