@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
-import { ColorSchemeType, ForceColorScheme } from "react18-themes";
+import { ColorSchemeType } from "react18-themes";
+import { ForceColorScheme } from "react18-themes/client/force-color-scheme";
 
 export default function PageWithForcedColorScheme() {
   const router = useRouter();

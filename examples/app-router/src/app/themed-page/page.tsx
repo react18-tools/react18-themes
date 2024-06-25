@@ -1,4 +1,4 @@
-import { ForceTheme } from "react18-themes";
+import { ForceTheme } from "react18-themes/force-theme";
 
 export default function PageWithForcedTheme(): JSX.Element {
   return (

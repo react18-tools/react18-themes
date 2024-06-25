@@ -7,7 +7,6 @@ export interface ColorSwitchProps extends HTMLProps<HTMLButtonElement> {
   size?: number;
   /** Skip system colorScheme while toggling */
   skipSystem?: boolean;
-  targetSelector?: string;
 }
 
 /**
@@ -24,16 +23,10 @@ export interface ColorSwitchProps extends HTMLProps<HTMLButtonElement> {
  * <ColorSwitch size={20} skipSystem />
  * ```
  */
-export const ColorSwitch = ({
-  size = 25,
-  skipSystem,
-  targetSelector,
-  className,
-  ...props
-}: ColorSwitchProps) => {
-  const { toggleColorScheme } = useTheme(targetSelector);
+export const ColorSwitch = ({ size = 25, skipSystem, className, ...props }: ColorSwitchProps) => {
+  const { toggleColorScheme } = useTheme();
 
-  const cls = [styles["color-switch"], className].join(" ");
+  const cls = [styles.s, className].join(" ");
   return (
     <button
       className={cls}
@@ -41,7 +34,7 @@ export const ColorSwitch = ({
       // skipcq: JS-0417
       onClick={() => toggleColorScheme(skipSystem)}
       // @ts-expect-error -- setting custom attribute
-      style={{ "--size": `${size}px` }}
+      style={{ "--s": `${size}px` }}
       {...props}
     />
   );

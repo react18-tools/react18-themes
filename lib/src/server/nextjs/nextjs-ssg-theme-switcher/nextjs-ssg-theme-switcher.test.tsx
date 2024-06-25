@@ -1,6 +1,6 @@
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, test } from "vitest";
-import { NextJsSSGThemeSwitcher, ServerSideWrapper } from ".";
+import { NextJsSSGThemeSwitcher, NextJsSSRThemeSwitcher, ServerSideWrapper } from ".";
 
 describe("nextjs-server-side-target", () => {
   afterEach(cleanup);
@@ -16,5 +16,9 @@ describe("nextjs-server-side-target", () => {
   test("test custom tag", ({ expect }) => {
     render(<NextJsSSGThemeSwitcher tag="main" />);
     expect(screen.getByTestId("nextjs-server-side-target").tagName).toBe("MAIN");
+  });
+  test("SSR", ({ expect }) => {
+    render(<NextJsSSRThemeSwitcher />);
+    expect(screen.getByTestId("nextjs-server-side-target").tagName).toBe("DIV");
   });
 });
