@@ -15,7 +15,7 @@ import { noFOUCScript } from "./no-fouc";
 import { initialState, ThemeStoreType } from "../../store";
 
 const MEDIA = "(prefers-color-scheme: dark)";
-const storageKey = `#${DEFAULT_ID}`;
+const storageKey = DEFAULT_ID;
 
 /** get dom attribute */
 const getResolvedTheme = () => document.documentElement.getAttribute("data-theme");
