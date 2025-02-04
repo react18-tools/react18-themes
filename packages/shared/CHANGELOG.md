@@ -1,5 +1,12 @@
 # @repo/shared
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [194138d]
+  - react18-themes@4.0.0
+
 ## 0.0.2
 
 ### Patch Changes

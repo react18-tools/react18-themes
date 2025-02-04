@@ -1,5 +1,11 @@
 # react18-themes
 
+## 4.0.0
+
+### Major Changes
+
+- 194138d: Remove deprecated server target
+
 ## 3.2.1
 
 ### Patch Changes
