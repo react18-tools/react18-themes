@@ -2,12 +2,13 @@ import type { ColorSchemeType } from "react18-themes";
 import { ForceColorScheme } from "react18-themes";
 
 interface PageWithForcedColorSchemeProps {
-  params: { colorScheme: ColorSchemeType };
+  params: Promise<{ colorScheme: ColorSchemeType }>;
 }
 
-export default function PageWithForcedColorScheme({
-  params: { colorScheme },
+export default async function PageWithForcedColorScheme({
+  params,
 }: PageWithForcedColorSchemeProps) {
+  const { colorScheme } = await params;
   return (
     <>
       <ForceColorScheme colorScheme={colorScheme} />
