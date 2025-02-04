@@ -4,7 +4,7 @@ interface PageProps {
   params: { theme: string };
 }
 
-export default function PageWithForcedTheme({ params: { theme } }: PageProps): JSX.Element {
+export default function PageWithForcedTheme({ params: { theme } }: PageProps) {
   return (
     <>
       <ForceTheme theme={theme} />

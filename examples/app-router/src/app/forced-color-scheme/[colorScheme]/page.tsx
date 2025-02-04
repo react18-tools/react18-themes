@@ -7,7 +7,7 @@ interface PageWithForcedColorSchemeProps {
 
 export default function PageWithForcedColorScheme({
   params: { colorScheme },
-}: PageWithForcedColorSchemeProps): JSX.Element {
+}: PageWithForcedColorSchemeProps) {
   return (
     <>
       <ForceColorScheme colorScheme={colorScheme} />
