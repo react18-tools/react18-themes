@@ -11,7 +11,7 @@ export default defineConfig({
     setupFiles: ["vitest.setup.ts"],
     coverage: {
       include: ["src/**"],
-      exclude: ["src/**/index.ts", "src/**/declaration.d.ts"],
+      exclude: ["src/**/index.ts", "src/**/declaration.d.ts", "src/server/**"],
       reporter: ["text", "json", "clover", "html"],
     },
   },
