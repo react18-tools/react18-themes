@@ -111,7 +111,7 @@
     "tsup": "^8.3.6",
     "typescript": "^5.7.3",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.0.5"
+    "vitest": "^3.2.6"
   },
   "dependencies": {
     "r18gs": "^3.0.1"
